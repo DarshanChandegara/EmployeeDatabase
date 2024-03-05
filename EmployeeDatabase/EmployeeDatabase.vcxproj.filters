@@ -18,24 +18,57 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="sqlite\shell.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sqlite\sqlite3.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DBmanage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Validator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Department.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engineer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Manager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Salary.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Employee.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\Helper.h">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="include\Regex.h">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Database.h">
+    <ClInclude Include="include\DBmanage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Employee.h">
+    <ClInclude Include="include\Model\Employee.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Engineer.h">
+    <ClInclude Include="include\Model\Engineer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Manager.h">
+    <ClInclude Include="include\Model\Manager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Salary.h">
+    <ClInclude Include="include\Model\Salary.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Department.h">
+    <ClInclude Include="include\Model\Department.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Validator.h">

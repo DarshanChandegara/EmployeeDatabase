@@ -73,26 +73,22 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)bin/$(Platform)/$(Configuration)/</OutDir>
     <IntDir>$(SolutionDir)bin-int/$(Platform)/$(Configuration)/</IntDir>
-    <ExecutablePath>
-    </ExecutablePath>
+    <ExecutablePath>$(VC_ExecutablePath_x64);$(CommonExecutablePath)</ExecutablePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)bin/$(Platform)/$(Configuration)/</OutDir>
     <IntDir>$(SolutionDir)bin-int/$(Platform)/$(Configuration)/</IntDir>
-    <ExecutablePath>
-    </ExecutablePath>
+    <ExecutablePath>$(VC_ExecutablePath_x64);$(CommonExecutablePath)</ExecutablePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)bin/$(Platform)/$(Configuration)/</OutDir>
     <IntDir>$(SolutionDir)bin-int/$(Platform)/$(Configuration)/</IntDir>
-    <ExecutablePath>
-    </ExecutablePath>
+    <ExecutablePath>$(VC_ExecutablePath_x64);$(CommonExecutablePath)</ExecutablePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)bin/$(Platform)/$(Configuration)/</OutDir>
     <IntDir>$(SolutionDir)bin-int/$(Platform)/$(Configuration)/</IntDir>
-    <ExecutablePath>
-    </ExecutablePath>
+    <ExecutablePath>$(VC_ExecutablePath_x64);$(CommonExecutablePath)</ExecutablePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -155,15 +151,26 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="include\Helper.h" />
+    <ClCompile Include="include\Regex.h" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="sqlite\shell.c" />
+    <ClCompile Include="sqlite\sqlite3.c" />
+    <ClCompile Include="src\DBmanage.cpp" />
+    <ClCompile Include="src\Department.cpp" />
+    <ClCompile Include="src\Employee.cpp" />
+    <ClCompile Include="src\Engineer.cpp" />
+    <ClCompile Include="src\Manager.cpp" />
+    <ClCompile Include="src\Salary.cpp" />
+    <ClCompile Include="src\Validator.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Database.h" />
-    <ClInclude Include="include\Department.h" />
-    <ClInclude Include="include\Employee.h" />
-    <ClInclude Include="include\Engineer.h" />
-    <ClInclude Include="include\Manager.h" />
-    <ClInclude Include="include\Salary.h" />
+    <ClInclude Include="include\DBmanage.h" />
+    <ClInclude Include="include\Model\Department.h" />
+    <ClInclude Include="include\Model\Employee.h" />
+    <ClInclude Include="include\Model\Engineer.h" />
+    <ClInclude Include="include\Model\Manager.h" />
+    <ClInclude Include="include\Model\Salary.h" />
     <ClInclude Include="include\Validator.h" />
     <ClInclude Include="sqlite\sqlite3.h" />
     <ClInclude Include="sqlite\sqlite3ext.h" />
