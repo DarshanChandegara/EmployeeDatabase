@@ -20,14 +20,19 @@ public:
     std::string getSpecialization() const { return specialization; }
 
     void setProgramming_language(const std::string& lang) { programming_language = lang; }
-    void setSpecialization(const std::string& str) { specialization = str; }
+    void setSpecialization() {
+        std::string specs; 
+        std::cout << "Enter Specialization: ";
+        std::cin.ignore(); 
+        std::getline(std::cin, specs); 
+        specialization = specs; 
+    }
 
-
-    void viewAllEngineer();
     void viewEngineer();
     void insertEngineer();
     void deleteEngineer();
     void updateEngineer();
+    void userInputEngineer();
     void action();
 
 private:

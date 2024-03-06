@@ -45,6 +45,7 @@ public:
     void setEmail(const std::string& str) { email = str; }
     void setAddress()  { 
         std::string add;
+        std::cout << "Enter address: ";
         std::cin.ignore(); 
         std::getline(std::cin, add);
         address = add;
@@ -59,7 +60,7 @@ public:
     void insertEmployee();
     void deleteEmployee();
     void updateEmployee();
-    void userInput();
+    void userInputEmployee();
     void action();
 
 

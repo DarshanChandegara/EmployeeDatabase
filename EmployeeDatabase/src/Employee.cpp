@@ -51,10 +51,11 @@ void Employee::viewEmployee() {
 		}
 		break;
 	}
+	
 }
 
 void Employee::insertEmployee() {
-	userInput();
+	//userInputEmployee();  
 	std::string query = "INSERT INTO Employee "
 		"(Eid, firstname, lastname, dob, mobile, email, address, gender, doj, manager_id, department_id) "
 		"VALUES (" + std::to_string(Eid) + ", '" + firstname + "', '" + lastname + "', '" + dob + "', '" + mobile + "', '" + email + "', '" + address + "' , '";
@@ -68,9 +69,9 @@ void Employee::insertEmployee() {
 		query += "Other";
 	}
 	query += "' , '" + doj + "', " + std::to_string(manager_id) + ", " + std::to_string(department_id) + "); ";
-
-	Database::getInstance().executeQuery(query.c_str());
-}
+	
+	Database::getInstance().executeQuery(query.c_str()); 
+} 
 
 void Employee::updateEmployee() {
 	std::string query = "update Employee set ";
@@ -93,66 +94,77 @@ void Employee::updateEmployee() {
 		std::cout << "9. managerId\n";
 		std::cout << "10. departmentId\n";
 		std::cout << "11. toUpdateDatabase\n";
+		std::string prompt = "Enter New Value\n";
 		std::string value;
 		cin >> i;
 		switch (i) {
 		case 1:
-			std::cout << "Enter the changed value\n";
-			cin >> value;
+			/*std::cout << "Enter the changed value\n";
+			cin >> value;*/
+			value = input(prompt); 
 			mp.insert({ "firstname" , value });
 			break;
-
+			 
 		case 2:
-			std::cout << "Enter the changed value\n";
-			cin >> value;
+			/*std::cout << "Enter the changed value\n";
+			cin >> value;*/
+			value = input(prompt);
 			mp.insert({ "lastname" , value });
 			break;
 
 		case 3:
-			std::cout << "Enter the changed value\n";
-			cin >> value;
+			/*std::cout << "Enter the changed value\n";
+			cin >> value;*/
+			value = input(prompt, dateRegex); 
 			mp.insert({ "dob" , value });
 			break;
 
 		case 4:
-			std::cout << "Enter the changed value\n";
-			cin >> value;
+			/*std::cout << "Enter the changed value\n";
+			cin >> value;*/
+			value = input(prompt, mobileRegex); 
 			mp.insert({ "mobile" , value });
 			break;
 
 		case 5:
-			std::cout << "Enter the changed value\n";
-			cin >> value;
+			/*std::cout << "Enter the changed value\n";
+			cin >> value;*/
+			value = input(prompt, emailRegex); 
 			mp.insert({ "email" , value });
 			break;
 
 		case 6:
-			std::cout << "Enter the changed value\n";
-			cin >> value;
-			mp.insert({ "address" , value });
+			/*std::cout << "Enter the changed value\n";
+			cin >> value;*/
+			setAddress();
+			mp.insert({ "address" , address });
 			break;
 
 		case 7:
-			std::cout << "Enter the changed value\n";
-			cin >> value;
+			/*std::cout << "Enter the changed value\n";
+			cin >> value;*/
+			value = input(prompt);
 			mp.insert({ "gender" , value });
 			break;
 
 		case 8:
-			std::cout << "Enter the changed value\n";
-			cin >> value;
+			/*std::cout << "Enter the changed value\n";
+			cin >> value;*/
+			value = input(prompt, dateRegex);  
 			mp.insert({ "doj" , value });
 			break;
 
 		case 9:
-			std::cout << "Enter the changed value\n";
-			cin >> value;
+			/*std::cout << "Enter the changed value\n";
+			cin >> value;*/
+			value = input(prompt, idRegex);  
 			mp.insert({ "manager_id" , value });
 			break;
 
 		case 10:
-			std::cout << "Enter the changed value\n";
-			cin >> value;
+			/*std::cout << "Enter the changed value\n";
+			cin >> value;*/
+			value = input(prompt, idRegex);  
 			mp.insert({ "department_id" , value });
 			break;
 
@@ -189,11 +201,13 @@ void Employee::updateEmployee() {
 
 
 void Employee::deleteEmployee() {
-	std::string query = "delete from Employee where ";
+	std::string query1 = "delete from Employee where ";
+	std::string query2 = "delete from Engineer where ";
+	//std::string query3 = "delete from Manager where ";
 	std::cout << "Select the Field on which you want to perform delete Operation\n";
 	std::cout << "1. Eid\n";
-	std::cout << "2. fname\n";
-	std::cout << "3. email\n";
+	//std::cout << "2. fname\n";
+	//std::cout << "3. email\n";
 	int i;
 	cin >> i;
 	std::string tmp;
@@ -202,20 +216,26 @@ void Employee::deleteEmployee() {
 		case 1:
 			std::cout << "Enter Eid: ";
 			cin >> tmp;
-			query += "Eid = " + tmp + ";";
-			Database::getInstance().executeQuery(query.c_str());
+			query1 += "Eid = " + tmp + ";";
+			query2 += "id = " + tmp + ";";
+			//query3 += "id = " + tmp + ";";
+			Database::getInstance().executeQuery(query1.c_str());
+			Database::getInstance().executeQuery(query2.c_str());
+			//Database::getInstance().executeQuery(query3.c_str());
 			break;
 		case 2:
 			std::cout << "Enter fname: ";
 			cin >> tmp;
-			query += "firstname = '" + tmp + "';";
-			Database::getInstance().executeQuery(query.c_str());
+			query1 += "firstname = '" + tmp + "';";
+			Database::getInstance().executeQuery(query1.c_str());
 			break;
 		case 3:
 			std::cout << "Enter email: ";
 			cin >> tmp;
-			query += "email = '" + tmp + "';";
-			Database::getInstance().executeQuery(query.c_str());
+			query1 += "email = '" + tmp + "';";
+			query2 += " id = ( select Eid from Employee where Employee.email = '" + tmp + "' );";
+			//Database::getInstance().executeQuery(query1.c_str()); 
+			//Database::getInstance().executeQuery(query2.c_str());
 			break;
 		default:
 			std::cout << "Enter valid field to delete\n";
@@ -224,6 +244,9 @@ void Employee::deleteEmployee() {
 		}
 		break;
 	}
+	//std::cout << query1 << "\n"; 
+	std::cout << query2 << "\n"; 
+	//std::cout << query3 << "\n"; 
 	int change = sqlite3_changes(Database::getInstance().db);
 	if (change == 0) {
 		std::cout << "Selected Employee is not in database\n";
@@ -234,7 +257,7 @@ void Employee::action() {
 
 }
 
-void Employee::userInput() {
+void Employee::userInputEmployee() {
 	setId(stoi(input("Enter Eid: ", idRegex)));
 	setFirstname(input("Enter FirstName: "));
 	setLastname(input("Enter LastName: "));

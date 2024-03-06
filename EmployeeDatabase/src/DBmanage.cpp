@@ -63,7 +63,7 @@ bool Database::open(const char* str) {
 		"id INTEGER PRIMARY KEY,"
 		"programming_language VARCHAR,"
 		"specialization VARCHAR,"
-		"FOREIGN KEY (id) REFERENCES Employee(Eid))";
+		"FOREIGN KEY (id) REFERENCES Employee(Eid) )";
 
 	rc = sqlite3_exec(db, sql3, 0, 0, &errorMsg);
 
@@ -81,7 +81,7 @@ bool Database::open(const char* str) {
 		"id INTEGER PRIMARY KEY,"
 		"management_experience INTEGER,"
 		"project_title VARCHAR,"
-		"FOREIGN KEY (id) REFERENCES Employee(Eid))";
+		"FOREIGN KEY (id) REFERENCES Employee(Eid) )";
 
 	rc = sqlite3_exec(db, sql4, 0, 0, &errorMsg);
 
@@ -100,7 +100,7 @@ bool Database::open(const char* str) {
 		"amount INTEGER,"
 		"base_salary INTEGER,"
 		"bonus INTEGER,"
-		"FOREIGN KEY (Sid) REFERENCES Employee(Eid))";
+		"FOREIGN KEY (Sid) REFERENCES Employee(Eid) )  ";
 
 	rc = sqlite3_exec(db, sql5, 0, 0, &errorMsg);
 

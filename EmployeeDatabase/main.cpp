@@ -7,10 +7,9 @@
 
 int main() {
 	Database::getInstance().open("employee.db");
-	Engineer e1;
+	//Employee e1;
 	//e1.insertEmployee();
-	//e1.insertEmployee();
-	//e1.viewAllEmployee();
+	//e1.insertEmployee(); 
 	//e1.viewEmployee();
 	//e1.updateEmployee();
 	//e1.viewEmployee();
@@ -18,8 +17,12 @@ int main() {
 
 	Department d1;
 	//d1.insertDepartment(); 
+	// 
 	//d1.viewDepartment();
 	//d1.deleteDepartment();
-	d1.updateDepartment(); 
+	//d1.updateDepartment(); 
 
+	Engineer e1;
+	e1.insertEngineer();  
+	//e1.deleteEngineer();
 }
