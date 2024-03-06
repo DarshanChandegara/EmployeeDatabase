@@ -43,14 +43,18 @@ public:
     void setDob(const std::string& str) { dob = str; }
     void setMobile(const std::string& str) { mobile = str; }
     void setEmail(const std::string& str) { email = str; }
-    void setAddress(const std::string& str)  { address = str; }
+    void setAddress()  { 
+        std::string add;
+        std::cin.ignore(); 
+        std::getline(std::cin, add);
+        address = add;
+    }
     void setGender(const Gender& g) { gender = g; }
     void setDoj(const std::string& str)  { doj = str; }
     void setManagerId(const int& id)  {  manager_id = id; }
     void setDepartmentId(const int& id)  {  department_id = id; }
 
 
-    void viewAllEmployee();
     void viewEmployee();
     void insertEmployee();
     void deleteEmployee();

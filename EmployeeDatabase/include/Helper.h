@@ -17,7 +17,7 @@ inline std::string input(const std::string& prompt, const std::regex& r = rg) {
             std::cout << "Enter valid input\n";
         }
         else {
-            break; 
+            break;
         }
     }
     return input;

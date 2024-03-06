@@ -1,16 +1,15 @@
 #include "../include/Model/Employee.h"
 
-void Employee::viewAllEmployee() {
-	const char* sql = "select* from Employee";
-	Database::getInstance().selectQuery(sql);
-}
-
 void Employee::viewEmployee() {
 	std::string query = "select * from Employee where ";
+	std::string all = "";
+	std::string join = "";
 	std::cout << "Select the Field on which you want to view the Employee\n";
 	std::cout << "1. Eid\n";
 	std::cout << "2. fname\n";
 	std::cout << "3. email\n";
+	std::cout << "4. department name\n";
+	std::cout << "5. ALL\n";
 	int i;
 	cin >> i;
 	std::string tmp;
@@ -33,6 +32,17 @@ void Employee::viewEmployee() {
 			cin >> tmp;
 			query += "email = '" + tmp + "';";
 			Database::getInstance().selectQuery(query.c_str());
+			break;
+		case 4: 
+			std::cout << "Enter departmaent name: "; 
+			cin >> tmp; 
+			join += "SELECT Employee.* FROM Employee JOIN Department ON Employee.department_id = Department.id WHERE Dname = '" + tmp + "' ;";
+			//std::cout << join;
+			Database::getInstance().selectQuery(join.c_str());  
+			break;
+		case 5:
+			all += "select * from Employee"; 
+			Database::getInstance().selectQuery(all.c_str()); 
 			break;
 		default:
 			std::cout << "Enter valid field to delete\n";
@@ -162,7 +172,7 @@ void Employee::updateEmployee() {
 		else {
 			query += "'" + it->second + "' ";
 		}
-		
+
 		if (it != itr)
 			query += ",";
 	}
@@ -231,7 +241,7 @@ void Employee::userInput() {
 	setDob(input("Enter DOB (dd-mm-yyyy): ", dateRegex));
 	setMobile(input("Enter Mobile: ", mobileRegex));
 	setEmail(input("Enter Email: ", emailRegex));
-	setAddress(input("Enter Address: "));
+	setAddress();
 
 	string gender = input("Enter Gender(Male / Female / Other): ");
 	if (gender == "Male") {

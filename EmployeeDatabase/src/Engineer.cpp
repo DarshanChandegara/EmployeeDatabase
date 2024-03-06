@@ -11,7 +11,6 @@ void Engineer::viewEngineer() {
 
 void Engineer::insertEngineer() {
 	const char* sql = "insert into Engineer";
-
 }
 
 void Engineer::updateEngineer() {

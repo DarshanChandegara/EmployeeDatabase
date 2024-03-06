@@ -4,9 +4,13 @@
 
 #include <iostream>
 #include <string>
+#include <map>
+#include "../DBmanage.h"
+#include "../Helper.h"
+#include"../Regex.h"
 class Department {
 public:
-
+    Department() {}
     Department(int id, const std::string& name, int manager_id, const std::string& description)
         : Did(id), Dname(name), manager_id(manager_id), description(description) {}
 
@@ -27,7 +31,11 @@ public:
         manager_id = mId;
     }
 
-    void setDescription(const std::string& desc) {
+    void setDescription() {
+        std::string desc;
+        std::cout << "Enter description: ";
+        std::cin.ignore();
+        std::getline(std::cin, desc);
         description = desc;
     }
 
@@ -35,6 +43,7 @@ public:
     void insertDepartment();
     void deleteDepartment();
     void updateDepartment();
+    void userInput();
     void action();
 
 private:
