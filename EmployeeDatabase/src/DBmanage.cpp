@@ -63,7 +63,7 @@ bool Database::open(const char* str) {
 		"id INTEGER PRIMARY KEY,"
 		"programming_language VARCHAR,"
 		"specialization VARCHAR,"
-		"FOREIGN KEY (id) REFERENCES Employee(Eid) )";
+		"FOREIGN KEY (id) REFERENCES Employee(Eid) ON DELETE CASCADE )";
 
 	rc = sqlite3_exec(db, sql3, 0, 0, &errorMsg);
 
@@ -81,7 +81,7 @@ bool Database::open(const char* str) {
 		"id INTEGER PRIMARY KEY,"
 		"management_experience INTEGER,"
 		"project_title VARCHAR,"
-		"FOREIGN KEY (id) REFERENCES Employee(Eid) )";
+		"FOREIGN KEY (id) REFERENCES Employee(Eid) ON DELETE CASCADE)";
 
 	rc = sqlite3_exec(db, sql4, 0, 0, &errorMsg);
 
@@ -100,7 +100,7 @@ bool Database::open(const char* str) {
 		"amount INTEGER,"
 		"base_salary INTEGER,"
 		"bonus INTEGER,"
-		"FOREIGN KEY (Sid) REFERENCES Employee(Eid) )  ";
+		"FOREIGN KEY (Sid) REFERENCES Employee(Eid) ON DELETE CASCADE)  ";
 
 	rc = sqlite3_exec(db, sql5, 0, 0, &errorMsg);
 
@@ -114,12 +114,15 @@ bool Database::open(const char* str) {
 		std::cout << "Table created successfully" << std::endl;
 	}
 
+	const char*  pragmaQuery = { "PRAGMA foreign_keys = ON;" };
+	executeQuery(pragmaQuery);
+
 	return true;
 }
 
-bool Database::executeQuery(const char* sql)
+int Database::executeQuery(const char* sql , int count)
 {
-	int rc = sqlite3_exec(db, sql, 0, 0, &errorMsg);
+	int rc = sqlite3_exec(db, sql, callbackOther, &count, &errorMsg);
 
 	if (rc != SQLITE_OK)
 	{
@@ -130,8 +133,12 @@ bool Database::executeQuery(const char* sql)
 	else
 	{
 		std::cout << "Query executed successfully" << std::endl;
-		return true;
+
+		return count;
+		//return true;
 	}
+
+
 }
 
 bool Database::selectQuery(const char* sql)
@@ -171,5 +178,11 @@ int Database::callback(void* data, int args, char** row, char** col) {
 	std::cout << "\n";
 	
 	std::cout << "\n";
+	return 0;
+}
+
+int Database::callbackOther(void* data, int argc, char** argv, char** azColName) {
+	int* count = reinterpret_cast<int*>(data);
+	*count = atoi(argv[0]);
 	return 0;
 }

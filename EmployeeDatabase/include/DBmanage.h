@@ -17,15 +17,17 @@ class Database {
 
 public:
 	sqlite3* db{};
+	sqlite3_stmt* stmt; 
 	bool open(const char* str);
 	bool close();
-	bool executeQuery(const char* sql);
+	int executeQuery(const char* sql , int count = 0);
 	bool selectQuery(const char* sql);
 	static Database& getInstance() {
 		static Database db;
 		return db;
 	}
 	static int callback(void* data, int args, char** row, char** col);
+	static int callbackOther(void* data, int args, char** row, char** col);
 };
 
 #endif
