@@ -10,7 +10,7 @@
 #include"../Regex.h"
 class Department {
 public:
-    Department() {}
+    Department() = default;
     Department(int id, const std::string& name, int manager_id, const std::string& description)
         : Did(id), Dname(name), manager_id(manager_id), description(description) {}
 

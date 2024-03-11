@@ -1,6 +1,7 @@
 #include "../include/Model/Department.h"
 
 void Department::userInput() {
+	system("cls"); 
 	setId(stoi(input("Enter Department ID: ", idRegex)));
 	setName(input("Enter Department Name: "));
 	setManagerId(stoi(input("Enter Department Manager ID: ", idRegex))); 
@@ -8,17 +9,21 @@ void Department::userInput() {
 }
 
 void Department::viewDepartment() {
+	system("cls"); 
 	std::string query = "select * from Department where ";
 	std::string all = "";
 	std::cout << "Select the Field on which you want to view the Department\n";
 	std::cout << "1. id\n";
 	std::cout << "2. Dname\n";
 	std::cout << "3. manager_id\n";
-	std::cout << "4. ALL\n";
+	std::cout << "4. ALL\n\n";
 	int i;
+	std::cout << "Enter Choice: ";
 	std::cin >> i; 
+	std::cout << "\n\n";
 	std::string tmp; 
 	while (1) {
+		system("cls");  
 		switch (i) {
 		case 1:
 			std::cout << "Enter Did: ";
@@ -53,6 +58,9 @@ void Department::viewDepartment() {
 	if (change == 0) {
 		std::cout << "Selected Department is not in database\n";
 	}
+	std::cout << "Press 0 button to go back to menu \n";
+	int g; 
+	std::cin >> g; 
 }
 
 void Department::insertDepartment() {
@@ -65,6 +73,7 @@ void Department::insertDepartment() {
 }
 
 void Department::updateDepartment() {
+	system("cls");  
 	std::string query = "update Department set ";
 	std::cout << "Enter the id to update Department\n";
 	std::string tmp;
@@ -128,12 +137,15 @@ void Department::updateDepartment() {
 }
 
 void Department::deleteDepartment() {
+	system("cls");  
 	std::string query = "delete from Department where ";
 	std::cout << "Select the Field on which you want to perform delete Operation\n"; 
 	std::cout << "1. Did\n"; 
 	std::cout << "2. Dname\n"; 
 	int i;
+	std::cout << "Enter choice: ";
 	std::cin >> i; 
+	std::cout << "\n";
 	std::string tmp; 
 	while (1) {
 		switch (i) {
@@ -141,13 +153,19 @@ void Department::deleteDepartment() {
 			std::cout << "Enter Did: ";
 			std::cin >> tmp; 
 			query += "id = " + tmp + ";";
-			Database::getInstance().executeQuery(query.c_str());
+			//std::cout << query; 
+			Database::getInstance().executeQuery(query.c_str()); 
+			std::cout << "Press 0 To continue\n";
+			std::cin >> i; 
 			break;
 		case 2:
 			std::cout << "Enter Dname: ";  
 			std::cin >> tmp; 
 			query += "Dname = '" + tmp + "';"; 
+			//std::cout << query;
 			Database::getInstance().executeQuery(query.c_str());
+			std::cout << "Press 0 To continue\n"; 
+			std::cin >> i; 
 			break;
 		default:
 			std::cout << "Enter valid field to delete\n";
@@ -162,4 +180,43 @@ void Department::deleteDepartment() {
 	}
 }
 
-void Department::action(){}
+void Department::action() {
+	auto check{ true };
+	while (check) {
+		system("cls");
+		std::cout << "Select The Operation You Want The Perform\n";
+		std::cout << "1. View\n";
+		std::cout << "2. Insert\n";
+		std::cout << "3. Update\n";
+		std::cout << "4. Delete\n";
+		std::cout << "5. Go to Main Menu\n\n";
+
+		std::cout << "Enter Choice : ";
+		int i;
+		std::cin >> i;
+		switch (i) {
+		case 1:
+			viewDepartment(); 
+			break;
+
+		case 2:
+			insertDepartment();
+			break;
+
+		case 3:
+			updateDepartment();
+			break;
+
+		case 4:
+			deleteDepartment(); 
+			break;
+
+		case 5:
+			check = false;
+			break;
+
+		default:
+			std::cout << "Enter Valid Choice\n";
+		}
+	}
+}

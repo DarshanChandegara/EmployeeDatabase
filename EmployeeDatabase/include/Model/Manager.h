@@ -5,7 +5,7 @@
 
 class Manager : public Employee {
 public:
-
+    Manager() = default;
     Manager(int id, const std::string& firstname, const std::string& lastname, const std::string& dob,
         const std::string& mobile, const std::string& email, const std::string& address,
         Gender gender, const std::string& doj, float salary, int w_location_id,
@@ -25,6 +25,7 @@ public:
     void insertManager();
     void deleteManager();
     void updateManager();
+    void userInputManager();
     void action();
 
 private:

@@ -10,8 +10,9 @@ void Employee::viewEmployee() {
 	std::cout << "3. email\n";
 	std::cout << "4. department name\n";
 	std::cout << "5. Manager Id\n";
-	std::cout << "6. ALL\n";
+	std::cout << "6. ALL\n\n";
 	int i;
+	std::cout << "Enter choice: ";
 	cin >> i;
 	std::string tmp;
 	while (1) {
@@ -62,6 +63,7 @@ void Employee::viewEmployee() {
 }
 
 void Employee::insertEmployee() {
+	/*system("cls"); */
 	//userInputEmployee();  
 	std::string query = "INSERT INTO Employee "
 		"(Eid, firstname, lastname, dob, mobile, email, address, gender, doj, manager_id, department_id) "
@@ -188,6 +190,7 @@ void Employee::updateEmployee() {
 
 
 void Employee::deleteEmployee() {
+	//system("cls"); 
 	std::string query1 = "delete from Employee where ";
 	std::string s;
 	int count1 = 0;
@@ -195,32 +198,36 @@ void Employee::deleteEmployee() {
 	int i;
 	std::cout << "Select the Field on which you want to perform delete Operation\n";
 	std::cout << "1. Eid\n";
-	std::cout << "2. email\n"; 
-	cin >> i;
+	std::cout << "2. email\n\n"; 
+	std::cout << "Enter Choice: ";
+	std::cin >> i;
+	std::cout << "\n";
 	std::string tmp;
 	while (1) {
 		switch (i) {
 		case 1: 
 			std::cout << "Enter Eid: ";
-			cin >> tmp;
+			std::cin >> tmp;
 			query1 += "Eid = " + tmp + ";";
 
 			s += "select count(*) from Employee where Employee.manager_id = " + tmp + ";"; 
 
 			count1 = 0;
 			count1 = Database::getInstance().executeQuery(s.c_str() , count1); 
-			cout << s << " \n"; 
-			cout << "Nunber of employee : " << count1 << "\n"; 
+			//std::cout << s << " \n"; 
+			//std::cout << "Nunber of employee : " << count1 << "\n"; 
 
 			s = "";
 			s += "select count(*) from Department where manager_id = " + tmp + ";"; 
 
 			count2 = 0;     
 			count2 = Database::getInstance().executeQuery(s.c_str(), count2);
-			cout << s << " \n"; 
-			std::cout << "Nunber of employee : "<< count2 << "\n";
+			//std::cout << s << " \n"; 
+			//std::cout << "Number of employee : "<< count2 << "\n";
 			if (count1 + count2 != 0) {
 				std::cout << "You can't delete this user because he/she is manager of other employees. Please change the manager first\n";
+				std::cout << "Press 0 To continue\n";
+				std::cin >> i;
 			}
 			else {
 				Database::getInstance().executeQuery(query1.c_str()); 
@@ -229,7 +236,7 @@ void Employee::deleteEmployee() {
 		
 		case 2:
 			std::cout << "Enter email: ";
-			cin >> tmp;
+			std::cin >> tmp;
 			query1 += "email = '" + tmp + "';";
 			Database::getInstance().executeQuery(query1.c_str()); 
 			break;

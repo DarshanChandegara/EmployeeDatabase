@@ -8,7 +8,7 @@ bool Database::open(const char* str) {
 		return false;
 	}
 	else {
-		std::cout << "Database Open Successfully \n";
+		//std::cout << "Database Open Successfully \n";
 	}
 
 
@@ -36,7 +36,7 @@ bool Database::open(const char* str) {
 	}
 	else
 	{
-		std::cout << "Table created successfully" << std::endl;
+		//std::cout << "Table created successfully" << std::endl;
 	}
 
 	const char* sql2 = "CREATE TABLE IF NOT EXISTS Department ("
@@ -55,7 +55,7 @@ bool Database::open(const char* str) {
 	}
 	else
 	{
-		std::cout << "Table created successfully" << std::endl;
+		//std::cout << "Table created successfully" << std::endl;
 	}
 
 
@@ -74,7 +74,7 @@ bool Database::open(const char* str) {
 	}
 	else
 	{
-		std::cout << "Table created successfully" << std::endl;
+		//std::cout << "Table created successfully" << std::endl;
 	}
 
 	const char* sql4 = "CREATE TABLE IF NOT EXISTS Manager ("
@@ -92,7 +92,7 @@ bool Database::open(const char* str) {
 	}
 	else
 	{
-		std::cout << "Table created successfully" << std::endl;
+		//std::cout << "Table created successfully" << std::endl;
 	}
 
 	const char* sql5 = "CREATE TABLE IF NOT EXISTS Salary ("
@@ -111,20 +111,24 @@ bool Database::open(const char* str) {
 	}
 	else
 	{
-		std::cout << "Table created successfully" << std::endl;
+		//std::cout << "Table created successfully" << std::endl;
 	}
 
-	const char*  pragmaQuery = { "PRAGMA foreign_keys = ON;" };
+	const char* pragmaQuery = { "PRAGMA foreign_keys = ON;" };
 	executeQuery(pragmaQuery);
 
 	return true;
 }
 
-int Database::executeQuery(const char* sql , int count)
+int Database::executeQuery(const char* sql, int count)
 {
 	int rc = sqlite3_exec(db, sql, callbackOther, &count, &errorMsg);
 
-	if (rc != SQLITE_OK)
+	if (rc == 19) {
+		std::cerr << "You can not delete this record because this violates the rule of reference key constraints\nSome other record took reference of this record\n";
+		return false;
+	}
+	else if (rc != SQLITE_OK)
 	{
 		std::cerr << "SQL error: " << errorMsg << std::endl;
 		sqlite3_free(errorMsg);
@@ -132,7 +136,7 @@ int Database::executeQuery(const char* sql , int count)
 	}
 	else
 	{
-		std::cout << "Query executed successfully" << std::endl;
+		//std::cout << "Query executed successfully" << std::endl;
 
 		return count;
 		//return true;
@@ -153,7 +157,7 @@ bool Database::selectQuery(const char* sql)
 	}
 	else
 	{
-		std::cout << "Query executed successfully" << std::endl;
+		//std::cout << "Query executed successfully" << std::endl;
 		return true;
 	}
 }
@@ -166,17 +170,19 @@ bool Database::close() {
 		return false;
 	}
 	else {
-		std::cout << "Database closed Successfully\n";
+		//std::cout << "Database closed Successfully\n";
 	}
 }
 
 int Database::callback(void* data, int args, char** row, char** col) {
 	//std::cout << "Hello from callback function\n";
+	std::cout << "+--------------------------+----------------------------------------+" << std::endl;
 	for (int i{ 0 }; i < args; i++) {
-		std::cout << col[i] << " : " << (row[i] ? row[i] : NULL) << " | ";
+		std::cout << "|" << std::setw(25) << std::left << col[i]  << " | " << std::setw(38) << std::left << (row[i] ? row[i] : NULL) << " |"<<std::endl;
 	}
+	std::cout << "+--------------------------+----------------------------------------+" << std::endl;
 	std::cout << "\n";
-	
+
 	std::cout << "\n";
 	return 0;
 }

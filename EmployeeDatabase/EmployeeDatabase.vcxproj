@@ -161,6 +161,7 @@
     <ClCompile Include="src\Employee.cpp" />
     <ClCompile Include="src\Engineer.cpp" />
     <ClCompile Include="src\Manager.cpp" />
+    <ClCompile Include="src\menu.cpp" />
     <ClCompile Include="src\Salary.cpp" />
     <ClCompile Include="src\Validator.cpp" />
   </ItemGroup>

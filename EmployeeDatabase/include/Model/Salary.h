@@ -13,7 +13,7 @@ public:
     float getAmount() const { return amount; }
     float getBaseSalary() const { return base_salary; }
     std::string getDate() const { return date; }
-    int getBonus() const { return bonus; }
+    float getBonus() const { return bonus; }
 
     void setAmount(const float& figure) { amount = figure;  }
     void setBaseSalary(const float& bSalary) { base_salary = bSalary; }

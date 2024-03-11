@@ -2,12 +2,13 @@
 #define _DB_
 
 #include<iostream>
+#include <iomanip>
 #include "../sqlite/sqlite3.h"
 
 class Database {
 	char* errorMsg = 0;
 
-	Database() {}
+	Database() = default; 
 	~Database() {
 		//sqlite3_close(db);
 		close();
@@ -17,7 +18,7 @@ class Database {
 
 public:
 	sqlite3* db{};
-	sqlite3_stmt* stmt; 
+	sqlite3_stmt* stmt {};
 	bool open(const char* str);
 	bool close();
 	int executeQuery(const char* sql , int count = 0);
