@@ -120,7 +120,7 @@ bool Database::open(const char* str) {
 	return true;
 }
 
-int Database::executeQuery(const char* sql, int count)
+int Database::executeQuery(const char* sql, float count)
 {
 	int rc = sqlite3_exec(db, sql, callbackOther, &count, &errorMsg);
 

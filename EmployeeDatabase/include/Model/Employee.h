@@ -19,7 +19,7 @@ public:
     Employee() = default;
     Employee(int id, const std::string& firstname, const std::string& lastname, const std::string& dob,
         const std::string& mobile, const std::string& email, const std::string& address,
-        Gender gender, const std::string& doj, int w_location_id,
+        Gender gender, const std::string& doj, 
         int manager_id, int department_id)
         : Eid(id), firstname(firstname), lastname(lastname), dob(dob), mobile(mobile), email(email),
         address(address), gender(gender), doj(doj), 

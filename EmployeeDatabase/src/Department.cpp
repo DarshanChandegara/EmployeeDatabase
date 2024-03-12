@@ -23,7 +23,7 @@ void Department::viewDepartment() {
 	std::cout << "\n\n";
 	std::string tmp; 
 	while (1) {
-		system("cls");  
+		  
 		switch (i) {
 		case 1:
 			std::cout << "Enter Did: ";
@@ -82,13 +82,15 @@ void Department::updateDepartment() {
 	bool check = true;
 	int i;
 	while (check) {
+		system("cls");
 		std::cout << "Select the field you want to update \n";
 		std::cout << "1. Department name\n";
 		std::cout << "2. manager id\n";
 		std::cout << "3. description\n";
-		std::cout << "4. toUpdateDatabase\n";
+		std::cout << "4. toUpdateDatabase\n\n";
 		std::string prompt = "Enter the changed value\n";
 		std::string value;
+		std::cout << "Enter Choice: "; 
 		std::cin >> i;
 		switch (i) {
 		case 1:

@@ -1,12 +1,14 @@
 #include "../include/Model/Manager.h"
 
 void Manager::userInputManager() {
+	system("cls");
 	userInputEmployee();
 	setManagementExperience(std::stoi(input("Enter Management Experience: ")));
 	setProjectTile(input("Enter Project Title: "));
 }
 
 void Manager::viewManager() {
+	system("cls");
 	std::string query1 = "SELECT * FROM Employee INNER JOIN Manager ON Manager.id = Employee.Eid and ";
 	std::string all = "";
 	std::string join = "";
@@ -16,8 +18,9 @@ void Manager::viewManager() {
 	std::cout << "3. email\n";
 	std::cout << "4. department name\n";
 	std::cout << "5. Project Title\n";
-	std::cout << "6. ALL\n";
+	std::cout << "6. ALL\n\n";
 	int i;
+	std::cout << "Enter Choice: "; 
 	cin >> i;
 	std::string tmp1;
 	while (1) {
@@ -64,6 +67,13 @@ void Manager::viewManager() {
 		}
 		break;
 	}
+	int change = sqlite3_changes(Database::getInstance().db);
+	if (change == 0) {
+		std::cout << "Selected Manager is not in database\n";
+	}
+	std::cout << "Press 0 button to go back to menu \n";
+	int g;
+	std::cin >> g;
 }
 
 void Manager::insertManager() {
@@ -77,9 +87,10 @@ void Manager::insertManager() {
 }
 
 void Manager::updateManager() {
+	system("cls"); 
 	std::string query1 = "update Employee set ";
 	std::string query2 = "update Manager set ";
-	std::cout << "Enter the Eid to update Employee\n";
+	std::cout << "Enter the Eid to update Manager\n";
 	std::string tmp1;
 	cin >> tmp1;
 	std::map<std::string, std::string> mp1;
@@ -87,6 +98,7 @@ void Manager::updateManager() {
 	bool check = true;
 	int i;
 	while (check) {
+		system("cls"); 
 		std::cout << "Select the field you want to update \n";
 		std::cout << "1. FirstName\n";
 		std::cout << "2. lastName\n";
@@ -100,9 +112,10 @@ void Manager::updateManager() {
 		std::cout << "10. departmentId\n";
 		std::cout << "11. Project Title\n";
 		std::cout << "12. managetment Experience \n";
-		std::cout << "13. ToUpdateDatabase\n";
+		std::cout << "13. ToUpdateDatabase\n\n";
 		std::string promp1t = "Enter New Value\n";
 		std::string value;
+		std::cout << "Enter Choice: "; 
 		cin >> i;
 		switch (i) {
 		case 1:
@@ -213,9 +226,51 @@ void Manager::updateManager() {
 }
 
 void Manager::deleteManager() {
+	system("cls"); 
 	deleteEmployee(); 
+	int change = sqlite3_changes(Database::getInstance().db); 
+	if (change == 0) {
+		std::cout << "Selected Manager is not in database\n";
+	}
 }
 
 void Manager::action() {
+	auto check{ true };
+	while (check) {
+		system("cls");
+		std::cout << "Select The Operation You Want The Perform\n";
+		std::cout << "1. View\n";
+		std::cout << "2. Insert\n";
+		std::cout << "3. Update\n";
+		std::cout << "4. Delete\n";
+		std::cout << "5. Go to Main Menu\n\n";
 
+		std::cout << "Enter Choice : ";
+		int i;
+		std::cin >> i;
+		switch (i) {
+		case 1:
+			viewManager();
+			break;
+
+		case 2:
+			insertManager();
+			break;
+
+		case 3:
+			updateManager();
+			break;
+
+		case 4:
+			deleteManager();
+			break;
+
+		case 5:
+			check = false; 
+			break;
+
+		default:
+			std::cout << "Enter Valid Choice\n";
+		}
+	}
 }

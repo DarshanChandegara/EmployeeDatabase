@@ -24,7 +24,6 @@ void Engineer::viewEngineer() {
 	std::cin >> i;
 	std::string tmp1;
 	while (1) {
-		system("cls"); 
 		switch (i) {
 		case 1:
 			std::cout << "Enter Eid: ";
@@ -100,6 +99,7 @@ void Engineer::updateEngineer() {
 	bool check = true;
 	int i;
 	while (check) { 
+		system("cls");
 		std::cout << "Select the field you want to update \n";
 		std::cout << "1. FirstName\n";
 		std::cout << "2. lastName\n";
@@ -113,9 +113,10 @@ void Engineer::updateEngineer() {
 		std::cout << "10. departmentId\n";
 		std::cout << "11. programming Language\n";
 		std::cout << "12. Specification \n";
-		std::cout << "13. ToUpdateDatabase\n";
+		std::cout << "13. ToUpdateDatabase\n\n";
 		std::string promp1t = "Enter New Value\n";
 		std::string value;
+		std::cout << "Enter Choice: ";
 		std::cin >> i;
 		switch (i) {
 		case 1:
@@ -224,7 +225,7 @@ void Engineer::deleteEngineer() {
 	deleteEmployee();
 	int change = sqlite3_changes(Database::getInstance().db); 
 	if (change == 0) { 
-		std::cout << "Selected Employee is not in database\n"; 
+		std::cout << "Selected Engineer is not in database\n"; 
 	}
 }
 
