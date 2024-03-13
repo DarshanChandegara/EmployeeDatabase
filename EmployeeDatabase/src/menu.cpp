@@ -3,7 +3,7 @@
 #include "../include/Model/Department.h"
 #include "../include/Model/Salary.h"
 
-void menu() {
+void menu() noexcept {
 	auto flag{ true };
 	while (flag) {
 		system("cls");
@@ -11,10 +11,12 @@ void menu() {
 		std::cout << "1. Engineer \n";
 		std::cout << "2. Manager \n"; 
 		std::cout << "3. Department \n"; 
-		std::cout << "4. To exit \n\n";
+		std::cout << "4. Salary \n"; 
+		std::cout << "5. To exit \n\n";
 		Engineer e; 
 		Manager m; 
 		Department d; 
+		Salary s;
 
 		std::cout << "Enter Your Choice:  ";
 		int i; 
@@ -33,11 +35,16 @@ void menu() {
 			break;
 
 		case 4:
+			s.action();
+			break;
+
+		case 5:
 			flag = false;
 			break;
 
 		default:
 			std::cout << "Enter valid table\n";
+			flag = false;
 		}
 	}
 }

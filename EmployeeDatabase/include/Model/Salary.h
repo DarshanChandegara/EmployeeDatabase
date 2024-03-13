@@ -29,14 +29,14 @@ public:
     void increment(float , std::string);
     void deleteSalary();
     void updateSalary();
-    void action();
+    void action() noexcept;
 
 private:
 
     int Sid;
-    float amount;    
-    float base_salary;
-    float bonus;
+    float amount{};
+    float base_salary{};
+    float bonus{};
 };
 
 #endif

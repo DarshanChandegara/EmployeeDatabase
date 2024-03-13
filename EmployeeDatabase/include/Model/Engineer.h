@@ -8,9 +8,9 @@ public:
     Engineer() = default;
     Engineer(int id, const std::string& firstname, const std::string& lastname, const std::string& dob,
         const std::string& mobile, const std::string& email, const std::string& address,
-        Gender gender, const std::string& doj,int manager_id, int department_id, const std::string& programming_language,
+        Gender gender, const std::string& doj,int manager_id, int department_id,Salary s ,const std::string& programming_language,
         const std::string& specialization)
-        : Employee(id, firstname, lastname, dob, mobile, email, address, gender, doj, manager_id, department_id),
+        : Employee(id, firstname, lastname, dob, mobile, email, address, gender, doj, manager_id, department_id , s),
         programming_language(programming_language), specialization(specialization) {}
 
 
@@ -20,9 +20,11 @@ public:
     void setProgramming_language(const std::string& lang) { programming_language = lang; }
     void setSpecialization() {
         std::string specs; 
-        std::cout << "Enter Specialization: ";
+        std::string msg = " Enter # to leave the field Empty\n"; 
+        std::cout << "Enter Specialization: "+msg;
         std::cin.ignore(); 
         std::getline(std::cin, specs); 
+        if (specs == "#") specs = "";
         specialization = specs; 
     }
 
@@ -31,7 +33,7 @@ public:
     void deleteEngineer();
     void updateEngineer();
     void userInputEngineer();
-    void action();
+    void action() noexcept;
 
 private:
 

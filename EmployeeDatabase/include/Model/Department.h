@@ -33,9 +33,11 @@ public:
 
     void setDescription() {
         std::string desc;
-        std::cout << "Enter description: ";
+        std::string msg = " Enter # to leave the field Empty\n";
+        std::cout << "Enter description: " + msg;
         std::cin.ignore();
         std::getline(std::cin, desc);
+        if (desc == "#") desc = "";
         description = desc;
     }
 
@@ -44,7 +46,7 @@ public:
     void deleteDepartment();
     void updateDepartment();
     void userInput();
-    void action();
+    void action() noexcept;
 
 private:
 

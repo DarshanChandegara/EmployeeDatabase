@@ -20,6 +20,7 @@ inline std::string input(const std::string& prompt, const std::regex& r = rg) {
             break;
         }
     }
+    if (input == "#") return "";
     return input;
 }
 #endif

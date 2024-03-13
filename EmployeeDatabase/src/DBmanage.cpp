@@ -125,20 +125,24 @@ int Database::executeQuery(const char* sql, float count)
 	int rc = sqlite3_exec(db, sql, callbackOther, &count, &errorMsg);
 
 	if (rc == 19) {
-		std::cerr << "You can not delete this record because this violates the rule of reference key constraints\nSome other record took reference of this record\n";
+		std::cerr << "You can not delete this record because this violates the rule of reference key constraints\nSome other record took reference of this record\n"; 
+		std::cout << "Press Enter to continue\n"; 
+		std::cin.get(); 
 		return false;
 	}
 	else if (rc != SQLITE_OK)
 	{
-		std::cerr << "SQL error: " << errorMsg << std::endl;
-		sqlite3_free(errorMsg);
+		std::cerr << "SQL error: " << errorMsg << std::endl; 
+		std::cout << "Press Enter to continue\n";  
+		std::cin.get();   
+		sqlite3_free(errorMsg); 
 		return false;
 	}
 	else
 	{
 		//std::cout << "Query executed successfully" << std::endl;
 
-		return count;
+		return count; 
 		//return true;
 	}
 
@@ -152,6 +156,8 @@ bool Database::selectQuery(const char* sql)
 	if (rc != SQLITE_OK)
 	{
 		std::cerr << "SQL error: " << errorMsg << std::endl;
+		std::cout << "Press Enter to continue\n";
+		std::cin.get();
 		sqlite3_free(errorMsg);
 		return false;
 	}
@@ -176,15 +182,22 @@ bool Database::close() {
 
 int Database::callback(void* data, int args, char** row, char** col) {
 	//std::cout << "Hello from callback function\n";
+	try {
 	std::cout << "+--------------------------+----------------------------------------+" << std::endl;
-	for (int i{ 0 }; i < args; i++) {
-		std::cout << "|" << std::setw(25) << std::left << col[i]  << " | " << std::setw(38) << std::left << (row[i] ? row[i] : NULL) << " |"<<std::endl;
-	}
-	std::cout << "+--------------------------+----------------------------------------+" << std::endl;
-	std::cout << "\n";
+		for (int i{ 0 }; i < args; i++) {
+			std::cout << "|" << std::setw(25) << std::left << col[i] << " | " << std::setw(38) << std::left << (row[i] ? row[i] : NULL) << " |" << std::endl;
+		}
+		std::cout << "+--------------------------+----------------------------------------+" << std::endl;
+		std::cout << "\n";
 
-	std::cout << "\n";
-	return 0;
+		std::cout << "\n";
+		return 0;	
+	}
+	catch (std::exception& e) {
+		std::cout << e.what() << std::endl;
+		std::cout << "Press Enter to continue\n"; 
+		std::cin.get(); 
+	}
 }
 
 int Database::callbackOther(void* data, int argc, char** argv, char** azColName) {

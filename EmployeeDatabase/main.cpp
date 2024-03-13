@@ -12,13 +12,5 @@ void menu();
 
 int main() {
 	Database::getInstance().open("employee.db");
-	//menu(); 
-	Salary s1;
-	//s1.userInputSalary();
-	//s1.insertSalary(127);
-	s1.viewSalary();
-	s1.updateSalary();
-	s1.viewSalary();
-
-
+	menu();   
 }

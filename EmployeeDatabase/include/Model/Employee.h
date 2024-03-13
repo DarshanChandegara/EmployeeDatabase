@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <map>
+#include "Salary.h"
 #include "../DBmanage.h"
 #include "../Helper.h"
 #include"../Regex.h"
@@ -20,10 +21,10 @@ public:
     Employee(int id, const std::string& firstname, const std::string& lastname, const std::string& dob,
         const std::string& mobile, const std::string& email, const std::string& address,
         Gender gender, const std::string& doj, 
-        int manager_id, int department_id)
+        int manager_id, int department_id , Salary s1)
         : Eid(id), firstname(firstname), lastname(lastname), dob(dob), mobile(mobile), email(email),
         address(address), gender(gender), doj(doj), 
-        manager_id(manager_id), department_id(department_id) {}
+        manager_id(manager_id), department_id(department_id), s{s1} {}
 
     int getId() const { return Eid; }
     std::string getFirstname() const { return firstname; }
@@ -45,9 +46,11 @@ public:
     void setEmail(const std::string& str) { email = str; }
     void setAddress()  { 
         std::string add;
-        std::cout << "Enter address: ";
+        std::string msg = " Enter # to leave the field Empty\n"; 
+        std::cout << "Enter address: "+msg;
         std::cin.ignore(); 
         std::getline(std::cin, add);
+        if (add == "#") add = "";
         address = add;
     }
     void setGender(const Gender& g) { gender = g; }
@@ -61,7 +64,7 @@ public:
     void deleteEmployee();
     void updateEmployee();
     void userInputEmployee();
-    void action();
+    void action() noexcept;
 
 
 private:
@@ -76,5 +79,6 @@ private:
     std::string doj{};
     int manager_id{};
     int department_id{};
+    Salary s;
 };
 #endif 

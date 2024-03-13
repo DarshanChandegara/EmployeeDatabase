@@ -163,7 +163,6 @@
     <ClCompile Include="src\Manager.cpp" />
     <ClCompile Include="src\menu.cpp" />
     <ClCompile Include="src\Salary.cpp" />
-    <ClCompile Include="src\Validator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\DBmanage.h" />
@@ -172,7 +171,6 @@
     <ClInclude Include="include\Model\Engineer.h" />
     <ClInclude Include="include\Model\Manager.h" />
     <ClInclude Include="include\Model\Salary.h" />
-    <ClInclude Include="include\Validator.h" />
     <ClInclude Include="sqlite\sqlite3.h" />
     <ClInclude Include="sqlite\sqlite3ext.h" />
   </ItemGroup>
