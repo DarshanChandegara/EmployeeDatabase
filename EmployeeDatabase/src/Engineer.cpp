@@ -145,7 +145,7 @@ void Engineer::updateEngineer() {
 			std::cout << "11. programming Language\n";
 			std::cout << "12. Specification \n";
 			std::cout << "13. ToUpdateDatabase\n\n";
-			std::string promp1t = "Enter New Value\n";
+			std::string_view promp1t = "Enter New Value\n";
 			std::string value;
 			std::cout << "Enter Choice: ";
 			std::cin >> i;
@@ -251,6 +251,9 @@ void Engineer::updateEngineer() {
 		int change = sqlite3_changes(Database::getInstance().db);
 		if (change == 0) {
 			std::cout << "Selected Employee is not in database\n";
+			std::cout << "Press 0 To continue\n";
+			int i;
+			std::cin >> i;
 		}
 	}
 	catch (std::exception& e) {
@@ -268,6 +271,9 @@ void Engineer::deleteEngineer() {
 		int change = sqlite3_changes(Database::getInstance().db);
 		if (change == 0) {
 			std::cout << "Selected Engineer is not in database\n";
+			std::cout << "Press 0 To continue\n";
+			int i;
+			std::cin >> i;
 		}
 	}
 	catch (std::exception& e) {
@@ -280,7 +286,7 @@ void Engineer::deleteEngineer() {
 
 void Engineer::action() noexcept {
 
-	auto check{ true };
+	/*auto check{ true };
 	while (check) {
 		system("cls");
 		std::cout << "Select The Operation You Want The Perform\n";
@@ -320,6 +326,6 @@ void Engineer::action() noexcept {
 		default:
 			std::cout << "Enter Valid Choice\n";
 		}
-	}
+	}*/
 
 }

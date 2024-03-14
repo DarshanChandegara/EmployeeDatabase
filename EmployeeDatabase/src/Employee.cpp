@@ -106,8 +106,6 @@ void Employee::insertEmployee() {
 
 void Employee::updateEmployee() {
 	try {
-
-
 		std::string query = "update Employee set ";
 		std::cout << "Enter the Eid to update Employee\n";
 		std::string tmp;
@@ -129,7 +127,7 @@ void Employee::updateEmployee() {
 			std::cout << "9. managerId\n";
 			std::cout << "10. departmentId\n";
 			std::cout << "11. toUpdateDatabase\n";
-			std::string prompt = "Enter New Value\n";
+			std::string_view prompt = "Enter New Value\n";
 			std::string value;
 			std::cin >> i;
 			switch (i) {
@@ -213,6 +211,9 @@ void Employee::updateEmployee() {
 		int change = sqlite3_changes(Database::getInstance().db);
 		if (change == 0) {
 			std::cout << "Selected Employee is not in database\n";
+			std::cout << "Press 0 To continue\n";
+			int i;
+			std::cin >> i;
 		}
 	}
 	catch (std::exception& e) {
@@ -255,16 +256,13 @@ void Employee::deleteEmployee() {
 
 				count1 = 0;
 				count1 = Database::getInstance().executeQuery(s.c_str(), count1);
-				//std::cout << s << " \n"; 
-				//std::cout << "Nunber of employee : " << count1 << "\n"; 
 
 				s = "";
 				s += "select count(*) from Department where manager_id = " + tmp + ";";
 
 				count2 = 0;
 				count2 = Database::getInstance().executeQuery(s.c_str(), count2);
-				//std::cout << s << " \n"; 
-				//std::cout << "Number of employee : "<< count2 << "\n";
+
 				if (count1 + count2 != 0) {
 					std::cout << "\nYou can't delete this user because he/she is manager of other employees. Please change the manager first\n";
 					std::cout << "Press 0 To continue\n\n";
@@ -293,6 +291,9 @@ void Employee::deleteEmployee() {
 		int change = sqlite3_changes(Database::getInstance().db);
 		if (change == 0) {
 			std::cout << "Selected Employee is not in database\n";
+			std::cout << "Press 0 To continue\n";
+			int i;
+			std::cin >> i;
 		}
 	}
 	catch (std::exception& e) {

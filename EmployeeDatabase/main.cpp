@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include "sqlite/sqlite3.h"
 #include "include/DBmanage.h"

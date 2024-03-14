@@ -8,7 +8,7 @@
 class Database {
 	char* errorMsg = 0;
 
-	Database() = default; 
+	Database() = default;
 	~Database() {
 		//sqlite3_close(db);
 		close();
@@ -18,6 +18,7 @@ class Database {
 
 public:
 	sqlite3* db{};
+	int rc{ 0 };
 	sqlite3_stmt* stmt {};
 	bool open(const char* str);
 	bool close();

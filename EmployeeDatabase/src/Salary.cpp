@@ -103,7 +103,7 @@ void Salary::updateSalary() {
 			std::cout << "3. Increment\n";
 			std::cout << "4. ToUpdate\n";
 
-			std::string promp1t = "Enter New Value\n";
+			std::string_view promp1t = "Enter New Value\n";
 			std::string value;
 			std::cout << "Enter Choice: ";
 			std::cin >> i;
@@ -153,6 +153,9 @@ void Salary::updateSalary() {
 		int change = sqlite3_changes(Database::getInstance().db);
 		if (change == 0) {
 			std::cout << "Selected Employee is not in database\n";
+			std::cout << "Press 0 To continue\n";
+			int i;
+			std::cin >> i;
 		}
 	}
 	catch (std::exception& e) {
@@ -171,7 +174,7 @@ void Salary::deleteSalary() {
 void Salary::action() noexcept {
 	auto check{ true };
 	while (check) {
-		system("cls");
+		system("cls");  
 		std::cout << "Select The Operation You Want The Perform\n";
 		std::cout << "1. View\n";
 		std::cout << "2. Update\n";
@@ -195,6 +198,7 @@ void Salary::action() noexcept {
 
 		default:
 			std::cout << "Enter Valid Choice\n";
+			
 		}
 	}
 }

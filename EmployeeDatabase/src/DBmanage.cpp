@@ -1,7 +1,7 @@
 #include "../include/DBmanage.h"
 
 bool Database::open(const char* str) {
-	int rc = sqlite3_open(str, &db);
+	rc = sqlite3_open(str, &db);
 
 	if (rc) {
 		std::cerr << "Can't open database: " << sqlite3_errmsg(db) << "\n";
@@ -122,12 +122,12 @@ bool Database::open(const char* str) {
 
 int Database::executeQuery(const char* sql, float count)
 {
-	int rc = sqlite3_exec(db, sql, callbackOther, &count, &errorMsg);
+	rc = sqlite3_exec(db, sql, callbackOther, &count, &errorMsg);
 
 	if (rc == 19) {
-		std::cerr << "You can not delete this record because this violates the rule of reference key constraints\nSome other record took reference of this record\n"; 
-		std::cout << "Press Enter to continue\n"; 
-		std::cin.get(); 
+		std::cerr << "You can not perform this operation on this record because this violates the rule of reference key constraints\n"; 
+		std::cout << "Press 0 to continue\n"; 
+		std::cin >> rc; 
 		return false;
 	}
 	else if (rc != SQLITE_OK)
@@ -151,7 +151,7 @@ int Database::executeQuery(const char* sql, float count)
 
 bool Database::selectQuery(const char* sql)
 {
-	int rc = sqlite3_exec(db, sql, callback, 0, &errorMsg);
+	rc = sqlite3_exec(db, sql, callback, 0, &errorMsg);
 
 	if (rc != SQLITE_OK)
 	{
@@ -169,7 +169,7 @@ bool Database::selectQuery(const char* sql)
 }
 
 bool Database::close() {
-	int rc = sqlite3_close(db);
+	rc = sqlite3_close(db);
 
 	if (rc != SQLITE_OK) {
 		std::cerr << "Database Failed to close\n";

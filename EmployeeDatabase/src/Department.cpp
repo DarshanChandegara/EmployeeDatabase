@@ -2,14 +2,13 @@
 
 void Department::userInput() {
 	try {
-		std::string msg = " Enter # to leave the field Empty\n"; 
 		system("cls");
 		setId(stoi(input("Enter Department ID: ", idRegex)));
-		setName(input("Enter Department Name: "));
+		setName();
 		setManagerId(stoi(input("Enter Department Manager ID: ", idRegex)));
 		setDescription();
 	}
-	catch (std::exception& e) {
+	catch (std::exception& e) { 
 		std::cout << e.what() << std::endl;
 		std::cout << "Press 0 To continue\n";
 		int i;
@@ -90,9 +89,9 @@ void Department::insertDepartment() {
 		std::string query = "INSERT INTO Department "
 			"(id, Dname, manager_id, description) "
 			"VALUES (" + std::to_string(Did) + ", '" + Dname + "'," + std::to_string(manager_id) + ", '" + description + "');";
-		std::cout << query;   
+		//std::cout << query;   
 		Database::getInstance().executeQuery(query.c_str());   
-		std::cin >> query;   
+		//std::cin >> query;     
 	}
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
@@ -121,7 +120,7 @@ void Department::updateDepartment() {
 			std::cout << "2. manager id\n";
 			std::cout << "3. description\n";
 			std::cout << "4. toUpdateDatabase\n\n";
-			std::string prompt = "Enter the changed value\n";
+			std::string_view prompt = "Enter the changed value\n";
 			std::string value;
 			std::cout << "Enter Choice: ";
 			std::cin >> i;
@@ -130,8 +129,8 @@ void Department::updateDepartment() {
 				return;
 
 			case 1:
-				value = input(prompt);
-				mp.insert({ "Dname" , value });
+				setName();
+				mp.insert({ "Dname" , Dname });
 				break;
 
 			case 2:
@@ -171,6 +170,9 @@ void Department::updateDepartment() {
 		int change = sqlite3_changes(Database::getInstance().db);
 		if (change == 0) {
 			std::cout << "Selected Department is not in database\n";
+			std::cout << "Press 0 To continue\n";
+			int i;
+			std::cin >> i;
 		}
 	}
 	catch (std::exception& e) {
@@ -228,6 +230,9 @@ void Department::deleteDepartment() {
 		int change = sqlite3_changes(Database::getInstance().db);
 		if (change == 0) {
 			std::cout << "Selected Department is not in database\n";
+			std::cout << "Press 0 To continue\n";
+			int i; 
+			std::cin >> i; 
 		}
 	}
 	catch (std::exception& e) {
@@ -239,7 +244,7 @@ void Department::deleteDepartment() {
 }
 
 void Department::action() noexcept {
-	auto check{ true };
+	/*auto check{ true };
 	while (check) {
 		system("cls");
 		std::cout << "Select The Operation You Want The Perform\n";
@@ -276,5 +281,5 @@ void Department::action() noexcept {
 		default:
 			std::cout << "Enter Valid Choice\n";
 		}
-	}
+	}*/
 }

@@ -156,6 +156,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="sqlite\shell.c" />
     <ClCompile Include="sqlite\sqlite3.c" />
+    <ClCompile Include="src\action.cpp" />
     <ClCompile Include="src\DBmanage.cpp" />
     <ClCompile Include="src\Department.cpp" />
     <ClCompile Include="src\Employee.cpp" />

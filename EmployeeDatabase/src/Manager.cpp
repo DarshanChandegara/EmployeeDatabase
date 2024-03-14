@@ -7,7 +7,7 @@ void Manager::userInputManager() {
 		system("cls");
 		userInputEmployee();
 		setManagementExperience(std::stoi(input("Enter Management Experience: "+msg)));
-		setProjectTile(input("Enter Project Title: "+msg));
+		setProjectTile();
 	}
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
@@ -74,7 +74,7 @@ void Manager::viewManager() {
 				break;
 			case 6:
 				all += "SELECT * FROM Employee INNER JOIN Manager ON Manager.id = Employee.Eid";
-				Database::getInstance().selectQuery(all.c_str());
+				Database::getInstance().selectQuery(all.c_str());  
 				break;
 			default:
 				std::cout << "Enter valid field\n";
@@ -147,7 +147,7 @@ void Manager::updateManager() {
 			std::cout << "11. Project Title\n";
 			std::cout << "12. managetment Experience \n";
 			std::cout << "13. ToUpdateDatabase\n\n";
-			std::string promp1t = "Enter New Value\n";
+			std::string_view promp1t = "Enter New Value\n";
 			std::string value;
 			std::cout << "Enter Choice: ";
 			cin >> i;
@@ -206,8 +206,8 @@ void Manager::updateManager() {
 				break;
 
 			case 11:
-				value = input(promp1t);
-				mp2.insert({ "project_title" , value });
+				setProjectTile();
+				mp2.insert({ "project_title" , project_title}); 
 				break;
 
 			case 12:
@@ -223,8 +223,8 @@ void Manager::updateManager() {
 
 		auto itr1 = mp1.end();
 		auto itr2 = mp2.end();
-		itr1--;
-		itr2--;
+		if(mp1.size() != 0) itr1--;
+		if(mp2.size() != 0) itr2--;
 		for (auto it = mp1.begin(); it != mp1.end(); ++it) {
 			query1 += it->first + " = ";
 			if (it->first == "manager_id" || it->first == "department_id") {
@@ -251,14 +251,17 @@ void Manager::updateManager() {
 
 		query1 += " where Eid = " + tmp1 + " ;";
 		query2 += " where id = " + tmp1 + " ;";
-		//std::cout << query1 << "\n";
-		//std::cout << query2 << "\n";
-
+		//std::cout << query1 << "\n"; 
+		//std::cout << query2 << "\n"; 
+		//std::cin >> query1;
 		Database::getInstance().executeQuery(query1.c_str());
-		Database::getInstance().executeQuery(query2.c_str());
+		Database::getInstance().executeQuery(query2.c_str());  
 		int change = sqlite3_changes(Database::getInstance().db);
 		if (change == 0) {
 			std::cout << "Selected Emp1loyee is not in database\n";
+			std::cout << "Press 0 To continue\n";
+			int i; 
+			std::cin >> i; 
 		}
 	}
 	catch (std::exception& e) {
@@ -277,6 +280,9 @@ void Manager::deleteManager() {
 		int change = sqlite3_changes(Database::getInstance().db);
 		if (change == 0) {
 			std::cout << "Selected Manager is not in database\n";
+			std::cout << "Press 0 To continue\n"; 
+			int i; 
+			std::cin >> i; 
 		}
 	}
 	catch (std::exception& e) {
@@ -288,7 +294,7 @@ void Manager::deleteManager() {
 }
 
 void Manager::action() noexcept {
-	auto check{ true };
+	/*auto check{ true };
 	while (check) {
 		system("cls");
 		std::cout << "Select The Operation You Want The Perform\n";
@@ -325,5 +331,5 @@ void Manager::action() noexcept {
 		default:
 			std::cout << "Enter Valid Choice\n";
 		}
-	}
+	}*/
 }
