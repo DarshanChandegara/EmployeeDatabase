@@ -3,6 +3,9 @@
 
 #include<iostream>
 #include <iomanip>
+#include <vector>
+#include <string>
+#include "../include/Helper.h"
 #include "../sqlite/sqlite3.h"
 
 class Database {
@@ -20,6 +23,7 @@ public:
 	sqlite3* db{};
 	int rc{ 0 };
 	sqlite3_stmt* stmt {};
+	static int row;
 	bool open(const char* str);
 	bool close();
 	int executeQuery(const char* sql , float count = 0);
@@ -28,6 +32,9 @@ public:
 		static Database db;
 		return db;
 	}
+	void createTableQuery();
+	void deleteTableQuery();
+	void showTables();
 	static int callback(void* data, int args, char** row, char** col);
 	static int callbackOther(void* data, int args, char** row, char** col);
 };

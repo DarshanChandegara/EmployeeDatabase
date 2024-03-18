@@ -1,5 +1,6 @@
 #include "../include/DBmanage.h"
 
+int Database::row = 0;
 bool Database::open(const char* str) {
 	rc = sqlite3_open(str, &db);
 
@@ -120,29 +121,147 @@ bool Database::open(const char* str) {
 	return true;
 }
 
+
+void Database::createTableQuery() {
+	system("cls");
+	std::cout << "If you want to go back press 0 Otherwise press 1\n";
+	int i;
+	if (std::cin >> i;  i == 0) {
+		return;
+	}
+	std::string tableName;
+	std::cout << "Enter table name: ";
+	std::cin >> tableName;
+	std::string sql = "CREATE TABLE IF NOT EXISTS " + tableName + " (";
+	std::vector<std::string> columns;
+
+	char choice;
+
+	do {
+		std::string columnName, columnType, constraints;
+		std::cout << "\nEnter column name: ";
+		std::cin >> columnName;
+		std::cout << "Enter column type: ";
+		std::cin >> columnType;
+		std::cout << "Enter column constraints : ";
+		std::cin.ignore();
+		std::getline(std::cin, constraints);
+
+		columns.push_back(columnName + " " + columnType + " " + constraints);
+		std::cout << "Add another column? (y/n): ";
+		std::cin >> choice;
+
+	} while (choice == 'y' || choice == 'Y');
+
+	for (int i = 0; i < columns.size(); ++i) {
+		sql += columns[i];
+		if (i < columns.size() - 1) {
+			sql += ",";
+		}
+	}
+	sql += ");";
+
+	//std::cout << sql;
+	rc = executeQuery(sql.c_str()); 
+	if (rc == 0) {
+		std::cout << "\nTable created Suceesfully\n\n";
+		std::cout << "Press 0 to continue....\n";
+		int i;
+		std::cin >> i;
+	}
+	//std::cout << sql << "\n\n";
+
+}
+
+void Database::showTables() {
+
+	std::string showQuery = " SELECT name FROM sqlite_schema ;";
+
+	rc = selectQuery(showQuery.c_str());
+
+	std::cout << "Press 0 to continue....\n";
+	int i;
+	std::cin >> i;
+}
+
+void Database::deleteTableQuery() {
+	system("cls");
+	int i;
+	std::cout << "Select the operation\n";
+	std::cout << "0. To Go Back \n"; 
+	std::cout << "1. Drop Table\n";
+	std::cout << "2. Delete Data within table\n";
+	i = std::stoi(input("Enter choice:", std::regex{ "[0-2]" }));
+	std::string deleteQuery;
+	std::string tableName;
+
+	switch (i) {
+	case 0:
+		return;
+		break;
+	case 1:
+		std::cout << "\nEnter Table Name to Drop: ";
+		std::cin >> tableName;
+		deleteQuery = "DROP TABLE " + tableName + ";";
+		//std::cout << deleteQuery << "\n\n";
+		rc = executeQuery(deleteQuery.c_str());
+
+		if (rc == 0) {
+			std::cout << "Table Dropped Succesfully ! \n\n";
+			std::cout << "Press 0 to continue....\n";
+			int i;
+			std::cin >> i;
+		}
+		break;
+
+	case 2:
+
+		std::cout << "\nEnter Table Name to Delete: ";
+		std::cin >> tableName;
+		deleteQuery = "DELETE FROM " + tableName + ";";
+		//std::cout << deleteQuery << "\n\n";
+		rc = executeQuery(deleteQuery.c_str());
+		if (rc == 0) {
+
+			std::cout << "Table Deleted Succesfully ! \n\n";
+			std::cout << "Press 0 to continue....\n";
+			int i;
+			std::cin >> i;
+		}
+		break;
+
+	default:
+		std::cout << "Wrong Input..!\n\n";
+		break;
+
+	}
+
+}
+
 int Database::executeQuery(const char* sql, float count)
 {
 	rc = sqlite3_exec(db, sql, callbackOther, &count, &errorMsg);
 
 	if (rc == 19) {
-		std::cerr << "You can not perform this operation on this record because this violates the rule of reference key constraints\n"; 
-		std::cout << "Press 0 to continue\n"; 
-		std::cin >> rc; 
-		return false;
+		//std::cerr << "You can not perform this operation on this record because this violates the rule of reference key constraints\n"; 
+		//std::cout << "Press 0 to continue\n"; 
+		//std::cin >> rc; 
+		return rc;
 	}
 	else if (rc != SQLITE_OK)
 	{
-		std::cerr << "SQL error: " << errorMsg << std::endl; 
-		std::cout << "Press Enter to continue\n";  
-		std::cin.get();   
-		sqlite3_free(errorMsg); 
-		return false;
+		std::cerr << "SQL error: " << errorMsg << std::endl;
+		std::cout << "Press press 0 to continue\n";
+		int i;
+		std::cin >> i;
+		sqlite3_free(errorMsg);
+		return rc;
 	}
 	else
 	{
 		//std::cout << "Query executed successfully" << std::endl;
 
-		return count; 
+		return rc;
 		//return true;
 	}
 
@@ -151,6 +270,7 @@ int Database::executeQuery(const char* sql, float count)
 
 bool Database::selectQuery(const char* sql)
 {
+	Database::row = 0;
 	rc = sqlite3_exec(db, sql, callback, 0, &errorMsg);
 
 	if (rc != SQLITE_OK)
@@ -164,6 +284,7 @@ bool Database::selectQuery(const char* sql)
 	else
 	{
 		//std::cout << "Query executed successfully" << std::endl;
+		std::cout << Database::row << " row returned\n\n";
 		return true;
 	}
 }
@@ -182,8 +303,9 @@ bool Database::close() {
 
 int Database::callback(void* data, int args, char** row, char** col) {
 	//std::cout << "Hello from callback function\n";
+	Database::row++;
 	try {
-	std::cout << "+--------------------------+----------------------------------------+" << std::endl;
+		std::cout << "+--------------------------+----------------------------------------+" << std::endl;
 		for (int i{ 0 }; i < args; i++) {
 			std::cout << "|" << std::setw(25) << std::left << col[i] << " | " << std::setw(38) << std::left << (row[i] ? row[i] : NULL) << " |" << std::endl;
 		}
@@ -191,12 +313,12 @@ int Database::callback(void* data, int args, char** row, char** col) {
 		std::cout << "\n";
 
 		std::cout << "\n";
-		return 0;	
+		return 0;
 	}
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
-		std::cout << "Press Enter to continue\n"; 
-		std::cin.get(); 
+		std::cout << "Press Enter to continue\n";
+		std::cin.get();
 	}
 }
 

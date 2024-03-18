@@ -25,7 +25,7 @@ public:
 
     void viewSalary();
     void userInputSalary();
-    void insertSalary(int id); 
+    void insertSalary(int id) const; 
     void increment(float , std::string);
     void deleteSalary();
     void updateSalary();

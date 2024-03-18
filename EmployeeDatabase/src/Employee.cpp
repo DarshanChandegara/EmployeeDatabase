@@ -92,127 +92,142 @@ void Employee::insertEmployee() {
 		}
 		query += "' , '" + doj + "', " + std::to_string(manager_id) + ", " + std::to_string(department_id) + "); ";
 
-		Database::getInstance().executeQuery(query.c_str());
-		s.insertSalary(getId());
-	}
-	catch (std::exception& e) {
-		std::cout << e.what() << std::endl;
-		std::cout << "Press 0 To continue\n";
-		int i;
-		std::cin >> i;
-	}
-} 
-
-void Employee::updateEmployee() {
-	try {
-		std::string query = "update Employee set ";
-		std::cout << "Enter the Eid to update Employee\n";
-		std::string tmp;
-		std::cin >> tmp;
-		std::map<std::string, std::string> mp;
-		bool check = true;
-		int i;
-		while (check) {
-			std::cout << "Select the field you want to update \n";
-			std::cout << "0. Go Back\n";  
-			std::cout << "1. FirstName\n";
-			std::cout << "2. lastName\n";
-			std::cout << "3. DOB\n";
-			std::cout << "4. mobile\n";
-			std::cout << "5. email\n";
-			std::cout << "6. address\n";
-			std::cout << "7. gender\n";
-			std::cout << "8. doj\n";
-			std::cout << "9. managerId\n";
-			std::cout << "10. departmentId\n";
-			std::cout << "11. toUpdateDatabase\n";
-			std::string_view prompt = "Enter New Value\n";
-			std::string value;
-			i = std::stoi(input("Enter Your Choice : ", std::regex{ "[0-11]" }));
-			switch (i) {
-			case 0:
-				return;
-
-			case 1:
-				value = input(prompt);
-				mp.insert({ "firstname" , value });
-				break;
-
-			case 2:
-				value = input(prompt);
-				mp.insert({ "lastname" , value });
-				break;
-
-			case 3:
-				value = input(prompt, dateRegex);
-				mp.insert({ "dob" , value });
-				break;
-
-			case 4:
-				value = input(prompt, mobileRegex);
-				mp.insert({ "mobile" , value });
-				break;
-
-			case 5:
-				value = input(prompt, emailRegex);
-				mp.insert({ "email" , value });
-				break;
-
-			case 6:
-				setAddress();
-				mp.insert({ "address" , address });
-				break;
-
-			case 7:
-				value = input(prompt);
-				mp.insert({ "gender" , value });
-				break;
-
-			case 8:
-				value = input(prompt, dateRegex);
-				mp.insert({ "doj" , value });
-				break;
-
-			case 9:
-				value = input(prompt, idRegex);
-				mp.insert({ "manager_id" , value });
-				break;
-
-			case 10:
-				value = input(prompt, idRegex);
-				mp.insert({ "department_id" , value });
-				break;
-
-			case 11:
-				check = false;
-				break;
-			}
+		int rc = Database::getInstance().executeQuery(query.c_str()); 
+		if (rc == 0) {
+			std::cout << "Employee inserted successfully";
+			
 		}
-
-		auto itr = mp.end();
-		itr--;
-		for (auto it = mp.begin(); it != mp.end(); ++it) {
-			query += it->first + " = ";
-			if (it->first == "manager_id" || it->first == "department_id") {
-				query += it->second + " ";
-			}
-			else {
-				query += "'" + it->second + "' ";
-			}
-
-			if (it != itr)
-				query += ",";
-		}
-		query += "where Eid = " + tmp + " ;";
-		//std::cout << query << "\n";
-
-		Database::getInstance().executeQuery(query.c_str());
-		int change = sqlite3_changes(Database::getInstance().db);
-		if (change == 0) {
-			std::cout << "Selected Employee is not in database\n";
+		else if (rc == 19) {
+			std::cout << "Entered manager or department is not available in particular table\n\n";
 			std::cout << "Press 0 To continue\n";
 			int i;
 			std::cin >> i;
+		}
+		s.insertSalary(getId()); 
+	}
+	catch (std::exception& e) { 
+		std::cout << e.what() << std::endl; 
+		std::cout << "Press 0 To continue\n";
+		int i;
+		std::cin >> i;
+	} 
+} 
+
+void Employee::updateEmployee() {
+	try { 
+		std::string query = "update Employee set "; 
+		std::cout << "Enter the Eid to update Employee\n"; 
+		std::string tmp; 
+		std::cin >> tmp; 
+
+		std::string select = "select * from Employee where id = " + tmp + " ;";
+		Database::getInstance().selectQuery(select.c_str()); 
+		if (Database::row == 0) {
+			std::cout << "Entered Department is not in database\n\n";
+			std::cout << "Press 0 to continue\n";
+			int i;
+			std::cin >> i;
+			updateEmployee(); 
+		}
+		else {
+			std::map<std::string, std::string> mp;
+			bool check = true;
+			int i;
+			while (check) {
+				std::cout << "Select the field you want to update \n";
+				std::cout << "0. Go Back\n";
+				std::cout << "1. FirstName\n";
+				std::cout << "2. lastName\n";
+				std::cout << "3. DOB\n";
+				std::cout << "4. mobile\n";
+				std::cout << "5. email\n";
+				std::cout << "6. address\n";
+				std::cout << "7. gender\n";
+				std::cout << "8. doj\n";
+				std::cout << "9. managerId\n";
+				std::cout << "10. departmentId\n";
+				std::cout << "11. toUpdateDatabase\n";
+				std::string_view prompt = "Enter New Value\n";
+				std::string value;
+				i = std::stoi(input("Enter Your Choice : ", std::regex{ "^[0-9]$|^1[0-1]$" }));
+				switch (i) {
+				case 0:
+					return;
+
+				case 1:
+					value = input(prompt);
+					mp.insert({ "firstname" , value });
+					break;
+
+				case 2:
+					value = input(prompt);
+					mp.insert({ "lastname" , value });
+					break;
+
+				case 3:
+					value = input(prompt, dateRegex);
+					mp.insert({ "dob" , value });
+					break;
+
+				case 4:
+					value = input(prompt, mobileRegex);
+					mp.insert({ "mobile" , value });
+					break;
+
+				case 5:
+					value = input(prompt, emailRegex);
+					mp.insert({ "email" , value });
+					break;
+
+				case 6:
+					setAddress();
+					mp.insert({ "address" , address });
+					break;
+
+				case 7:
+					value = input(prompt);
+					mp.insert({ "gender" , value });
+					break;
+
+				case 8:
+					value = input(prompt, dateRegex);
+					mp.insert({ "doj" , value });
+					break;
+
+				case 9:
+					value = input(prompt, idRegex);
+					mp.insert({ "manager_id" , value });
+					break;
+
+				case 10:
+					value = input(prompt, idRegex);
+					mp.insert({ "department_id" , value });
+					break;
+
+				case 11:
+					check = false;
+					break;
+				}
+			}
+
+			auto itr = mp.end();
+			itr--;
+			for (auto it = mp.begin(); it != mp.end(); ++it) {
+				query += it->first + " = ";
+				if (it->first == "manager_id" || it->first == "department_id") {
+					query += it->second + " ";
+				}
+				else {
+					query += "'" + it->second + "' ";
+				}
+
+				if (it != itr)
+					query += ",";
+			}
+			query += "where Eid = " + tmp + " ;";
+			//std::cout << query << "\n";
+
+			int rc = Database::getInstance().executeQuery(query.c_str());
 		}
 	}
 	catch (std::exception& e) {
@@ -222,8 +237,6 @@ void Employee::updateEmployee() {
 		std::cin >> i;
 	}
 }
-
-
 
 void Employee::deleteEmployee() {
 	try {
@@ -250,33 +263,13 @@ void Employee::deleteEmployee() {
 				std::cout << "Enter Eid: ";
 				std::cin >> tmp;
 				query1 += "Eid = " + tmp + ";";
-
-				s += "select count(*) from Employee where Employee.manager_id = " + tmp + ";";
-
-				count1 = 0;
-				count1 = Database::getInstance().executeQuery(s.c_str(), count1);
-
-				s = "";
-				s += "select count(*) from Department where manager_id = " + tmp + ";";
-
-				count2 = 0;
-				count2 = Database::getInstance().executeQuery(s.c_str(), count2);
-
-				if (count1 + count2 != 0) {
-					std::cout << "\nYou can't delete this user because he/she is manager of other employees. Please change the manager first\n";
-					std::cout << "Press 0 To continue\n\n";
-					std::cin >> i;
-				}
-				else {
-					Database::getInstance().executeQuery(query1.c_str());
-				}
 				break;
 
 			case 2:
 				std::cout << "Enter email: ";
 				std::cin >> tmp;
 				query1 += "email = '" + tmp + "';";
-				Database::getInstance().executeQuery(query1.c_str());
+				
 				break;
 
 			default:
@@ -287,13 +280,30 @@ void Employee::deleteEmployee() {
 			break;
 		}
 		std::cout << query1 << "\n";
-		int change = sqlite3_changes(Database::getInstance().db);
-		if (change == 0) {
-			std::cout << "Selected Employee is not in database\n";
+
+		int rc = Database::getInstance().executeQuery(query1.c_str()); 
+		if (rc == 0) {
+			std::cout << "Employee Deleted successfully\n\n";
+			std::cout << "Press 0 to continue.....\n"; 
+			int i; 
+			std::cin >> i; 
+		}
+		else if (rc == 19) {
+			std::cout << "You can not delete this Employee because this is a manager of other employees \n\n";
 			std::cout << "Press 0 To continue\n";
 			int i;
 			std::cin >> i;
 		}
+		else {
+			int change = sqlite3_changes(Database::getInstance().db);
+			if (change == 0) {
+				std::cout << "Selected Employee is not in database\n";
+				std::cout << "Press 0 To continue\n";
+				int i;
+				std::cin >> i;
+			}
+		}
+		
 	}
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
