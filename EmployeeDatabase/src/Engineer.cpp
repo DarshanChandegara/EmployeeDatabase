@@ -31,8 +31,8 @@ void Engineer::viewEngineer() {
 		std::cout << "5. Manager Id\n";
 		std::cout << "6. ALL\n\n";
 		int i;
-		std::cout << "Enter Choice: ";
-		std::cin >> i;
+		i = std::stoi(input("Enter Your Choice : ", std::regex{ "[0-6]" }));
+		
 		std::string tmp1;
 		while (1) {
 			switch (i) {
@@ -147,69 +147,80 @@ void Engineer::updateEngineer() {
 			std::cout << "13. ToUpdateDatabase\n\n";
 			std::string_view promp1t = "Enter New Value\n";
 			std::string value;
-			std::cout << "Enter Choice: ";
-			std::cin >> i;
+			i = std::stoi(input("Enter Your Choice : ", std::regex{ "[0-13]" }));
 			switch (i) {
 			case 0:
 				return;
 
 			case 1:
 				value = input(promp1t);
+				mp1.erase("firstname");
 				mp1.insert({ "firstname" , value });
 				break;
 
 			case 2:
 				value = input(promp1t );
+				mp1.erase("lastname");
 				mp1.insert({ "lastname" , value });
 				break;
 
 			case 3:
 				value = input(promp1t, dateRegex);
+				mp1.erase("dob");
 				mp1.insert({ "dob" , value });
 				break;
 
 			case 4:
 				value = input(promp1t, mobileRegex);
+				mp1.erase("mobile");
 				mp1.insert({ "mobile" , value });
 				break;
 
 			case 5:
 				value = input(promp1t, emailRegex);
+				mp1.erase("email");
 				mp1.insert({ "email" , value });
 				break;
 
 			case 6:
 				setAddress();
+				mp1.erase("address");
 				mp1.insert({ "address" , getAddress() });
 				break;
 
 			case 7:
 				value = input(promp1t);
+				mp1.erase("gender");
 				mp1.insert({ "gender" , value });
 				break;
 
 			case 8:
 				value = input(promp1t, dateRegex);
+				mp1.erase("doj");
 				mp1.insert({ "doj" , value });
 				break;
 
 			case 9:
 				value = input(promp1t, idRegex);
+				mp1.erase("manager_id");
 				mp1.insert({ "manager_id" , value });
 				break;
 
 			case 10:
 				value = input(promp1t, idRegex);
+				mp1.erase("department_id"); 
 				mp1.insert({ "department_id" , value });
 				break;
 
 			case 11:
 				value = input(promp1t);
+				mp2.erase("programming_language"); 
 				mp2.insert({ "programming_language" , value });
 				break;
 
 			case 12:
 				setSpecialization();
+				mp2.erase("specialization"); 
 				mp2.insert({ "specialization" , getSpecialization() });
 				break;
 
@@ -219,10 +230,10 @@ void Engineer::updateEngineer() {
 			}
 		}
 
-		auto itr1 = mp1.end();
+		auto itr1 =  mp1.end();
 		auto itr2 = mp2.end();
-		itr1--;
-		itr2--;
+		if(mp1.size() != 0) itr1--;
+		if(mp2.size() != 0) itr2--;
 		for (auto it = mp1.begin(); it != mp1.end(); ++it) {
 			query1 += it->first + " = ";
 			if (it->first == "manager_id" || it->first == "department_id") {

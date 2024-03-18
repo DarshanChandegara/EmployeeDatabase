@@ -23,13 +23,13 @@ void Department::viewDepartment() {
 		std::string all = "";
 		std::cout << "Select the Field on which you want to view the Department\n";
 		std::cout << "0. Go Back\n";
-		std::cout << "1. id\n";
+		std::cout << "1. Id\n";
 		std::cout << "2. Dname\n";
 		std::cout << "3. manager_id\n";
 		std::cout << "4. ALL\n\n";
 		int i;
-		std::cout << "Enter Choice: ";
-		std::cin >> i;
+		i = std::stoi(input("Enter Your Choice : ", std::regex{ "[0-4]" }));
+		
 		std::cout << "\n\n";
 		std::string tmp;
 		while (1) {
@@ -122,24 +122,26 @@ void Department::updateDepartment() {
 			std::cout << "4. toUpdateDatabase\n\n";
 			std::string_view prompt = "Enter the changed value\n";
 			std::string value;
-			std::cout << "Enter Choice: ";
-			std::cin >> i;
+			i = std::stoi(input("Enter Your Choice : ", std::regex{ "[0-4]" }));
 			switch (i) {
 			case 0:
 				return;
 
 			case 1:
 				setName();
+				mp.erase("Dname");
 				mp.insert({ "Dname" , Dname });
 				break;
 
 			case 2:
 				value = input(prompt, idRegex);
+				mp.erase("manager_id");
 				mp.insert({ "manager_id" , value });
 				break;
 
 			case 3:
 				setDescription();
+				mp.erase("description");
 				mp.insert({ "description" , description });
 				break;
 
@@ -150,7 +152,7 @@ void Department::updateDepartment() {
 		}
 
 		auto itr = mp.end();
-		itr--;
+		if(mp.size() != 0) itr--;
 		for (auto it = mp.begin(); it != mp.end(); ++it) {
 			query += it->first + " = ";
 			if (it->first == "manager_id") {
@@ -193,8 +195,7 @@ void Department::deleteDepartment() {
 		std::cout << "1. Did\n";
 		std::cout << "2. Dname\n";
 		int i;
-		std::cout << "Enter choice: ";
-		std::cin >> i;
+		i = std::stoi(input("Enter Your Choice : ", std::regex{ "[0-2]" }));
 		std::cout << "\n";
 		std::string tmp;
 		while (1) {

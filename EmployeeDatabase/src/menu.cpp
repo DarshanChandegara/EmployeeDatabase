@@ -15,9 +15,8 @@ void menu() noexcept {
 		std::cout << "4. Salary \n";  
 		std::cout << "5. To exit \n\n"; 
 
-		std::cout << "Enter Your Choice:  "; 
 		int i;  
-		std::cin >> i;  
+		i = std::stoi(input("Enter Your Choice : ", std::regex{"[1-5]"}));
 
 		switch (i) { 
 		case 1:  case 2:  case 3:
@@ -34,7 +33,7 @@ void menu() noexcept {
 
 		default:
 			std::cout << "Enter valid table\n"; 
-			flag = false; 
+			//flag = false; 
 		} 
 	}
 }

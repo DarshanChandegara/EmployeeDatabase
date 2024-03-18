@@ -33,8 +33,7 @@ void Manager::viewManager() {
 		std::cout << "5. Project Title\n";
 		std::cout << "6. ALL\n\n";
 		int i;
-		std::cout << "Enter Choice: ";
-		cin >> i;
+		i = std::stoi(input("Enter Your Choice : ", std::regex{ "[0-6]" }));
 		std::string tmp1;
 		while (1) {
 			switch (i) {
@@ -149,69 +148,80 @@ void Manager::updateManager() {
 			std::cout << "13. ToUpdateDatabase\n\n";
 			std::string_view promp1t = "Enter New Value\n";
 			std::string value;
-			std::cout << "Enter Choice: ";
-			cin >> i;
+			i = std::stoi(input("Enter Your Choice : ", std::regex{ "[0-13]" }));
 			switch (i) {
 			case 0:
 				return;
 
 			case 1:
 				value = input(promp1t);
+				mp1.erase("firstname");
 				mp1.insert({ "firstname" , value });
 				break;
 
 			case 2:
 				value = input(promp1t);
+				mp1.erase("lastname");
 				mp1.insert({ "lastname" , value });
 				break;
 
 			case 3:
 				value = input(promp1t, dateRegex);
+				mp1.erase("dob");
 				mp1.insert({ "dob" , value });
 				break;
 
 			case 4:
 				value = input(promp1t, mobileRegex);
+				mp1.erase("mobile");
 				mp1.insert({ "mobile" , value });
 				break;
 
 			case 5:
 				value = input(promp1t, emailRegex);
+				mp1.erase("email");
 				mp1.insert({ "email" , value });
 				break;
 
 			case 6:
 				setAddress();
+				mp1.erase("address");
 				mp1.insert({ "address" , getAddress() });
 				break;
 
 			case 7:
 				value = input(promp1t);
+				mp1.erase("gender");
 				mp1.insert({ "gender" , value });
 				break;
 
 			case 8:
 				value = input(promp1t, dateRegex);
+				mp1.erase("doj");
 				mp1.insert({ "doj" , value });
 				break;
 
 			case 9:
 				value = input(promp1t, idRegex);
+				mp1.erase("manager_id");
 				mp1.insert({ "manager_id" , value });
 				break;
 
 			case 10:
 				value = input(promp1t, idRegex);
+				mp1.erase("department_id");
 				mp1.insert({ "department_id" , value });
 				break;
 
 			case 11:
 				setProjectTile();
+				mp2.erase("project_title");
 				mp2.insert({ "project_title" , project_title}); 
 				break;
 
 			case 12:
 				value = input(promp1t);
+				mp2.erase("management_experience");
 				mp2.insert({ "management_experience" , value });
 				break;
 

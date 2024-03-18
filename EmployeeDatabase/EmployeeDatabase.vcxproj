@@ -151,8 +151,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="include\Helper.h" />
-    <ClCompile Include="include\Regex.h" />
+    <ClInclude Include="include\Helper.h" />
+    <ClInclude Include="include\Regex.h" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="sqlite\shell.c" />
     <ClCompile Include="sqlite\sqlite3.c" />

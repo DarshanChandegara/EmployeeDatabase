@@ -18,7 +18,7 @@ void Salary::userInputSalary() {
 
 void Salary::increment(float percentage , std::string id) {
 	try {
-		float val = 0;
+		double val = 0;
 		std::string query = "select amount from Salary where Sid = " + id + " ;";
 		int rc = sqlite3_prepare_v2(Database::getInstance().db, query.c_str(), -1, &Database::getInstance().stmt, nullptr);
 		rc = sqlite3_step(Database::getInstance().stmt);
@@ -91,6 +91,18 @@ void Salary::updateSalary() {
 		std::cout << "Enter the Eid to update Salary : ";
 		std::string tmp;
 		std::cin >> tmp;
+
+		std::string query1 = "select base_salary from Salary where Sid = " + tmp + " ;"; 
+		int rc = sqlite3_prepare_v2(Database::getInstance().db, query1.c_str(), -1, &Database::getInstance().stmt, nullptr); 
+		rc = sqlite3_step(Database::getInstance().stmt); 
+		base_salary = sqlite3_column_double(Database::getInstance().stmt, 0);
+
+		query1 = "select bonus from Salary where Sid = " + tmp + " ;";
+		rc = sqlite3_prepare_v2(Database::getInstance().db, query1.c_str(), -1, &Database::getInstance().stmt, nullptr);
+		rc = sqlite3_step(Database::getInstance().stmt);
+		bonus = sqlite3_column_double(Database::getInstance().stmt, 0); 
+
+
 		std::map<std::string, std::string> mp1;
 		bool check = true;
 		int i;
@@ -105,8 +117,7 @@ void Salary::updateSalary() {
 
 			std::string_view promp1t = "Enter New Value\n";
 			std::string value;
-			std::cout << "Enter Choice: ";
-			std::cin >> i;
+			i = std::stoi(input("Enter Your Choice : ", std::regex{ "[0-4]" }));
 			switch (i) {
 			case 0:
 				return;
@@ -114,12 +125,14 @@ void Salary::updateSalary() {
 			case 1:
 				value = input(promp1t);
 				setBaseSalary(std::stof(value));
+				mp1.erase("base_salary");
 				mp1.insert({ "base_salary" , value });
 				break;
 
 			case 2:
 				value = input(promp1t);
 				setBonus(std::stof(value));
+				mp1.erase("bonus");
 				mp1.insert({ "bonus" , value });
 				break;
 
@@ -142,7 +155,8 @@ void Salary::updateSalary() {
 		for (auto it = mp1.begin(); it != mp1.end(); ++it) {
 			query += it->first + " = " + it->second + " ,";
 		}
-		if (mp1.size() != 0) setAmount(base_salary + +bonus);
+
+		if (mp1.size() != 0) setAmount(base_salary+bonus);
 
 
 		query += " amount = " + std::to_string(getAmount()) + " where Sid = " + tmp + " ;";
@@ -180,9 +194,8 @@ void Salary::action() noexcept {
 		std::cout << "2. Update\n";
 		std::cout << "3. Go to Main Menu\n\n";
 
-		std::cout << "Enter Choice : ";
 		int i;
-		std::cin >> i;
+		i = std::stoi(input("Enter Your Choice : ", std::regex{ "[1-3]" }));
 		switch (i) {
 		case 1:
 			viewSalary();

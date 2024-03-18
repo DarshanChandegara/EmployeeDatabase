@@ -42,12 +42,6 @@
     <ClCompile Include="src\Employee.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="include\Helper.h">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="include\Regex.h">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\menu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -79,6 +73,12 @@
     </ClInclude>
     <ClInclude Include="sqlite\sqlite3ext.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Regex.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Helper.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

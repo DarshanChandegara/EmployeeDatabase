@@ -16,8 +16,7 @@ void Employee::viewEmployee() {
 		std::cout << "5. Manager Id\n";
 		std::cout << "6. ALL\n\n";
 		int i;
-		std::cout << "Enter choice: ";
-		std::cin >> i;
+		i = std::stoi(input("Enter Your Choice : ", std::regex{ "[0-6]" }));
 		std::string tmp;
 		while (1) {
 			switch (i) {
@@ -129,7 +128,7 @@ void Employee::updateEmployee() {
 			std::cout << "11. toUpdateDatabase\n";
 			std::string_view prompt = "Enter New Value\n";
 			std::string value;
-			std::cin >> i;
+			i = std::stoi(input("Enter Your Choice : ", std::regex{ "[0-11]" }));
 			switch (i) {
 			case 0:
 				return;
@@ -238,8 +237,8 @@ void Employee::deleteEmployee() {
 		std::cout << "0. Go Back\n"; 
 		std::cout << "1. Eid\n";
 		std::cout << "2. email\n\n";
-		std::cout << "Enter Choice: ";
-		std::cin >> i;
+		
+		i = std::stoi(input("Enter Your Choice : ", std::regex{ "[0-2]" }));
 		std::cout << "\n";
 		std::string tmp;
 		while (1) {

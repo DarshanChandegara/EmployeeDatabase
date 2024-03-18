@@ -15,12 +15,11 @@ void action(int j) {
 		std::cout << "4. Delete\n";
 		std::cout << "5. Go to Main Menu\n\n";
 
-		std::cout << "Enter Choice : ";
 		int i;
+		i = std::stoi(input("Enter Your Choice : ", std::regex{ "[1-5]" }));
 		Engineer e;
 		Manager m;
 		Department d;
-		std::cin >> i; 
 		switch (j) {
 		case 1:
 			switch (i) {
