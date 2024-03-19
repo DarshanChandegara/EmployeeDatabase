@@ -2,6 +2,7 @@
 #define _Manager_
 
 #include "Employee.h"
+#include "../Helper.h"
 
 class Manager : public Employee {
 public:

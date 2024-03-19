@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <string_view>
 #include <map>
 #include "Salary.h"
 #include "../DBmanage.h"
@@ -65,7 +66,6 @@ public:
     void updateEmployee();
     void userInputEmployee();
     void action() noexcept;
-
 
 private:
     int Eid;

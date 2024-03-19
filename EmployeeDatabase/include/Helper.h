@@ -2,6 +2,7 @@
 #define _HELPER_
 
 #include<iostream>
+#include<string>
 #include<regex>
 
 inline std::regex rg{ ".*" };
@@ -23,5 +24,14 @@ inline std::string input(const std::string_view& prompt, const std::regex& r = r
 	return input;
 }
 
+inline  std::string fun() {
+	return "darshan";
+}
+
+inline void waitMenu() {
+	std::cout << "Press 0 to continue....\n"; 
+	int i; 
+	std::cin >> i; 
+}
 
 #endif

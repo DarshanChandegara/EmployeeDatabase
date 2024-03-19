@@ -1,6 +1,7 @@
 #include "../include/DBmanage.h"
 
 int Database::row = 0;
+
 bool Database::open(const char* str) {
 	rc = sqlite3_open(str, &db);
 
@@ -121,7 +122,6 @@ bool Database::open(const char* str) {
 	return true;
 }
 
-
 void Database::createTableQuery() {
 	system("cls");
 	std::cout << "If you want to go back press 0 Otherwise press 1\n";
@@ -165,9 +165,7 @@ void Database::createTableQuery() {
 	rc = executeQuery(sql.c_str()); 
 	if (rc == 0) {
 		std::cout << "\nTable created Suceesfully\n\n";
-		std::cout << "Press 0 to continue....\n";
-		int i;
-		std::cin >> i;
+		waitMenu(); 
 	}
 	//std::cout << sql << "\n\n";
 
@@ -179,9 +177,7 @@ void Database::showTables() {
 
 	rc = selectQuery(showQuery.c_str());
 
-	std::cout << "Press 0 to continue....\n";
-	int i;
-	std::cin >> i;
+	waitMenu(); 
 }
 
 void Database::deleteTableQuery() {
@@ -190,7 +186,7 @@ void Database::deleteTableQuery() {
 	std::cout << "Select the operation\n";
 	std::cout << "0. To Go Back \n"; 
 	std::cout << "1. Drop Table\n";
-	std::cout << "2. Delete Data within table\n";
+	std::cout << "2. Delete Data within table\n\n";
 	i = std::stoi(input("Enter choice:", std::regex{ "[0-2]" }));
 	std::string deleteQuery;
 	std::string tableName;
@@ -202,15 +198,18 @@ void Database::deleteTableQuery() {
 	case 1:
 		std::cout << "\nEnter Table Name to Drop: ";
 		std::cin >> tableName;
+		if (tableName == "Employee" || tableName == "Salary" || tableName == "Engineer" || tableName == "Manager" || tableName == "Department") {
+			std::cout << " \x1b[31mYou can not delete this Table\x1b[0m\n";
+			waitMenu(); 
+			break;
+		}
 		deleteQuery = "DROP TABLE " + tableName + ";";
 		//std::cout << deleteQuery << "\n\n";
 		rc = executeQuery(deleteQuery.c_str());
 
 		if (rc == 0) {
 			std::cout << "Table Dropped Succesfully ! \n\n";
-			std::cout << "Press 0 to continue....\n";
-			int i;
-			std::cin >> i;
+			waitMenu();  
 		}
 		break;
 
@@ -218,15 +217,18 @@ void Database::deleteTableQuery() {
 
 		std::cout << "\nEnter Table Name to Delete: ";
 		std::cin >> tableName;
+		if (tableName == "Employee" || tableName == "Salary" || tableName == "Engineer" || tableName == "Manager" || tableName == "Department") {
+			std::cout << "\x1b[31mYou can not delete this Table\x1b[0m\n";
+			waitMenu();
+			break;
+		}
 		deleteQuery = "DELETE FROM " + tableName + ";";
 		//std::cout << deleteQuery << "\n\n";
 		rc = executeQuery(deleteQuery.c_str());
 		if (rc == 0) {
 
 			std::cout << "Table Deleted Succesfully ! \n\n";
-			std::cout << "Press 0 to continue....\n";
-			int i;
-			std::cin >> i;
+			waitMenu();  
 		}
 		break;
 
@@ -251,9 +253,7 @@ int Database::executeQuery(const char* sql, float count)
 	else if (rc != SQLITE_OK)
 	{
 		std::cerr << "SQL error: " << errorMsg << std::endl;
-		std::cout << "Press press 0 to continue\n";
-		int i;
-		std::cin >> i;
+		waitMenu(); 
 		sqlite3_free(errorMsg);
 		return rc;
 	}
@@ -298,6 +298,7 @@ bool Database::close() {
 	}
 	else {
 		//std::cout << "Database closed Successfully\n";
+		return true;
 	}
 }
 
@@ -317,8 +318,7 @@ int Database::callback(void* data, int args, char** row, char** col) {
 	}
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
-		std::cout << "Press Enter to continue\n";
-		std::cin.get();
+		waitMenu();
 	}
 }
 

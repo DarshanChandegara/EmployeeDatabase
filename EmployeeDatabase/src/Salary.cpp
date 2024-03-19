@@ -4,19 +4,17 @@ void Salary::userInputSalary() {
 
 	try {
 		std::string msg = " Enter # to leave the field Empty\n"; 
-		setBaseSalary(std::stof(input("Enter Base Salary: ")));
-		setBonus(std::stof(input("Enter Bonus: ")));
+		setBaseSalary(std::stof(input("Enter Base Salary: " , salaryRegex)));
+		setBonus(std::stof(input("Enter Bonus: ",salaryRegex)));
 		setAmount(base_salary + bonus);
 	}
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
-		std::cout << "Press 0 To continue\n";
-		int i;
-		std::cin >> i;
+		waitMenu();
 	}
 }
 
-void Salary::increment(float percentage , std::string id) {
+void Salary::increment(double percentage , std::string id) {
 	try {
 		double val = 0;
 		std::string query = "select amount from Salary where Sid = " + id + " ;";
@@ -39,9 +37,7 @@ void Salary::increment(float percentage , std::string id) {
 	}
 	catch (std::exception& e) { 
 		std::cout << e.what() << std::endl;
-		std::cout << "Press 0 To continue\n";
-		int i;
-		std::cin >> i;
+		waitMenu();
 	}
 }
 
@@ -54,15 +50,11 @@ void Salary::viewSalary() {
 		std::cin >> tmp;
 		query += tmp + " ;";
 		Database::getInstance().selectQuery(query.c_str());
-		std::cout << "Press 0 button to go back to menu \n";
-		int g;
-		std::cin >> g;
+		waitMenu();
 	}
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
-		std::cout << "Press 0 To continue\n";
-		int i;
-		std::cin >> i;
+		waitMenu();
 	}
 }
 
@@ -74,9 +66,7 @@ void Salary::insertSalary(int id) const {
 	}
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
-		std::cout << "Press 0 To continue\n";
-		int i;
-		std::cin >> i;
+		waitMenu();
 	}
 }
 
@@ -121,7 +111,6 @@ void Salary::updateSalary() {
 				std::cout << "3. Increment\n";
 				std::cout << "4. ToUpdate\n";
 
-				std::string_view promp1t = "Enter New Value\n";
 				std::string value;
 				i = std::stoi(input("Enter Your Choice : ", std::regex{ "[0-4]" }));
 				switch (i) {
@@ -129,14 +118,14 @@ void Salary::updateSalary() {
 					return;
 
 				case 1:
-					value = input(promp1t);
+					value = input("Enter Base Salary: ",salaryRegex);
 					setBaseSalary(std::stof(value));
 					mp1.erase("base_salary");
 					mp1.insert({ "base_salary" , value });
 					break;
 
-				case 2:
-					value = input(promp1t);
+				case 2: 
+					value = input("Enter Bonus: ",salaryRegex);
 					setBonus(std::stof(value));
 					mp1.erase("bonus");
 					mp1.insert({ "bonus" , value });
@@ -172,20 +161,15 @@ void Salary::updateSalary() {
 			rc = Database::getInstance().executeQuery(query.c_str());
 			if (rc == 0) {
 				std::cout << "Salary updated successfully\n\n";
-				std::cout << "Press 0 to continue.....\n";
-				int i;
-				std::cin >> i;
+				waitMenu();
 			}
 		}
 	}
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
-		std::cout << "Press 0 To continue\n";
-		int i;
-		std::cin >> i;
+		waitMenu();
 	}
 }
-
 
 void Salary::deleteSalary() {
 

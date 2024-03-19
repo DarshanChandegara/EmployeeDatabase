@@ -57,9 +57,9 @@ public:
 
 private:
 
-    int Did;
-    std::string Dname;
-    int manager_id;
-    std::string description;
+    int Did{};
+    std::string Dname{};
+    int manager_id{};
+    std::string description{};
 };
 #endif

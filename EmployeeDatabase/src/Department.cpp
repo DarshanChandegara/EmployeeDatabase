@@ -10,9 +10,7 @@ void Department::userInput() {
 	}
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
-		std::cout << "Press 0 To continue\n";
-		int i;
-		std::cin >> i;
+		waitMenu();
 	}
 }
 
@@ -69,20 +67,23 @@ void Department::viewDepartment() {
 			int rc = Database::getInstance().selectQuery(query.c_str());
 		}
 
-		std::cout << "Press 0 button to go back to menu \n";
-		int g;
-		std::cin >> g;
+		waitMenu();
 	}
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
-		std::cout << "Press 0 To continue\n";
-		int i;
-		std::cin >> i;
+		waitMenu();
 	}
 }
 
 void Department::insertDepartment() {
 	try {
+		system("cls");
+		std::cout << "If you want to go back press 0 Otherwise press 1\n";
+		int i;
+		if (i = std::stoi(input("",std::regex{"^[0-1]$"}));  i == 0) {
+			return;
+		}
+
 		userInput();
 		std::string query = "INSERT INTO Department "
 			"(id, Dname, manager_id, description) "
@@ -91,23 +92,17 @@ void Department::insertDepartment() {
 		int rc = Database::getInstance().executeQuery(query.c_str());
 		if (rc == 19) {
 			std::cout << "Entered manager is not available in partivular table \n\n";
-			std::cout << "Press 0 To continue\n";
-			int i;
-			std::cin >> i;
+			waitMenu();
 		}
 		else if (rc == 0) {
 			std::cout << "Department added successfully \n\n";
-			std::cout << "Press 0 to continue.....\n";
-			int i;
-			std::cin >> i;
+			waitMenu();
 		}
 		//std::cin >> query;     
 	}
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
-		std::cout << "Press 0 To continue\n";
-		int i;
-		std::cin >> i;
+		waitMenu();
 	}
 }
 
@@ -121,13 +116,13 @@ void Department::updateDepartment() {
 		std::cin >> tmp;
 
 		std::string select = "select * from Department where id = " + tmp + " ;";
-		Database::getInstance().executeQuery(select.c_str());
+		Database::getInstance().selectQuery(select.c_str());
 		if (Database::row == 0) {
 			std::cout << "Entered Department is not in database\n\n";
 			std::cout << "Press 0 to continue\n";
 			int i;
 			std::cin >> i;
-			updateDepartment(); 
+			updateDepartment();
 		}
 		else {
 			std::map<std::string, std::string> mp;
@@ -141,7 +136,6 @@ void Department::updateDepartment() {
 				std::cout << "2. manager id\n";
 				std::cout << "3. description\n";
 				std::cout << "4. toUpdateDatabase\n\n";
-				std::string_view prompt = "Enter the changed value\n";
 				std::string value;
 				i = std::stoi(input("Enter Your Choice : ", std::regex{ "[0-4]" }));
 				switch (i) {
@@ -155,7 +149,7 @@ void Department::updateDepartment() {
 					break;
 
 				case 2:
-					value = input(prompt, idRegex);
+					value = input("Enter Department Id: ", idRegex);
 					mp.erase("manager_id");
 					mp.insert({ "manager_id" , value });
 					break;
@@ -193,23 +187,17 @@ void Department::updateDepartment() {
 
 			if (rc == 19) {
 				std::cerr << "You can not assigne value because entered manager is not in database \n\n";
-				std::cout << "Press 0 To continue\n";
-				int i;
-				std::cin >> i;
+				waitMenu();
 			}
 			else if (rc == 0) {
 				std::cout << "Department Updated successfully \n\n";
-				std::cout << "Press 0 to continue.....\n";
-				int i;
-				std::cin >> i;;
+				waitMenu();
 			}
 		}
 	}
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
-		std::cout << "Press 0 To continue\n";
-		int i;
-		std::cin >> i;
+		waitMenu();
 	}
 }
 
@@ -254,33 +242,26 @@ void Department::deleteDepartment() {
 
 		//int rc{};
 		int rc = Database::getInstance().executeQuery(query.c_str());
-		if (rc == 19) {
-			std::cout << "You can not Delete this department because there is employee which are working in this department  \n\n";
-			std::cout << "Press 0 To continue\n";
-			int i;
-			std::cin >> i;
-		}
-		else if (rc == 0) {
-			std::cout << "Department Deleted successfully \n\n";
-			std::cout << "Press 0 to continue.....\n";
-			int i;
-			std::cin >> i;
-		}
-		else {
-			int change = sqlite3_changes(Database::getInstance().db); 
+		if (rc == 0) {
+			int change = sqlite3_changes(Database::getInstance().db);
 			if (change == 0) {
 				std::cout << "Selected Department is not in database\n";
-				std::cout << "Press 0 To continue\n";
-				int i;
-				std::cin >> i;
 			}
+			else {
+
+				std::cout << "Department Deleted successfully \n\n";
+			}
+			waitMenu();
 		}
+		else if (rc == 19) {
+			std::cout << "You can not Delete this department because there is employee which are working in this department  \n\n";
+			waitMenu();
+		}
+
 	}
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
-		std::cout << "Press 0 To continue\n";
-		int i;
-		std::cin >> i;
+		waitMenu();
 	}
 }
 

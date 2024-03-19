@@ -11,9 +11,7 @@ void Manager::userInputManager() {
 	}
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
-		std::cout << "Press 0 To continue\n";
-		int i;
-		std::cin >> i;
+		waitMenu();
 	}
 }
 
@@ -82,20 +80,22 @@ void Manager::viewManager() {
 		if (i != 4 && i != 6) {
 			int rc = Database::getInstance().selectQuery(query1.c_str());
 		}
-		std::cout << "Press 0 button to go back to menu \n";
-		int g;
-		std::cin >> g;
+		waitMenu();
 	}
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
-		std::cout << "Press 0 To continue\n";
-		int i;
-		std::cin >> i;
+		waitMenu();
 	}
 }
 
 void Manager::insertManager() {
 	try {
+		system("cls");
+		std::cout << "If you want to go back press 0 Otherwise press 1\n"; 
+		int i;
+		if (std::cin >> i;  i == 0) {
+			return;
+		}
 		userInputManager();
 
 		insertEmployee();
@@ -105,16 +105,12 @@ void Manager::insertManager() {
 		int rc = Database::getInstance().executeQuery(query.c_str());
 		if (rc == 0) {
 			std::cout << "Manager inserted successfully\n\n";
-			std::cout << "Press 0 to continue.....\n";
-			int i;
-			std::cin >> i;
+			waitMenu();
 		}
 	}
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
-		std::cout << "Press 0 To continue\n";
-		int i;
-		std::cin >> i;
+		waitMenu();
 	}
 }
 
@@ -159,7 +155,6 @@ void Manager::updateManager() {
 				std::cout << "11. Project Title\n";
 				std::cout << "12. managetment Experience \n";
 				std::cout << "13. ToUpdateDatabase\n\n";
-				std::string_view promp1t = "Enter New Value\n";
 				std::string value;
 				i = std::stoi(input("Enter Your Choice : ", std::regex{ "^[0-9]$|^1[0-3]$" }));
 				switch (i) {
@@ -167,31 +162,31 @@ void Manager::updateManager() {
 					return;
 
 				case 1:
-					value = input(promp1t);
-					mp1.erase("firstname");
+					value = input("Enter First Name: ", alphaRegex);
+					mp1.erase("firstname"); 
 					mp1.insert({ "firstname" , value });
 					break;
 
 				case 2:
-					value = input(promp1t);
+					value = input("Enter Last Name: ", alphaRegex);
 					mp1.erase("lastname");
 					mp1.insert({ "lastname" , value });
 					break;
 
 				case 3:
-					value = input(promp1t, dateRegex);
+					value = input("Enter Date Of Birth: ", dateRegex);
 					mp1.erase("dob");
 					mp1.insert({ "dob" , value });
 					break;
 
 				case 4:
-					value = input(promp1t, mobileRegex);
+					value = input("Enter Mobile: ", mobileRegex);
 					mp1.erase("mobile");
 					mp1.insert({ "mobile" , value });
 					break;
 
 				case 5:
-					value = input(promp1t, emailRegex);
+					value = input("Enter Email: ", emailRegex);
 					mp1.erase("email");
 					mp1.insert({ "email" , value });
 					break;
@@ -203,25 +198,25 @@ void Manager::updateManager() {
 					break;
 
 				case 7:
-					value = input(promp1t);
+					value = input("Enter Gender (Male/Female/Other: )",genderRegex);
 					mp1.erase("gender");
 					mp1.insert({ "gender" , value });
 					break;
 
 				case 8:
-					value = input(promp1t, dateRegex);
+					value = input("Enter Date Of Joinning: ", dateRegex);
 					mp1.erase("doj");
 					mp1.insert({ "doj" , value });
 					break;
 
 				case 9:
-					value = input(promp1t, idRegex);
+					value = input("Enter ManagerId: ", idRegex);
 					mp1.erase("manager_id");
 					mp1.insert({ "manager_id" , value });
 					break;
 
 				case 10:
-					value = input(promp1t, idRegex);
+					value = input("Enter Department Id: ", idRegex);
 					mp1.erase("department_id");
 					mp1.insert({ "department_id" , value });
 					break;
@@ -233,7 +228,7 @@ void Manager::updateManager() {
 					break;
 
 				case 12:
-					value = input(promp1t);
+					value = input("Enter Management experience: ");
 					mp2.erase("management_experience");
 					mp2.insert({ "management_experience" , value });
 					break;
@@ -291,23 +286,17 @@ void Manager::updateManager() {
 
 			if (rc == 0) {
 				std::cout << "Manager updated successfully\n\n";
-				std::cout << "Press 0 to continue.....\n";
-				int i;
-				std::cin >> i;
+				waitMenu();
 			}
 			else if (rc == 19) {
 				std::cout << "You can not update that value Because entered manager or department is not in particular table\n\n";
-				std::cout << "Press 0 To continue\n";
-				int i;
-				std::cin >> i;
+				waitMenu();
 			}
 		}
 	}
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
-		std::cout << "Press 0 To continue\n";
-		int i;
-		std::cin >> i;
+		waitMenu();
 	}
 }
 
@@ -319,9 +308,7 @@ void Manager::deleteManager() {
 	}
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
-		std::cout << "Press 0 To continue\n";
-		int i;
-		std::cin >> i;
+		waitMenu();
 	}
 }
 

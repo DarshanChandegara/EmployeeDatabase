@@ -10,9 +10,7 @@ void Engineer::userInputEngineer() {
 	}
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
-		std::cout << "Press 0 To continue\n";
-		int i;
-		std::cin >> i;
+		waitMenu();
 	}
 }
 
@@ -83,20 +81,22 @@ void Engineer::viewEngineer() {
 			int rc = Database::getInstance().selectQuery(query1.c_str()); 
 		}
 		
-		std::cout << "Press 0 button to go back to menu \n";
-		int g;
-		std::cin >> g;
+		waitMenu();
 	}
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
-		std::cout << "Press 0 To continue\n";
-		int i;
-		std::cin >> i;
+		waitMenu();
 	}
 }
 
 void Engineer::insertEngineer() {
 	try {
+		system("cls");
+		std::cout << "If you want to go back press 0 Otherwise press 1\n";
+		int i;
+		if (std::cin >> i;  i == 0) {
+			return;
+		}
 		userInputEngineer();
 
 		insertEmployee();
@@ -105,16 +105,12 @@ void Engineer::insertEngineer() {
 		int rc = Database::getInstance().executeQuery(query.c_str());
 		if (rc == 0) {
 			std::cout << "Engineer Inserted successfully\n\n";
-			std::cout << "Press 0 to continue.....\n"; 
-			int i;  
-			std::cin >> i; 
+			waitMenu();
 		}
 	}
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
-		std::cout << "Press 0 To continue\n";
-		int i;
-		std::cin >> i;
+		waitMenu();
 	}
 }
 
@@ -159,7 +155,6 @@ void Engineer::updateEngineer() {
 				std::cout << "11. programming Language\n";
 				std::cout << "12. Specification \n";
 				std::cout << "13. ToUpdateDatabase\n\n";
-				std::string_view promp1t = "Enter New Value\n";
 				std::string value;
 				i = std::stoi(input("Enter Your Choice : ", std::regex{ "^[0-9]$|^1[0-3]$" }));
 				switch (i) {
@@ -167,31 +162,31 @@ void Engineer::updateEngineer() {
 					return;
 
 				case 1:
-					value = input(promp1t);
+					value = input("Enter First Name: ", alphaRegex);
 					mp1.erase("firstname");
 					mp1.insert({ "firstname" , value });
 					break;
 
 				case 2:
-					value = input(promp1t);
+					value = input("Enter Last Name: ", alphaRegex);
 					mp1.erase("lastname");
 					mp1.insert({ "lastname" , value });
 					break;
 
 				case 3:
-					value = input(promp1t, dateRegex);
+					value = input("Enter Date Of Birth: ", dateRegex);
 					mp1.erase("dob");
 					mp1.insert({ "dob" , value });
 					break;
 
 				case 4:
-					value = input(promp1t, mobileRegex);
+					value = input("Enter Mobile: ", mobileRegex);
 					mp1.erase("mobile");
 					mp1.insert({ "mobile" , value });
 					break;
 
 				case 5:
-					value = input(promp1t, emailRegex);
+					value = input("Enter Email: ", emailRegex);
 					mp1.erase("email");
 					mp1.insert({ "email" , value });
 					break;
@@ -203,31 +198,31 @@ void Engineer::updateEngineer() {
 					break;
 
 				case 7:
-					value = input(promp1t);
+					value = input("Enter Gender (Male/Female/Other: )", genderRegex);
 					mp1.erase("gender");
 					mp1.insert({ "gender" , value });
 					break;
 
 				case 8:
-					value = input(promp1t, dateRegex);
+					value = input("Enter Date Of Joining: ", dateRegex);
 					mp1.erase("doj");
 					mp1.insert({ "doj" , value });
 					break;
 
 				case 9:
-					value = input(promp1t, idRegex);
+					value = input("Enter Manager Id: ", idRegex);
 					mp1.erase("manager_id");
 					mp1.insert({ "manager_id" , value });
 					break;
 
 				case 10:
-					value = input(promp1t, idRegex);
+					value = input("Enter Department Id: ", idRegex);
 					mp1.erase("department_id");
 					mp1.insert({ "department_id" , value });
 					break;
 
 				case 11:
-					value = input(promp1t);
+					value = input("Enter Programming Language: ");
 					mp2.erase("programming_language");
 					mp2.insert({ "programming_language" , value });
 					break;
@@ -285,23 +280,17 @@ void Engineer::updateEngineer() {
 
 			if (rc == 0) {
 				std::cout << "Engineer updated successfully\n\n";
-				std::cout << "Press 0 to continue.....\n";
-				int i;
-				std::cin >> i;
+				waitMenu();
 			}
 			else if (rc == 19) {
 				std::cout << "You can not assign value beacuse entered manager or department is not in particular table\n\n";
-				std::cout << "Press 0 To continue\n";
-				int i;
-				std::cin >> i;
+				waitMenu();
 			}
 		}
 	}
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
-		std::cout << "Press 0 To continue\n";
-		int i;
-		std::cin >> i;
+		waitMenu();
 	}
 }
 
@@ -312,9 +301,7 @@ void Engineer::deleteEngineer() {
 	}
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
-		std::cout << "Press 0 To continue\n";
-		int i;
-		std::cin >> i;
+		waitMenu();
 	}
 }
 
