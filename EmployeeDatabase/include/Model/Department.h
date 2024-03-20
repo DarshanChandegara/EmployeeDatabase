@@ -12,7 +12,7 @@
 class Department {
 public:
     Department() = default;
-    Department(int id, const std::string_view& name, int manager_id, const std::string_view& description)
+    Department(int id, const std::string name, int manager_id, const std::string description)
         : Did(id), Dname(name), manager_id(manager_id), description(description) {}
 
     int getId() const { return Did; }

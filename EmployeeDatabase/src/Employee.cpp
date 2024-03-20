@@ -65,6 +65,9 @@ bool Employee::viewEmployee() {
 			}
 			break;
 		}
+		if (Database::row == 0) {
+			return false;
+		}
 		return true;
 	}
 	catch (std::exception& e) {
@@ -99,7 +102,7 @@ bool Employee::insertEmployee() {
 			return true;
 		}
 		else if (rc == 19) {
-			std::cout << "Entered manager or department is not available in particular table\n\n";
+			std::cout << "Entered manager or department is not available in particular table Or entered employee is already exist \n\n";
 			waitMenu();
 			return false;
 		}
@@ -119,7 +122,7 @@ bool Employee::updateEmployee() {
 		std::string tmp;
 		std::cin >> tmp;
 
-		std::string select = "select * from Employee where id = " + tmp + " ;";
+		std::string select = "select * from Employee where Eid = " + tmp + " ;";
 		Database::getInstance().selectQuery(select.c_str());
 		if (Database::row == 0) {
 			std::cout << "Entered Department is not in database\n\n";
@@ -224,9 +227,17 @@ bool Employee::updateEmployee() {
 			}
 			query += "where Eid = " + tmp + " ;";
 			//std::cout << query << "\n";
-
 			int rc = Database::getInstance().executeQuery(query.c_str());
-			return true;
+			if (rc == 0) {
+				std::cout << "Employee updated successfully\n\n";
+				waitMenu();
+				return true;
+			}
+			else if (rc == 19) {
+				std::cout << "You can not assign value beacuse entered manager or department is not in particular table\n\n";
+				waitMenu();
+				return false;
+			}
 		}
 	}
 	catch (std::exception& e) {

@@ -10,7 +10,7 @@ class Salary {
 public:
 
     Salary() = default;
-    Salary(int id, int emp_id, double amount, double base_salary, double bonus)
+    Salary(int id, double amount, double base_salary, double bonus)
         : Sid(id), amount(amount), base_salary(base_salary),  bonus(bonus) {}
 
     int getId() const { return Sid; }
@@ -34,7 +34,7 @@ public:
 
 private:
 
-    int Sid;
+    int Sid{};
     double amount{};
     double base_salary{};
     double bonus{};
