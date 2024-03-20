@@ -28,10 +28,10 @@ public:
         specialization = specs; 
     }
 
-    void viewEngineer();
-    void insertEngineer();
-    void deleteEngineer();
-    void updateEngineer();
+    bool viewEngineer();
+    bool insertEngineer();
+    bool deleteEngineer();
+    bool updateEngineer();
     void userInputEngineer();
     void action() noexcept;
 

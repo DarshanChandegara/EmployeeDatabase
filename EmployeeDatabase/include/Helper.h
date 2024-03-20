@@ -7,10 +7,10 @@
 
 inline std::regex rg{ ".*" };
 
-inline std::string input(const std::string_view& prompt, const std::regex& r = rg) {
+inline std::string input(const std::string_view& prompt, const std::regex& r = rg) { 
 	std::string input;
 	while (true) {
-		std::cout << prompt;
+		std::cout << prompt; 
 		std::cin >> input;
 
 		if (!std::regex_match(input, r)) {

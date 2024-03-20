@@ -11,7 +11,7 @@
 #include"../Regex.h"
 
 
-enum class Gender { Male, Female, Other };
+enum class Gender { Male=0, Female, Other };
 
 using namespace std;
 
@@ -60,10 +60,10 @@ public:
     void setDepartmentId(const int& id)  {  department_id = id; } 
 
 
-    void viewEmployee();
-    void insertEmployee();
-    void deleteEmployee();
-    void updateEmployee();
+    bool viewEmployee();
+    bool insertEmployee();
+    bool deleteEmployee();
+    bool updateEmployee();
     void userInputEmployee();
     void action() noexcept;
 

@@ -30,10 +30,10 @@ public:
         project_title = desc; 
     }
 
-    void viewManager();
-    void insertManager();
-    void deleteManager();
-    void updateManager();
+    bool viewManager();
+    bool insertManager();
+    bool deleteManager();
+    bool updateManager();
     void userInputManager();
     void action() noexcept;
 

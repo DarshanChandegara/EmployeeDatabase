@@ -48,10 +48,10 @@ public:
         description = desc;
     }
 
-    void viewDepartment();
-    void insertDepartment();
-    void deleteDepartment();
-    void updateDepartment();
+    bool viewDepartment();
+    bool insertDepartment();
+    bool deleteDepartment();
+    bool updateDepartment();
     void userInput();
     void action() noexcept;
 
