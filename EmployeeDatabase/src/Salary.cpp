@@ -51,6 +51,9 @@ bool Salary::viewSalary() {
 		std::cin >> tmp;
 		query += tmp + " ;";
 		Database::getInstance().selectQuery(query.c_str());
+		if (Database::row == 0) {
+			return false;
+		}
 		waitMenu();
 		return true;
 	}
@@ -64,7 +67,7 @@ bool Salary::viewSalary() {
 bool Salary::insertSalary(int id) const {
 	try {
 		std::string query = "insert into Salary values(" + std::to_string(id) + " , " + std::to_string(getAmount()) + " , " + std::to_string(getBaseSalary()) + " ," + std::to_string(getBonus()) + ") ;";
-		//std::cout << query;
+		//std::cout << query; 
 		Database::getInstance().executeQuery(query.c_str());
 		return true;
 	}
