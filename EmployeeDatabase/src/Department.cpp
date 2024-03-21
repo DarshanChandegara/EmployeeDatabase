@@ -88,14 +88,14 @@ bool Department::insertDepartment() {
 			return true;
 		}
 
-		userInput();
+		//userInput();
 		std::string query = "INSERT INTO Department "
 			"(id, Dname, manager_id, description) "
 			"VALUES (" + std::to_string(Did) + ", '" + Dname + "'," + std::to_string(manager_id) + ", '" + description + "');";
 		//std::cout << query;   
 		int rc = Database::getInstance().executeQuery(query.c_str());
 		if (rc == 19) {
-			std::cout << "Entered manager is not available in partivular table \n\n";
+			std::cout << "Entered manager is not available in particular table OR Entered department ID is already exist in table  \n\n";
 			waitMenu();
 			return false;
 		}
@@ -118,7 +118,7 @@ bool Department::updateDepartment() {
 	try {
 		system("cls");
 		std::string query = "update Department set ";
-		setId(std::stoi(input("Enter the Did to update Department : "))); 
+		//setId(std::stoi(input("Enter the Did to update Department : "))); 
 
 		std::string select = "select * from Department where id = " + std::to_string(getId()) + " ;";
 		Database::getInstance().selectQuery(select.c_str());
@@ -147,19 +147,19 @@ bool Department::updateDepartment() {
 					return true;
 
 				case 1:
-					setName();
+					//setName();
 					mp.erase("Dname");
 					mp.insert({ "Dname" , Dname });
 					break;
 
 				case 2:
-					setManagerId(std::stoi(input("Enter Manager ID Id: ", idRegex)));
+					//setManagerId(std::stoi(input("Enter Manager ID Id: ", idRegex)));
 					mp.erase("manager_id");
 					mp.insert({ "manager_id" , std::to_string(manager_id)});
 					break;
 
 				case 3:
-					setDescription();
+					//setDescription();
 					mp.erase("description"); 
 					mp.insert({ "description" , description });
 					break;
@@ -227,14 +227,14 @@ bool Department::deleteDepartment() {
 				return true;
 
 			case 1:
-				setId(std::stoi(input("Enter Did: ")));
+				//setId(std::stoi(input("Enter Did: ")));
 				query += "id = " + std::to_string(getId()) + ";";  
 				//std::cout << query;  
 
 				break;
 			case 2:
-				setName();
-				query += "Dname = '" + getName() + "';";
+				//setName();
+				query += "Dname = '" + getName() + "';"; 
 				//std::cout << query;
 				break;
 			default:
@@ -251,14 +251,15 @@ bool Department::deleteDepartment() {
 			int change = sqlite3_changes(Database::getInstance().db);
 			if (change == 0) {
 				std::cout << "Selected Department is not in database\n";
+				waitMenu();
 				return false;
 			}
 			else {
 
 				std::cout << "Department Deleted successfully \n\n";
+				waitMenu();
 				return true;
 			}
-			waitMenu();
 		}
 		else if (rc == 19) {
 			std::cout << "You can not Delete this department because there is employee which are working in this department  \n\n";

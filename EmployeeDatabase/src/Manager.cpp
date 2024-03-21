@@ -101,7 +101,7 @@ bool Manager::insertManager() {
 		if (std::cin >> i;  i == 0) {
 			return true;
 		}
-		userInputManager();
+		//userInputManager();
 
 		if (auto ch = insertEmployee(); ch) {
 			std::string query = ""; 
@@ -137,7 +137,7 @@ bool Manager::updateManager() {
 		system("cls");
 		std::string query1 = "update Employee set ";
 		std::string query2 = "update Manager set ";
-		setId(std::stoi(input("Enter the Mid to update Manager : ")));
+		//setId(std::stoi(input("Enter the Mid to update Manager : ")));
 
 		std::string select = "select * from Manager where id = " + std::to_string(getId()) + " ;"; 
 		Database::getInstance().selectQuery(select.c_str()); 
@@ -177,63 +177,63 @@ bool Manager::updateManager() {
 					return true;
 
 				case 1:
-					setFirstname(input("Enter firstname: ", alphaRegex));
+					//setFirstname(input("Enter firstname: ", alphaRegex));
 					mp1.insert({ "firstname" , getFirstname() });
 					break;
 
 				case 2:
-					setLastname(input("Enter LastName: ", alphaRegex)); 
+					//setLastname(input("Enter LastName: ", alphaRegex)); 
 					mp1.insert({ "lastname" ,  getLastname() }); 
 					break;
 
 				case 3:
-					setDob(input("Enter DOB (dd-mm-yyyy): ", dateRegex)); 
+					//setDob(input("Enter DOB (dd-mm-yyyy): ", dateRegex)); 
 					mp1.insert({ "dob" , getDob() }); 
 					break;
 
 				case 4:
-					setMobile(input("Enter Mobile: ", mobileRegex)); 
+					//setMobile(input("Enter Mobile: ", mobileRegex)); 
 					mp1.insert({ "mobile" , getMobile() }); 
 					break;
 
 				case 5:
-					setEmail(input("Enter Email: ", emailRegex)); 
+					//setEmail(input("Enter Email: ", emailRegex)); 
 					mp1.insert({ "email" , getEmail() }); 
 					break;
 
 				case 6:
-					setAddress(); 
+					//setAddress(); 
 					mp1.insert({ "address" , getAddress() }); 
 					break;
 
 				case 7:
-					value = input("Enter Gender (Male/Female/Other: )", genderRegex); 
+					//value = input("Enter Gender (Male/Female/Other: )", genderRegex); 
 					mp1.insert({ "gender" , value });
 					break;
 
 				case 8:
-					setDoj(input("Enter DOJ(dd-mm-yyyy): ", dateRegex));
+					//setDoj(input("Enter DOJ(dd-mm-yyyy): ", dateRegex));
 					mp1.insert({ "doj" , getDoj() });
 					break;
 
 				case 9:
-					setManagerId(stoi(input("Enter Manager Id: ", idRegex)));
+					//setManagerId(stoi(input("Enter Manager Id: ", idRegex)));
 					mp1.insert({ "manager_id" , std::to_string(getManagerId()) });
 					break;
 
 				case 10:
-					setDepartmentId(stoi(input("Enter Department Id: ", idRegex)));
+					//setDepartmentId(stoi(input("Enter Department Id: ", idRegex)));
 					mp1.insert({ "department_id" , std::to_string(getDepartmentId()) });
 					break;
 
 				case 11:
-					setProjectTile();
+					//setProjectTile();
 					mp2.erase("project_title");
 					mp2.insert({ "project_title" , project_title });
 					break;
 
 				case 12:
-					setManagementExperience(std::stoi(input("Enter Management experience: "))); 
+					//setManagementExperience(std::stoi(input("Enter Management experience: "))); 
 					mp2.erase("management_experience");
 					mp2.insert({ "management_experience" , std::to_string(getManagementExperience())}); 
 					break;

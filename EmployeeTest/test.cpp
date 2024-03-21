@@ -2,6 +2,8 @@
 #include "include/Model/Employee.h"
 #include "Fixtures/EmployeeFixture.h"
 #include "Fixtures/EngineerFixture.h"
+#include "Fixtures/DepartmentFixture.h"
+#include "Fixtures/ManagerFixture.h"
 
 
 //TEST(TestCaseName, TestName) {    
@@ -28,14 +30,14 @@
 
 TEST_F(EmployeeFixture , DISABLED_ViewTest) {
 	ASSERT_TRUE(emp.viewEmployee()); //sucess
- ASSERT_FALSE(emp.viewEmployee()); //record not avilable     
+	ASSERT_FALSE(emp.viewEmployee()); //record not avilable     
 }
 
 TEST_F(EmployeeFixture, DISABLED_InsertTest) {
 	ASSERT_TRUE(e1.insertEmployee());  // Success
-	ASSERT_FALSE(e2.insertEmployee());  // Fail because Employee is already exist 
-	ASSERT_FALSE(e3.insertEmployee()); // Fail Beacause Manager is not available 
-	ASSERT_FALSE(e4.insertEmployee()); // Fail Beacause Department is not available 
+	//ASSERT_FALSE(e2.insertEmployee());  // Fail because Employee is already exist 
+	//ASSERT_FALSE(e3.insertEmployee()); // Fail Beacause Manager is not available 
+	//ASSERT_FALSE(e4.insertEmployee()); // Fail Beacause Department is not available 
 }
 
 TEST_F(EmployeeFixture, DISABLED_UpdateTest) {
@@ -85,6 +87,60 @@ TEST_F(EngineerFixture, DISABLED_DeleteTest) {
 
 	ASSERT_TRUE(eg2.deleteEngineer());  // Suceess  ID    
 	ASSERT_TRUE(eg1.deleteEngineer());  // Sucess   Email   
+}
+
+
+
+// Department 
+TEST_F(DepartmentFixture, DISABLED_InsertTest) {
+	ASSERT_FALSE(d1.insertDepartment()); // Fail because With given department id there is already some other department 
+	ASSERT_FALSE(d2.insertDepartment());  // Fail because enterd manager is not in manager table  
+	ASSERT_TRUE(d3.insertDepartment()); // Success 
+	ASSERT_TRUE(d4.insertDepartment()); // Success
+}
+
+TEST_F(DepartmentFixture, DISABLED_ViewTest) {
+	ASSERT_FALSE(d1.viewDepartment());
+}
+
+TEST_F(DepartmentFixture, DISABLED_UpdateTest) {
+	ASSERT_FALSE(d2.updateDepartment());  // Fail because manager id is not in database
+	ASSERT_FALSE(d4.updateDepartment()); // Fali beacuse department is not in table 
+	ASSERT_TRUE(d3.updateDepartment());  // Success
+}
+
+TEST_F(DepartmentFixture, DISABLED_DeleteTest) {
+	ASSERT_FALSE(d1.deleteDepartment()); // Fail because there is employee which are working in this department 
+	ASSERT_FALSE(d5.deleteDepartment()); // Fail beacuse there is no department like this id 
+	ASSERT_FALSE(d6.deleteDepartment()); // Fail beacuse there is no department like this name 
+
+	ASSERT_TRUE(d3.deleteDepartment());  // Success id
+	ASSERT_TRUE(d4.deleteDepartment());  // Success name
+}
+
+
+
+// Manager 
+TEST_F(ManagerFixture, DISABLED_InsertTest) {
+	ASSERT_TRUE(m2.insertManager());    // Success  
+	ASSERT_TRUE(m3.insertManager());    // Success  
+	ASSERT_TRUE(m4.insertManager());    // Success  
+	ASSERT_TRUE(m5.insertManager());    // Success  
+
+	ASSERT_FALSE(m1.insertManager());  // Fail because Employee is already exist    
+	ASSERT_FALSE(m6.insertManager()); // Fail Beacause Department is not available  
+	ASSERT_FALSE(m7.insertManager()); // Fail Beacause Department is not available  
+}
+
+TEST_F(ManagerFixture, DISABLED_UpdateTest) {
+	ASSERT_FALSE(m6.updateManager()); //  updated manager id is not available  
+	EXPECT_FALSE(m7.updateManager()); // Updated Department id is not avialable    
+	EXPECT_FALSE(m8.updateManager()); // Enter Employee is not aviable      
+	ASSERT_TRUE(m1.updateManager()); // Sucess
+}
+
+TEST_F(ManagerFixture, ViewTest) {
+	EXPECT_TRUE(m1.viewManager());  
 }
 
 

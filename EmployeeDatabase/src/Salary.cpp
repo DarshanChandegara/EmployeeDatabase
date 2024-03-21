@@ -17,7 +17,7 @@ void Salary::userInputSalary() {
 double Salary::increment(double percentage , std::string id) {
 	try {
 		double val = 0;
-		std::string query = "select amount from Salary where Sid = " + id + " ;";
+		std::string query = "select base_salary from Salary where Sid = " + id + " ;";
 		int rc = sqlite3_prepare_v2(Database::getInstance().db, query.c_str(), -1, &Database::getInstance().stmt, nullptr);
 		rc = sqlite3_step(Database::getInstance().stmt);
 		if (rc == SQLITE_ROW) {
@@ -30,9 +30,9 @@ double Salary::increment(double percentage , std::string id) {
 		}
 
 		val = (val + ((val * percentage) / 100));
-		amount = val;
-		setAmount(val);
-		return getAmount();
+		base_salary = val;
+		setBaseSalary(val);
+		return getBaseSalary(); 
 		//std::cout << amount << "\n";
 	}
 	catch (std::exception& e) { 
@@ -52,9 +52,9 @@ bool Salary::viewSalary() {
 		query += tmp + " ;";
 		Database::getInstance().selectQuery(query.c_str());
 		if (Database::row == 0) {
+			waitMenu();
 			return false;
 		}
-		waitMenu();
 		return true;
 	}
 	catch (std::exception& e) {
@@ -93,7 +93,7 @@ bool Salary::updateSalary() {
 			std::cout << "Press 0 to continue\n";
 			int i;
 			std::cin >> i;
-			updateSalary(); 
+			return false;
 		}
 		else {
 			std::string query1 = "select base_salary from Salary where Sid = " + tmp + " ;";
@@ -139,8 +139,8 @@ bool Salary::updateSalary() {
 
 				case 3:
 					value = input("Enter Percantage by which you want to increase the salary :");
+					increment(std::stof(value), tmp); 
 					setAmount(base_salary + bonus);
-					increment(std::stof(value), tmp);
 					break;
 
 				case 4:

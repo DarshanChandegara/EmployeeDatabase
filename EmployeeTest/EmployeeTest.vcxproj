@@ -120,7 +120,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Fixtures\DepartmentFixture.h" />
     <ClInclude Include="Fixtures\EmployeeFixture.h" />
+    <ClInclude Include="Fixtures\ManagerFixture.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
