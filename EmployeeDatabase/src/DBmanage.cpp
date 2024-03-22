@@ -6,10 +6,12 @@ bool Database::open(const char* str) {
 	rc = sqlite3_open(str, &db);
 
 	if (rc) {
+		logging::default_logger()->log(logging::Log::Level::LevelError, sqlite3_errmsg(db));   
 		std::cerr << "Can't open database: " << sqlite3_errmsg(db) << "\n";
 		return false;
 	}
 	else {
+		logging::default_logger()->log( logging::Log::Level::LevelInfo, "Database Open Successfully");  
 		//std::cout << "Database Open Successfully \n";
 	}
 
@@ -33,11 +35,13 @@ bool Database::open(const char* str) {
 
 	if (rc != SQLITE_OK)
 	{
+		logging::default_logger()->log(logging::Log::Level::LevelError, sqlite3_errmsg(db));
 		std::cerr << "SQL error: " << errorMsg << std::endl;
 		sqlite3_free(errorMsg);
 	}
 	else
 	{
+		logging::default_logger()->log(logging::Log::Level::LevelInfo, "Table created successfully"); 
 		//std::cout << "Table created successfully" << std::endl;
 	}
 
@@ -52,11 +56,13 @@ bool Database::open(const char* str) {
 
 	if (rc != SQLITE_OK)
 	{
+		logging::default_logger()->log(logging::Log::Level::LevelError, sqlite3_errmsg(db));
 		std::cerr << "SQL error: " << errorMsg << std::endl;
 		sqlite3_free(errorMsg);
 	}
 	else
 	{
+		logging::default_logger()->log(logging::Log::Level::LevelInfo, "Table created successfully");
 		//std::cout << "Table created successfully" << std::endl;
 	}
 
@@ -71,11 +77,13 @@ bool Database::open(const char* str) {
 
 	if (rc != SQLITE_OK)
 	{
+		logging::default_logger()->log(logging::Log::Level::LevelError, sqlite3_errmsg(db));
 		std::cerr << "SQL error: " << errorMsg << std::endl;
 		sqlite3_free(errorMsg);
 	}
 	else
 	{
+		logging::default_logger()->log(logging::Log::Level::LevelInfo, "Table created successfully");
 		//std::cout << "Table created successfully" << std::endl;
 	}
 
@@ -89,11 +97,13 @@ bool Database::open(const char* str) {
 
 	if (rc != SQLITE_OK)
 	{
+		logging::default_logger()->log(logging::Log::Level::LevelError, sqlite3_errmsg(db)); 
 		std::cerr << "SQL error: " << errorMsg << std::endl;
 		sqlite3_free(errorMsg);
 	}
 	else
 	{
+		logging::default_logger()->log(logging::Log::Level::LevelInfo, "Table created successfully");
 		//std::cout << "Table created successfully" << std::endl;
 	}
 
@@ -108,11 +118,13 @@ bool Database::open(const char* str) {
 
 	if (rc != SQLITE_OK)
 	{
+		logging::default_logger()->log(logging::Log::Level::LevelError, sqlite3_errmsg(db));
 		std::cerr << "SQL error: " << errorMsg << std::endl;
 		sqlite3_free(errorMsg);
 	}
 	else
 	{
+		logging::default_logger()->log(logging::Log::Level::LevelInfo, "Table created successfully");
 		//std::cout << "Table created successfully" << std::endl;
 	}
 
@@ -203,7 +215,7 @@ void Database::deleteTableQuery() {
 			waitMenu(); 
 			break;
 		}
-		deleteQuery = "DROP TABLE " + tableName + ";";
+		deleteQuery = "DROP TABLE " + tableName + ";"; 
 		//std::cout << deleteQuery << "\n\n";
 		rc = executeQuery(deleteQuery.c_str());
 

@@ -2,10 +2,13 @@
 #include "sqlite/sqlite3.h"
 #include "include/DBmanage.h"
 #include "include/Helper.h"
+#include "include/LOG/log.h"
+#include "include/LOG/logger.h"
 
 void menu();
 
 int main() {
+	logging::default_logger()->setFileFlag(true); 
 	Database::getInstance().open("employee.db");
 	auto ch{ true };
 	while (ch) {

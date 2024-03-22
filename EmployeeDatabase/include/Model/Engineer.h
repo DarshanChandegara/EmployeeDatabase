@@ -2,7 +2,9 @@
 #define _Engineer_
 
 #include "Employee.h"
-//#include "../DBmanage.h"
+#include "../LOG/log.h"
+#include "../LOG/logger.h"
+
 class Engineer : public Employee {
 public:
     Engineer() = default;

@@ -3,6 +3,8 @@
 
 #include "Employee.h"
 #include "../Helper.h"
+#include "../LOG/log.h"
+#include "../LOG/logger.h"
 
 class Manager : public Employee {
 public:

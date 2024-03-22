@@ -111,6 +111,8 @@ bool Manager::insertManager() {
 			if (rc == 0) {
 				std::cout << "Manager inserted successfully\n\n";
 				waitMenu(); 
+				logging::Info("Engineer Added for Id: ", std::to_string(getId()));
+
 				return true;
 			}
 			else if (rc == 19) {
@@ -292,6 +294,7 @@ bool Manager::updateManager() {
 			if (rc == 0) {
 				std::cout << "Manager updated successfully\n\n";
 				waitMenu();
+				logging::Info("Manager updated for Id: ", std::to_string(getId()));
 				return true;
 			}
 			else if (rc == 19) {

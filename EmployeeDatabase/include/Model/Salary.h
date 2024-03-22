@@ -5,6 +5,8 @@
 #include "../Helper.h"
 #include "../Regex.h"
 #include "../DBmanage.h"
+#include "../LOG/log.h"
+#include "../LOG/logger.h"
 
 class Salary {
 public:
@@ -18,6 +20,7 @@ public:
     double getBaseSalary() const { return base_salary; }
     double getBonus() const { return bonus; }
 
+    void setId(int id) { Sid = id; }
     void setAmount(double figure) {
         amount = figure;
     }
@@ -27,7 +30,7 @@ public:
     bool viewSalary();
     void userInputSalary();
     bool insertSalary(int id) const; 
-    double increment(double, std::string);
+    double increment(double, int);
     bool deleteSalary();
     bool updateSalary();
     void action() noexcept;

@@ -4,6 +4,7 @@
 #include "Fixtures/EngineerFixture.h"
 #include "Fixtures/DepartmentFixture.h"
 #include "Fixtures/ManagerFixture.h"
+#include "Fixtures/SalaryFixture.h"
 
 
 //TEST(TestCaseName, TestName) {    
@@ -105,7 +106,7 @@ TEST_F(DepartmentFixture, DISABLED_ViewTest) {
 
 TEST_F(DepartmentFixture, DISABLED_UpdateTest) {
 	ASSERT_FALSE(d2.updateDepartment());  // Fail because manager id is not in database
-	ASSERT_FALSE(d4.updateDepartment()); // Fali beacuse department is not in table 
+	ASSERT_FALSE(d5.updateDepartment()); // Fali beacuse department is not in table 
 	ASSERT_TRUE(d3.updateDepartment());  // Success
 }
 
@@ -139,11 +140,47 @@ TEST_F(ManagerFixture, DISABLED_UpdateTest) {
 	ASSERT_TRUE(m1.updateManager()); // Sucess
 }
 
-TEST_F(ManagerFixture, ViewTest) {
+TEST_F(ManagerFixture, DISABLED_ViewTest) {
 	EXPECT_TRUE(m1.viewManager());  
 }
 
+TEST_F(ManagerFixture, DISABLED_DelelteTest) {
+	ASSERT_FALSE(m1.deleteManager()); // Fail beacuse this is a manager of other emloyees 
+	ASSERT_FALSE(m9.deleteManager()); // Fail becuse such manager is not available 
+	ASSERT_FALSE(m2.deleteManager()); // Fail beacuse manager with this email is not exist
 
+	ASSERT_TRUE(m4.deleteManager()); // Success ID
+	ASSERT_TRUE(m5.deleteManager()); // Success Email
+
+}
+
+
+
+// Salary
+TEST_F(SalaryFixture, DISABLED_IncrementTest) {
+	double d1 = s1.getBaseSalary(); 
+	s1.increment(25 , s1.getId());
+
+	double d2 = d1 + (d1 * 0.25);
+	ASSERT_DOUBLE_EQ(s1.getBaseSalary(), d2);
+	ASSERT_DOUBLE_EQ(s1.getAmount() ,s1.getBaseSalary() + s1.getBonus() );
+}
+
+TEST_F(SalaryFixture, DISABLED_ViewTest) {
+	ASSERT_TRUE(s1.viewSalary());
+}
+
+TEST_F(SalaryFixture, DISABLED_UpdateTest) {
+	ASSERT_FALSE(s3.updateSalary()); // Fail beacuse Sid is not in table
+	s2.updateSalary(); 
+	ASSERT_DOUBLE_EQ(s2.getAmount() , s2.getBaseSalary() + s2.getBonus()); // Success base_salary  
+	s4.updateSalary(); 
+	ASSERT_DOUBLE_EQ(s4.getAmount() , s4.getBaseSalary() + s4.getBonus()); // Success bonus 
+}
+
+
+
+ 
 int main(int argv, char** argc) {
 	Database::getInstance().open("employee.db"); 
 	testing::InitGoogleTest(&argv, argc);

@@ -102,6 +102,7 @@ bool Department::insertDepartment() {
 		else if (rc == 0) {
 			std::cout << "Department added successfully \n\n";
 			waitMenu();
+			logging::Info("Department added for Id: ", std::to_string(getId()));
 			return true;
 		}
 		//std::cin >> query;     
@@ -197,6 +198,7 @@ bool Department::updateDepartment() {
 			else if (rc == 0) {
 				std::cout << "Department Updated successfully \n\n";
 				waitMenu();
+				logging::Info("Department Updated with Id: " , std::to_string(getId())); 
 				return true;
 			}
 		}
@@ -258,6 +260,7 @@ bool Department::deleteDepartment() {
 
 				std::cout << "Department Deleted successfully \n\n";
 				waitMenu();
+				logging::Info("Department Deleted with Id: " , std::to_string(getId()));  
 				return true;
 			}
 		}

@@ -9,6 +9,9 @@
 #include "../DBmanage.h"
 #include "../Helper.h"
 #include"../Regex.h"
+#include "../LOG/log.h"
+#include "../LOG/logger.h"
+
 class Department {
 public:
     Department() = default;

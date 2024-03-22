@@ -9,6 +9,8 @@
 #include "../DBmanage.h"
 #include "../Helper.h"
 #include"../Regex.h"
+#include "../LOG/log.h"
+#include "../LOG/logger.h"
 
 
 enum class Gender { Male=0, Female, Other };

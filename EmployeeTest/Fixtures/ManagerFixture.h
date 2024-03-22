@@ -9,16 +9,22 @@ protected:
 		m5.setId(505); 
 
 		//Un Comment for InsertTest
-		/*m6.setDepartmentId(3); 
-		m7.setManagerId(506);*/
+		//m6.setDepartmentId(3); 
+		//m7.setManagerId(506);
 
 		//Un Comment for UpdateTest
-		m6.setManagerId(506);
-		m7.setDepartmentId(5);
-		m8.setId(507);
-		m1.setDob("26-08-2003");
-		m1.setEmail("darshan@gmail.com");
-		m1.setManagerId(503);
+		//m6.setManagerId(506); 
+		//m7.setDepartmentId(5); 
+		//m8.setId(507); 
+		//m1.setDob("26-08-2003"); 
+		//m1.setEmail("darshan@gmail.com");
+		//m1.setManagerId(503);
+
+		//Uncomment for DeleteTest
+		m9.setId(510);
+		m2.setEmail("this2@gmail.com");
+		m4.setId(504);
+		m5.setEmail("test1@gmail.com");
 
 	}
 	void TearDown() {

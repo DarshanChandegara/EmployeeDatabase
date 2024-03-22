@@ -108,8 +108,9 @@ bool Engineer::insertEngineer() {
 			query += "INSERT INTO Engineer VALUES ( " + to_string(getId()) + ", ' " + programming_language + " ' , ' " + specialization + " ') ;"; 
 			int rc = Database::getInstance().executeQuery(query.c_str()); 
 			if (rc == 0) {
-				std::cout << "Engineer Inserted successfully\n\n"; 
-				waitMenu(); 
+				std::cout << "Engineer Inserted successfully\n\n";
+				waitMenu();   
+				logging::Info("Engineer Added for Id: ", std::to_string(getId()));
 				return true;
 			}
 			else if (rc == 19) {
@@ -284,6 +285,7 @@ bool Engineer::updateEngineer() {
 			if (rc == 0) {
 				std::cout << "Engineer updated successfully\n\n";
 				waitMenu();
+				logging::Info("Engineer updated for Id: ", std::to_string(getId()));
 				return true;
 			}
 			else if (rc == 19) {
