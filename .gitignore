@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/EmployeeDatabase/include/LOG/fileHelper.h
+/EmployeeDatabase/include/LOG/log.h
+/EmployeeDatabase/include/LOG/log.h
