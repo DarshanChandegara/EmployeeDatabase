@@ -21,10 +21,11 @@ int main() {
 		std::cout << "2. Show Tables\n";
 		std::cout << "3. Delete Tables\n";
 		std::cout << "4. Access Table\n";
-		std::cout << "5. Exit\n\n";
+		std::cout << "5. Backup Table\n";
+		std::cout << "6. Exit\n\n";
 
 		int i;
-		i = std::stoi(input("Enter Choice: " , std::regex{"[1-5]"}));
+		i = std::stoi(input("Enter Choice: " , std::regex{"[1-6]"}));
 		switch (i) {
 		case 1 :
 			DB::Database::getInstance().createTableQuery();
@@ -41,8 +42,12 @@ int main() {
 		case 4:
 			menu();
 			break;
-
+		
 		case 5:
+			DB::Database::getInstance().writeCSV(); 
+			break;
+
+		case 6:
 			ch = false;
 			break;
 

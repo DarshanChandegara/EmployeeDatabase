@@ -340,3 +340,95 @@ int DB::Database::callbackOther(void* data, int argc, char** argv, char** azColN
 	*count = atoi(argv[0]);
 	return 0;
 }
+
+bool DB::Database::exportToCsv(const std::string_view& tableName , const std::filesystem::path& path) {
+	
+	std::ofstream file{ path , std::ios::app };
+
+	if (!file.is_open()) {
+		std::cout << "File is unable to open!!!!\n";
+		waitMenu();
+		return false;
+	}
+
+	std::string query = "select * from " + std::string{ tableName } + ";";
+	rc = DB::Database::getInstance().executeQuery(query.c_str());
+
+	if (rc != 0) {
+		std::cout << "Error msg: " << errorMsg << "\n";
+		waitMenu();
+		return false;
+	}
+
+	stmt = nullptr;
+
+	int rc = sqlite3_prepare_v2(DB::Database::getInstance().db, query.c_str(), -1, &DB::Database::getInstance().stmt, nullptr); 
+	if (rc != 0) {
+		std::cout << "Error msg: " << errorMsg << "\n";
+		waitMenu();
+		return false;
+	}
+
+	int columnsCount = sqlite3_column_count(stmt); 
+
+
+	file <<"\n" << string_rep() << "\n\n";
+
+	for (auto i{0}; i < columnsCount; i++) {
+		file << sqlite3_column_name(stmt , i);
+		if (i != columnsCount - 1) {
+			file << ",";
+		}
+	}
+	file << ";\n"; 
+
+	while (rc = sqlite3_step(stmt), rc == 100) {
+		for (auto i{ 0 }; i < columnsCount; i++) { 
+			file << sqlite3_column_text(stmt, i);  
+			if (i != columnsCount - 1) { 
+				file << ",";
+			}
+		}
+		file << ";\n";
+	}
+
+	if (rc == 101) {
+		std::cout << "Table " + std::string{ tableName } + " backup successfull!!!!\n";
+		logging::Info("Table " + std::string{ tableName } + " backup successfull!!!!");
+		return true;
+	}
+} 
+
+void DB::Database::writeCSV() {
+	std::filesystem::path p{ "C:\\Users\\ZTI\\OneDrive - ZURU INC\\C++\\EmployeeDatabase\\EmployeeDatabase\\BackUp\\Employee.csv" };
+	if (!DB::Database::getInstance().exportToCsv("Employee", p)) {
+		waitMenu();
+		return;
+	}
+
+	p = "C:\\Users\\ZTI\\OneDrive - ZURU INC\\C++\\EmployeeDatabase\\EmployeeDatabase\\BackUp\\Engineer.csv";
+	if (!DB::Database::getInstance().exportToCsv("Engineer", p)) { 
+		waitMenu(); 
+		return;
+	}
+
+	p = "C:\\Users\\ZTI\\OneDrive - ZURU INC\\C++\\EmployeeDatabase\\EmployeeDatabase\\BackUp\\Manager.csv";
+	if (!DB::Database::getInstance().exportToCsv("Manager", p)) { 
+		waitMenu(); 
+		return;
+	}
+
+	p = "C:\\Users\\ZTI\\OneDrive - ZURU INC\\C++\\EmployeeDatabase\\EmployeeDatabase\\BackUp\\Department.csv";
+	if (!DB::Database::getInstance().exportToCsv("Department", p)) { 
+		waitMenu(); 
+		return;
+	}
+
+	p = "C:\\Users\\ZTI\\OneDrive - ZURU INC\\C++\\EmployeeDatabase\\EmployeeDatabase\\BackUp\\Salary.csv";
+	if (!DB::Database::getInstance().exportToCsv("Salary", p)) { 
+		waitMenu(); 
+		return;
+	}
+
+	waitMenu(); 
+}

@@ -3,10 +3,10 @@
 void Model::Salary::userInputSalary(){
 
 	try {
-		std::string msg = " Enter # to leave the field Empty: \n";
-		setBaseSalary(std::stof(input("Enter Base Salary OR " + msg, salaryRegex, true)));
-		setBonus(std::stof(input("Enter Bonus OR ", salaryRegex, true)));
-		setAmount(base_salary + bonus);
+		std::string msg = " Enter # to leave the field Empty: \n"; 
+		setBaseSalary(std::stof(input("Enter Base Salary OR " + msg, salaryRegex, true))); 
+		setBonus(std::stof(input("Enter Bonus OR ", salaryRegex, true))); 
+		setAmount(base_salary + bonus); 
 	}
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
