@@ -5,11 +5,13 @@
 #include "include/LOG/log.h"
 #include "include/LOG/logger.h"
 
+using namespace utility;
+
 void menu();
 
 int main() {
 	logging::default_logger()->setFileFlag(true); 
-	Database::getInstance().open("employee.db");
+	DB::Database::getInstance().open("employee.db");
 	auto ch{ true };
 	while (ch) {
 		system("cls");
@@ -25,15 +27,15 @@ int main() {
 		i = std::stoi(input("Enter Choice: " , std::regex{"[1-5]"}));
 		switch (i) {
 		case 1 :
-			Database::getInstance().createTableQuery();
+			DB::Database::getInstance().createTableQuery();
 			break;
 
 		case 2:
-			Database::getInstance().showTables();
+			DB::Database::getInstance().showTables();
 			break;
-			
+
 		case 3:
-			Database::getInstance().deleteTableQuery();
+			DB::Database::getInstance().deleteTableQuery();
 			break;
 
 		case 4:

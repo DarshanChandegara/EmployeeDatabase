@@ -20,8 +20,8 @@ protected:
 
 	}
 
-	Salary s1{2 , 600000 , 500000 , 100000};
-	Salary s2 = s1;
-	Salary s3 = s1;
-	Salary s4 = s1;
+	Model::Salary s1{2 , 600000 , 500000 , 100000};
+	Model::Salary s2 = s1;
+	Model::Salary s3 = s1;
+	Model::Salary s4 = s1;
 };

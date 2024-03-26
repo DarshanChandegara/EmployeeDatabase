@@ -45,10 +45,10 @@ protected:
 	void TearDown() {
 
 	}
-	Salary s{ 2 , 600000.0 , 500000.0 , 100000.0 };
-	Employee emp;
-	Employee e1{ 2 , "darshan" , "patel" , "16-12-1212" , "5567894565" , "this@gmail.com" , "jsdhgfd fgsd" , Gender::Male , "01-01-2023" , 1 , 1 , s};
-	Employee e2 = e1;
-	Employee e3 = e1;
-	Employee e4 = e1;
+	Model::Salary s{ 2 , 600000.0 , 500000.0 , 100000.0 };
+	Model::Employee emp;
+	Model::Employee e1{ 2 , "darshan" , "patel" , "16-12-1212" , "5567894565" , "this@gmail.com" , "jsdhgfd fgsd" , Gender::Male , "01-01-2023" , 1 , 1 , s};
+	Model::Employee e2 = e1;
+	Model::Employee e3 = e1;
+	Model::Employee e4 = e1;
 };

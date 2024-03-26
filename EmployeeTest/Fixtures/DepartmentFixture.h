@@ -37,10 +37,10 @@ class DepartmentFixture : public testing::Test {
 
 		}
 
-		Department d1{1 , "Finance" , 1 , "Do the work related to money "};
-		Department d2{3 , "Finance" , 5 , "Do the work related to money "};
-		Department d3{3 , "Web Dev" , 1 , "Do the work related to Website Handling"};
-		Department d4{4 , "HR" , 1 , "Do the work related to Human resource and management of employees"};
-		Department d5{5 , "HR" , 1 , "Do the work related to Human resource and management of employees"};
-		Department d6 = d4;
+		Model::Department d1{1 , "Finance" , 1 , "Do the work related to money "};
+		Model::Department d2{3 , "Finance" , 5 , "Do the work related to money "};
+		Model::Department d3{3 , "Web Dev" , 1 , "Do the work related to Website Handling"};
+		Model::Department d4{4 , "HR" , 1 , "Do the work related to Human resource and management of employees"};
+		Model::Department d5{5 , "HR" , 1 , "Do the work related to Human resource and management of employees"};
+		Model::Department d6 = d4;
 };

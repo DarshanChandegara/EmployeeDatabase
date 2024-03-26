@@ -1,8 +1,8 @@
 #include "../include/DBmanage.h"
 
-int Database::row = 0;
+int DB::Database::row = 0;
 
-bool Database::open(const char* str) {
+bool DB::Database::open(const char* str) {
 	rc = sqlite3_open(str, &db);
 
 	if (rc) {
@@ -29,7 +29,8 @@ bool Database::open(const char* str) {
 		"manager_id INTEGER,"
 		"department_id INTEGER,"
 		"FOREIGN KEY (department_id) REFERENCES Department(id),"
-		"FOREIGN KEY (manager_id) REFERENCES Employee(Eid));";
+		"FOREIGN KEY (manager_id) REFERENCES Manager(id));";
+
 
 	rc = sqlite3_exec(db, sql, 0, 0, &errorMsg);
 
@@ -50,7 +51,7 @@ bool Database::open(const char* str) {
 		"Dname VARCHAR,"
 		"manager_id INTEGER,"
 		"description VARCHAR,"
-		"FOREIGN KEY (manager_id) REFERENCES Employee(Eid))";
+		"FOREIGN KEY (manager_id) REFERENCES Manager(id))";
 
 	rc = sqlite3_exec(db, sql2, 0, 0, &errorMsg);
 
@@ -134,7 +135,7 @@ bool Database::open(const char* str) {
 	return true;
 }
 
-void Database::createTableQuery() {
+void DB::Database::createTableQuery() {
 	system("cls");
 	std::cout << "If you want to go back press 0 Otherwise press 1\n";
 	int i;
@@ -183,7 +184,7 @@ void Database::createTableQuery() {
 
 }
 
-void Database::showTables() {
+void DB::Database::showTables() {
 
 	std::string showQuery = " SELECT name FROM sqlite_schema ;";
 
@@ -192,7 +193,7 @@ void Database::showTables() {
 	waitMenu(); 
 }
 
-void Database::deleteTableQuery() {
+void DB::Database::deleteTableQuery() {
 	system("cls");
 	int i;
 	std::cout << "Select the operation\n";
@@ -252,7 +253,7 @@ void Database::deleteTableQuery() {
 
 }
 
-int Database::executeQuery(const char* sql, float count)
+int DB::Database::executeQuery(const char* sql, float count)
 {
 	rc = sqlite3_exec(db, sql, callbackOther, &count, &errorMsg);
 
@@ -280,7 +281,7 @@ int Database::executeQuery(const char* sql, float count)
 
 }
 
-bool Database::selectQuery(const char* sql)
+bool DB::Database::selectQuery(const char* sql)
 {
 	Database::row = 0;
 	rc = sqlite3_exec(db, sql, callback, 0, &errorMsg);
@@ -301,7 +302,7 @@ bool Database::selectQuery(const char* sql)
 	}
 }
 
-bool Database::close() {
+bool DB::Database::close() {
 	rc = sqlite3_close(db);
 
 	if (rc != SQLITE_OK) {
@@ -314,13 +315,13 @@ bool Database::close() {
 	}
 }
 
-int Database::callback(void* data, int args, char** row, char** col) {
+int DB::Database::callback(void* data, int args, char** row, char** col) {
 	//std::cout << "Hello from callback function\n";
 	Database::row++;
 	try {
 		std::cout << "+--------------------------+----------------------------------------+" << std::endl;
 		for (int i{ 0 }; i < args; i++) {
-			std::cout << "|" << std::setw(25) << std::left << col[i] << " | " << std::setw(38) << std::left << (row[i] ? row[i] : NULL) << " |" << std::endl;
+			std::cout << "|" << std::setw(25) << std::left << col[i] << " | " << std::setw(38) << std::left << (row[i] ? row[i] : "NULL") << " |" << std::endl;
 		}
 		std::cout << "+--------------------------+----------------------------------------+" << std::endl;
 		std::cout << "\n";
@@ -334,7 +335,7 @@ int Database::callback(void* data, int args, char** row, char** col) {
 	}
 }
 
-int Database::callbackOther(void* data, int argc, char** argv, char** azColName) {
+int DB::Database::callbackOther(void* data, int argc, char** argv, char** azColName) {
 	int* count = reinterpret_cast<int*>(data);
 	*count = atoi(argv[0]);
 	return 0;

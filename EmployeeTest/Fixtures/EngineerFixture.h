@@ -56,12 +56,12 @@ protected:
 	void TearDown() {
 
 	}
-	Salary sg1{ 4 , 600000.0 , 500000.0 , 100000.0 };
-	Engineer eng;
-	Engineer eg1{ 3 , "Kalpesh" , "Shukla" , "16-12-1212" , "5567894565" , "this@gmail.com" , "jsdhgfd fgsd" , Gender::Male , "01-01-2023" , 1 , 1 , sg1 , "C++", "Senior C++ Develpoer" };
-	Engineer eg2{ 4 , "Kalpesh" , "Shukla" , "16-12-1212" , "5567894565" , "this@gmail.com" , "jsdhgfd fgsd" , Gender::Male , "01-01-2023" , 15 , 1 , sg1 , "C++", "Senior C++ Develpoer" }; 
-	Engineer eg4{ 4 , "Kalpesh" , "Shukla" , "16-12-1212" , "5567894565" , "this@gmail.com" , "jsdhgfd fgsd" , Gender::Male , "01-01-2023" , 15 , 1 , sg1 , "C++", "Senior C++ Develpoer" };
-	Engineer eg3 = eg2;
+	Model::Salary sg1{ 4 , 600000.0 , 500000.0 , 100000.0 };
+	Model::Engineer eng;
+	Model::Engineer eg1{ 3 , "Kalpesh" , "Shukla" , "16-12-1212" , "5567894565" , "this@gmail.com" , "jsdhgfd fgsd" , Gender::Male , "01-01-2023" , 1 , 1 , sg1 , "C++", "Senior C++ Develpoer" };
+	Model::Engineer eg2{ 4 , "Kalpesh" , "Shukla" , "16-12-1212" , "5567894565" , "this@gmail.com" , "jsdhgfd fgsd" , Gender::Male , "01-01-2023" , 15 , 1 , sg1 , "C++", "Senior C++ Develpoer" }; 
+	Model::Engineer eg4{ 4 , "Kalpesh" , "Shukla" , "16-12-1212" , "5567894565" , "this@gmail.com" , "jsdhgfd fgsd" , Gender::Male , "01-01-2023" , 15 , 1 , sg1 , "C++", "Senior C++ Develpoer" };
+	Model::Engineer eg3 = eg2;
 	
 
 };
