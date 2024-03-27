@@ -7,23 +7,23 @@
 #include "Fixtures/SalaryFixture.h"
 
 
-//TEST(TestCaseName, TestName) {    
-//  EXPECT_EQ(1, 1);
-//  ASSERT_EQ(fun(), "darshan");
-//}
-//
-//TEST_F(EmployeeFixture , constructionTest) {  
-//	ASSERT_EQ(emp.getId(), 1);
-//	ASSERT_EQ(emp.getFirstname(), "Darshan");
-//	ASSERT_EQ(emp.getLastname(), "Chandegara");
-//	ASSERT_EQ(emp.getEmail(), "darshan@gmail.com");
-//	ASSERT_EQ(emp.getMobile(), "8469557424");
-//	ASSERT_EQ(emp.getDob(), "26-08-2002"); 
-//	ASSERT_EQ(emp.getDoj(), "01-01-2024"); 
-//	ASSERT_EQ(emp.getManagerId(), 1); 
-//	ASSERT_EQ(emp.getDepartmentId(), 1); 
-//	ASSERT_EQ(emp.getGender(), Gender::Male);
-//}
+TEST(TestCaseName, DISABLED_TestName) {    
+  EXPECT_EQ(1, 1);
+  ASSERT_EQ(fun(), "darshan");
+}
+
+TEST_F(EmployeeFixture , DISABLED_constructionTest) {  
+	ASSERT_EQ(emp.getId(), 1);
+	ASSERT_EQ(emp.getFirstname(), "Darshan");
+	ASSERT_EQ(emp.getLastname(), "Chandegara");
+	ASSERT_EQ(emp.getEmail(), "darshan@gmail.com");
+	ASSERT_EQ(emp.getMobile(), "8469557424");
+	ASSERT_EQ(emp.getDob(), "26-08-2002"); 
+	ASSERT_EQ(emp.getDoj(), "01-01-2024"); 
+	ASSERT_EQ(emp.getManagerId(), 1); 
+	ASSERT_EQ(emp.getDepartmentId(), 1); 
+	ASSERT_EQ(emp.getGender(), Gender::Male);
+}
 
 
 

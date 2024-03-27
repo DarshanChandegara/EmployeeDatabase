@@ -38,13 +38,45 @@ bool Model::Table::createTable() {
 				sql += ",";
 			}
 		}
+
+		auto flag{ true };
+		int cnt{ 0 };
+		std::string field, refrenceTableName , tableField; 
+		while (flag) { 
+			std::cout << "Do you want to add Foreign Key (Y/N)?: ";
+			
+			if (std::cin >> choice; (choice == 'y' || choice == 'Y')) {
+
+				std::cout << "Enter the field: ";
+				std::cin >> field;
+				std::cout << "Enter the name of the table from which refrence is taken: ";
+				std::cin >> refrenceTableName;  
+				std::cout << "Enter the field of the reference table: ";
+				std::cin >> tableField;  
+				
+				sql +=", FOREIGN KEY (" + field + ") REFERENCES " + refrenceTableName + "( " + tableField + ")";
+				cnt++;
+			}
+			else {
+				flag = false;
+			}
+		}
+		if (cnt != 0) { 
+			std::cout << "Do you want to add on delete cascade (Y/N)? "; 
+
+			if (std::cin >> choice; (choice == 'Y' || choice == 'y')) { 
+				sql += " ON DELETE CASCADE";
+			}
+		}
+		
 		sql += ");";
 
-		//std::cout << sql;
-		int rc = DB::Database::getInstance().executeQuery(sql.c_str());
+		std::cout << sql;  
+		int rc{}; 
+		//int rc = DB::Database::getInstance().executeQuery(sql.c_str()); 
 		if (rc == 0) {
 			std::cout << "\n\x1b[32mTable created Suceesfully\x1b[0m\n\n";
-			waitMenu();
+			waitMenu(); 
 			return true;
 		}
 		//std::cout << sql << "\n\n";
@@ -150,7 +182,7 @@ void Model::Table::infoTable() noexcept {
 	}
 	std::cout << "+--------------------------+----------------------------------------+" << std::endl;
 	waitMenu();
-}
+} 
 
 std::optional<Model::Table> Model::Table::getTable(const std::string& tableName) {
 
@@ -221,6 +253,7 @@ void Model::Table::writeCSV() {
 		}
 	}
 	std::cout << "\n\x1b[32m Table BackUp successfull!!!!!\x1b[0m\n\n";
+	logging::Info("Table BackUp successfull!!!!!!");
 	waitMenu();
 }
 
@@ -331,6 +364,7 @@ bool Model::Table::insertRecord() {
 
 		if (rc == 0) {
 			std::cout << "\x1b[32mIn " + name + ": Record Inserted successfully!!!!\x1b[0m\n";
+			logging::Info(name + ": Record Inserted successfully!!!!"); 
 			waitMenu();
 			return true;
 		}
@@ -398,7 +432,8 @@ bool Model::Table::updateRecord() {
 		int rc = DB::Database::getInstance().executeQuery(query.c_str());
 
 		if (rc == 0) {
-			std::cout << "\x1b[32min " + name + "Record updated successfully with id " + id + "\x1b[0m\n";
+			std::cout << "\x1b[32min " + name + ": Record updated successfully with id " + id + "\x1b[0m\n";
+			logging::Info(name + ": Record updated successfully with id " + id); 
 			waitMenu();
 			return true;
 		}
@@ -430,6 +465,7 @@ bool Model::Table::deleteRecord() const{
 		int rc = DB::Database::getInstance().executeQuery(query.c_str());
 		if (rc == 0) {
 			std::cout << "\x1b[32mRecord deleted successfully from " + name + "\x1b[0m\n";
+			logging::Info(name + ": Record deleted successfully with id " + id);
 			waitMenu();
 			return true;
 		}
