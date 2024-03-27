@@ -7,7 +7,7 @@ bool DB::Database::open(const char* str) {
 
 	if (rc) {
 		logging::default_logger()->log(logging::Log::Level::LevelError, sqlite3_errmsg(db));   
-		std::cerr << "Can't open database: " << sqlite3_errmsg(db) << "\n";
+		std::cerr << "\x1b[31mCan't open database: " << sqlite3_errmsg(db) << "\x1b[0m\n";
 		return false;
 	}
 	else {
@@ -37,7 +37,7 @@ bool DB::Database::open(const char* str) {
 	if (rc != SQLITE_OK)
 	{
 		logging::default_logger()->log(logging::Log::Level::LevelError, sqlite3_errmsg(db));
-		std::cerr << "SQL error: " << errorMsg << std::endl;
+		std::cerr << "\x1b[31mSQL error: " << errorMsg<<"\x1b[0m" << std::endl;
 		sqlite3_free(errorMsg);
 	}
 	else
@@ -58,7 +58,7 @@ bool DB::Database::open(const char* str) {
 	if (rc != SQLITE_OK)
 	{
 		logging::default_logger()->log(logging::Log::Level::LevelError, sqlite3_errmsg(db));
-		std::cerr << "SQL error: " << errorMsg << std::endl;
+		std::cerr << "\x1b[31mSQL error: " << errorMsg <<"\x1b[0m" << std::endl;
 		sqlite3_free(errorMsg);
 	}
 	else
@@ -79,7 +79,7 @@ bool DB::Database::open(const char* str) {
 	if (rc != SQLITE_OK)
 	{
 		logging::default_logger()->log(logging::Log::Level::LevelError, sqlite3_errmsg(db));
-		std::cerr << "SQL error: " << errorMsg << std::endl;
+		std::cerr << "\x1b[31mSQL error: " << errorMsg<<"\x1b[0m" << std::endl;
 		sqlite3_free(errorMsg);
 	}
 	else
@@ -99,7 +99,7 @@ bool DB::Database::open(const char* str) {
 	if (rc != SQLITE_OK)
 	{
 		logging::default_logger()->log(logging::Log::Level::LevelError, sqlite3_errmsg(db)); 
-		std::cerr << "SQL error: " << errorMsg << std::endl;
+		std::cerr << "\x1b[31mSQL error: " << errorMsg<<"\x1b[0m" << std::endl;
 		sqlite3_free(errorMsg);
 	}
 	else
@@ -120,7 +120,7 @@ bool DB::Database::open(const char* str) {
 	if (rc != SQLITE_OK)
 	{
 		logging::default_logger()->log(logging::Log::Level::LevelError, sqlite3_errmsg(db));
-		std::cerr << "SQL error: " << errorMsg << std::endl;
+		std::cerr << "\x1b[31mSQL error: " << errorMsg<<"\x1b[0m" << std::endl;
 		sqlite3_free(errorMsg);
 	}
 	else
@@ -147,7 +147,7 @@ int DB::Database::executeQuery(const char* sql, float count)
 	}
 	else if (rc != SQLITE_OK)
 	{
-		std::cerr << "SQL error: " << errorMsg << std::endl;
+		std::cerr << "\x1b[31mSQL error: " << errorMsg <<"\x1b[0m" << std::endl;
 		waitMenu(); 
 		sqlite3_free(errorMsg);
 		return rc;
@@ -170,7 +170,7 @@ bool DB::Database::selectQuery(const char* sql)
 
 	if (rc != SQLITE_OK)
 	{
-		std::cerr << "SQL error: " << errorMsg << std::endl;
+		std::cerr << "\x1b[31mSQL error: " << errorMsg <<"\x1b[0m" << std::endl;
 		std::cout << "Press Enter to continue\n";
 		std::cin.get();
 		sqlite3_free(errorMsg);
@@ -188,7 +188,7 @@ bool DB::Database::close() {
 	rc = sqlite3_close(db);
 
 	if (rc != SQLITE_OK) {
-		std::cerr << "Database Failed to close\n";
+		//std::cerr << "Database Failed to close\n";
 		return false;
 	}
 	else {
@@ -214,7 +214,9 @@ int DB::Database::callback(void* data, int args, char** row, char** col) {
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
 		waitMenu();
+		return 0;
 	}
+	return 0;
 }
 
 int DB::Database::callbackOther(void* data, int argc, char** argv, char** azColName) {
@@ -223,94 +225,3 @@ int DB::Database::callbackOther(void* data, int argc, char** argv, char** azColN
 	return 0;
 }
 
-bool DB::Database::exportToCsv(const std::string_view& tableName , const std::filesystem::path& path) {
-	
-	std::ofstream file{ path , std::ios::app };
-
-	if (!file.is_open()) {
-		std::cout << "File is unable to open!!!!\n";
-		waitMenu();
-		return false;
-	}
-
-	std::string query = "select * from " + std::string{ tableName } + ";";
-	rc = DB::Database::getInstance().executeQuery(query.c_str());
-
-	if (rc != 0) {
-		std::cout << "Error msg: " << errorMsg << "\n";
-		waitMenu();
-		return false;
-	}
-
-	stmt = nullptr;
-
-	int rc = sqlite3_prepare_v2(DB::Database::getInstance().db, query.c_str(), -1, &DB::Database::getInstance().stmt, nullptr); 
-	if (rc != 0) {
-		std::cout << "Error msg: " << errorMsg << "\n";
-		waitMenu();
-		return false;
-	}
-
-	int columnsCount = sqlite3_column_count(stmt); 
-
-
-	file <<"\n" << string_rep() << "\n\n";
-
-	for (auto i{0}; i < columnsCount; i++) {
-		file << sqlite3_column_name(stmt , i);
-		if (i != columnsCount - 1) {
-			file << ",";
-		}
-	}
-	file << ";\n"; 
-
-	while (rc = sqlite3_step(stmt), rc == 100) {
-		for (auto i{ 0 }; i < columnsCount; i++) { 
-			file << sqlite3_column_text(stmt, i);  
-			if (i != columnsCount - 1) { 
-				file << ",";
-			}
-		}
-		file << ";\n";
-	}
-
-	if (rc == 101) {
-		std::cout << "Table " + std::string{ tableName } + " backup successfull!!!!\n";
-		logging::Info("Table " + std::string{ tableName } + " backup successfull!!!!");
-		return true;
-	}
-} 
-
-void DB::Database::writeCSV() {
-	std::filesystem::path p{ "C:\\Users\\ZTI\\OneDrive - ZURU INC\\C++\\EmployeeDatabase\\EmployeeDatabase\\BackUp\\Employee.csv" };
-	if (!DB::Database::getInstance().exportToCsv("Employee", p)) {
-		waitMenu();
-		return;
-	}
-
-	p = "C:\\Users\\ZTI\\OneDrive - ZURU INC\\C++\\EmployeeDatabase\\EmployeeDatabase\\BackUp\\Engineer.csv";
-	if (!DB::Database::getInstance().exportToCsv("Engineer", p)) { 
-		waitMenu(); 
-		return;
-	}
-
-	p = "C:\\Users\\ZTI\\OneDrive - ZURU INC\\C++\\EmployeeDatabase\\EmployeeDatabase\\BackUp\\Manager.csv";
-	if (!DB::Database::getInstance().exportToCsv("Manager", p)) { 
-		waitMenu(); 
-		return;
-	}
-
-	p = "C:\\Users\\ZTI\\OneDrive - ZURU INC\\C++\\EmployeeDatabase\\EmployeeDatabase\\BackUp\\Department.csv";
-	if (!DB::Database::getInstance().exportToCsv("Department", p)) { 
-		waitMenu(); 
-		return;
-	}
-
-	p = "C:\\Users\\ZTI\\OneDrive - ZURU INC\\C++\\EmployeeDatabase\\EmployeeDatabase\\BackUp\\Salary.csv";
-	if (!DB::Database::getInstance().exportToCsv("Salary", p)) { 
-		waitMenu(); 
-		return;
-	}
-
-	waitMenu(); 
-}

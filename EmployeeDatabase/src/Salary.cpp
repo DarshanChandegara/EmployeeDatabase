@@ -147,12 +147,13 @@ bool Model::Salary::updateSalary() {
 
 			rc = DB::Database::getInstance().executeQuery(query.c_str());
 			if (rc == 0) {
-				std::cout << "Salary updated successfully\n\n";
+				std::cout << "\x1b[32mSalary updated successfully\x1b[0m\n\n";
 				waitMenu();
 				logging::Info("Salary updated for Id: ", std::to_string(getId()));
 
 				return true;
 			}
+			return false;
 		}
 	}
 	catch (std::exception& e) {

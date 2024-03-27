@@ -101,5 +101,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="BackUp\demo.csv" />
+    <None Include="BackUp\Department.csv" />
+    <None Include="BackUp\Employee.csv" />
+    <None Include="BackUp\Engineer.csv" />
+    <None Include="BackUp\Manager.csv" />
+    <None Include="BackUp\Salary.csv" />
+    <None Include="BackUp\darshan.csv" />
   </ItemGroup>
 </Project>

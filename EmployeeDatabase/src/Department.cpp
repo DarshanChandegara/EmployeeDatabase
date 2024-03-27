@@ -95,12 +95,12 @@ bool Model::Department::insertDepartment() {
 		//std::cout << query;   
 		int rc = DB::Database::getInstance().executeQuery(query.c_str());
 		if (rc == 19) {
-			std::cout << "Entered manager is not available in particular table OR Entered department ID is already exist in table  \n\n";
+			std::cout << "\x1b[33mEntered manager is not available in particular table OR Entered department ID is already exist in table  \x1b[0m\n\n";
 			waitMenu();
 			return false;
 		}
 		else if (rc == 0) {
-			std::cout << "Department added successfully \n\n";
+			std::cout << "\x1b[32mDepartment added successfully\x1b[0m \n\n";
 			waitMenu();
 			logging::Info("Department added for Id: ", std::to_string(getId()));
 			return true;
@@ -195,12 +195,12 @@ bool Model::Department::updateDepartment() {
 			int rc = DB::Database::getInstance().executeQuery(query.c_str());
 
 			if (rc == 19) {
-				std::cerr << "You can not assigne value because entered manager is not in database \n\n";
+				std::cerr << "\x1b[33mYou can not assigne value because entered manager is not in database \x1b[0m\n\n";
 				waitMenu();
 				return false;
 			}
 			else if (rc == 0) {
-				std::cout << "Department Updated successfully \n\n";
+				std::cout << "\x1b[32mDepartment Updated successfully\x1b[0m \n\n";
 				waitMenu();
 				logging::Info("Department Updated with Id: ", std::to_string(getId()));
 				return true;
@@ -257,20 +257,20 @@ bool Model::Department::deleteDepartment() {
 		if (rc == 0) {
 			int change = sqlite3_changes(DB::Database::getInstance().db);
 			if (change == 0) {
-				std::cout << "Selected Department is not in database\n";
+				std::cout << "\x1b[33mSelected Department is not in database\x1b[0m\n";
 				waitMenu();
 				return false;
 			}
 			else {
 
-				std::cout << "Department Deleted successfully \n\n";
+				std::cout << "\x1b[32mDepartment Deleted successfully\x1b[0m \n\n";
 				waitMenu();
 				logging::Info("Department Deleted with Id: ", std::to_string(getId()));
 				return true;
 			}
 		}
 		else if (rc == 19) {
-			std::cout << "You can not Delete this department because there is employee which are working in this department  \n\n";
+			std::cout << "\x1b[33mYou can not Delete this department because there is employee which are working in this department \x1b[0m \n\n";
 			waitMenu();
 			return false;
 		}

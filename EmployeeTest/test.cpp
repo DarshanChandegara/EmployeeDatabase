@@ -29,7 +29,7 @@
 
 // Employee 
 
-TEST_F(EmployeeFixture , DISABLED_ViewTest) {
+TEST_F(EmployeeFixture, DISABLED_ViewTest) {
 	ASSERT_TRUE(emp.viewEmployee()); //sucess
 	ASSERT_FALSE(emp.viewEmployee()); //record not avilable     
 }

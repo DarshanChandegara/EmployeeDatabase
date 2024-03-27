@@ -53,14 +53,6 @@ namespace logging {
 	void Log::log(Log::Level l, const T& ...args) const {
 
 		if (m_LogLevel >= l) {
-			std::string str = string_rep();
-			str.append(" [")
-				.append(showLevelWithColour(l))
-				.append("] ")
-				.append("[")
-				.append(l_name)
-				.append("] ");
-
 			std::string str1 = string_rep();
 			str1.append(" [")
 				.append(showLevel(l))
@@ -68,10 +60,6 @@ namespace logging {
 				.append("[")
 				.append(l_name)
 				.append("] ");
-
-			logConsole(str);
-			printArgs(args...);
-
 
 
 			if (isDumpOnFile == true) {

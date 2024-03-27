@@ -109,17 +109,17 @@ bool Model::Manager::insertManager() {
 			//std::cout << query << "\n";
 			int rc = DB::Database::getInstance().executeQuery(query.c_str());
 			if (rc == 0) {
-				std::cout << "Manager inserted successfully\n\n";
+				std::cout << "\x1b[32mManager inserted successfully\x1b[0m\n\n";
 				waitMenu();
 				logging::Info("Engineer Added for Id: ", std::to_string(getId()));
-
 				return true;
 			}
 			else if (rc == 19) {
-				std::cout << "Entered Manager is already exist\n\n";
+				std::cout << "\x1b[33mEntered Manager is already exist\x1b[0m\n\n";
 				waitMenu();
 				return false;
 			}
+			return false;
 		}
 		else {
 			return false;
@@ -131,6 +131,7 @@ bool Model::Manager::insertManager() {
 		waitMenu();
 		return false;
 	}
+	return false;
 }
 
 bool Model::Manager::updateManager() {
@@ -298,23 +299,25 @@ bool Model::Manager::updateManager() {
 			}
 
 			if (rc == 0) {
-				std::cout << "Manager updated successfully\n\n";
+				std::cout << "\x1b[32mManager updated successfully\x1b[0m\n\n";
 				waitMenu();
 				logging::Info("Manager updated for Id: ", std::to_string(getId()));
 				return true;
 			}
 			else if (rc == 19) {
-				std::cout << "You can not update that value Because entered manager or department is not in particular table\n\n";
+				std::cout << "\x1b[33mYou can not update that value Because entered manager or department is not in particular table\x1b[0m\n\n";
 				waitMenu();
 				return false;
 			}
 		}
+		return false;
 	}
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
 		waitMenu();
 		return false;
 	}
+	return false;
 }
 
 bool Model::Manager::deleteManager() {

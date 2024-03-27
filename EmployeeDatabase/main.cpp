@@ -11,22 +11,12 @@ using namespace utility;
 void menu();
 
 int main() {
-	//logging::default_logger()->setFileFlag(true); 
-	DB::Database::getInstance().open("employee.db");
+	//logging::default_logger()->setFileFlag(true);   
+	DB::Database::getInstance().open("employee.db"); 
 	auto ch{ true };
-	//Model::Table t;
-	std::optional< Model::Table> t = Model::Table::getTable("demo"); 
-	if (t.has_value()) { 
-		//t.value().infoTable();  
-		//t.value().insertRecord(); 
-		//t.value().deleteRecord();  
-		//t.value().viewAllRecords();
-		t.value().viewRecord();
-	}
-
+	Model::Table t;
 	
-	
-	/*while (ch) {
+	while (ch) {
 		system("cls");
 		std::cout << "------------------------------------> WELCOME TO EMPLOYEE MANAGEMENT SYSTEM <-------------------------------------------\n";
 		std::cout << "Enter the Opertaion you want to perform\n";
@@ -34,11 +24,12 @@ int main() {
 		std::cout << "2. Show Tables\n";
 		std::cout << "3. Delete Tables\n";
 		std::cout << "4. Access Table\n";
-		std::cout << "5. Backup Table\n";
-		std::cout << "6. Exit\n\n";
+		std::cout << "5. Access Other Tables\n";
+		std::cout << "6. Backup Table\n";
+		std::cout << "7. Exit\n\n";
 
 		int i;
-		i = std::stoi(input("Enter Choice: " , std::regex{"[1-6]"}));
+		i = std::stoi(input("Enter Choice: " , std::regex{"[1-7]"}));
 		switch (i) {
 		case 1 :
 			t.createTable();
@@ -55,17 +46,21 @@ int main() {
 		case 4:
 			menu();
 			break;
-		
+
 		case 5:
-			DB::Database::getInstance().writeCSV(); 
+			t.action();
+			break;
+		
+		case 6:
+			t.writeCSV();  
 			break;
 
-		case 6:
+		case 7:
 			ch = false;
 			break;
 
 		default:
 			std::cout << "Enter valid input: \n";
 		}
-	}*/
+	}
 }

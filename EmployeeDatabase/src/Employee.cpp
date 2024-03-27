@@ -97,13 +97,13 @@ bool Model::Employee::insertEmployee() {
 		
 		int rc = DB::Database::getInstance().executeQuery(query.c_str());
 		if (rc == 0) {
-			std::cout << "Employee inserted successfully\n";
+			std::cout << "\x1b[32mEmployee inserted successfully\x1b[0m\n";
 			logging::Info("Employee added for Id: ", std::to_string(getId()));  
 			s.insertSalary(getId()); 
 			return true;
 		}
 		else if (rc == 19) {
-			std::cout << "Entered manager or department is not available in particular table Or entered employee is already exist \n\n";
+			std::cout << "\x1b[33mEntered manager or department is not available in particular table Or entered employee is already exist \x1b[0m\n\n";
 			waitMenu();
 			return false;
 		}
@@ -235,23 +235,25 @@ bool Model::Employee::updateEmployee() {
 			
 			int rc = DB::Database::getInstance().executeQuery(query.c_str());
 			if (rc == 0) {
-				std::cout << "Employee updated successfully\n\n";
+				std::cout << "\x1b[32mEmployee updated successfully\x1b[0m\n\n";
 				waitMenu();
 				logging::Info("Employee updated for Id: ", std::to_string(getId()));  
 				return true;
 			}
 			else if (rc == 19) {
-				std::cout << "You can not assign value beacuse entered manager or department is not in particular table\n\n";
+				std::cout << "\x1b[33mYou can not assign value beacuse entered manager or department is not in particular table\x1b[0m\n\n";
 				waitMenu();
 				return false;
 			}
 		}
+		return false;
 	}
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
 		waitMenu();
 		return false;
 	}
+	return false;
 }
 
 bool Model::Employee::deleteEmployee() {
@@ -298,23 +300,23 @@ bool Model::Employee::deleteEmployee() {
 		if (rc == 0) {
 			int change = sqlite3_changes(DB::Database::getInstance().db);
 			if (change == 0) {
-				std::cout << "Selected Employee is not in database\n";
+				std::cout << "\x1b[33mSelected Employee is not in database\x1b[0m\n";
 				waitMenu(); 
 				return false;
 			}
 			else {
-				std::cout << "Employee Deleted successfully\n\n";
+				std::cout << "\x1b[32mEmployee Deleted successfully\x1b[0m\n\n";
 				waitMenu();
 				logging::Info("Employee deleted for Id: ", std::to_string(getId())); 
 				return true;
 			}
 		}
 		else if (rc == 19) {
-			std::cout << "You can not delete this Employee because this is a manager of other employees \n\n";
+			std::cout << "\x1b[33mYou can not delete this Employee because this is a manager of other employees \x1b[0m\n\n";
 			waitMenu();
 			return false;
 		}
-		
+		return false;
 
 	}
 	catch (std::exception& e) {
@@ -322,6 +324,7 @@ bool Model::Employee::deleteEmployee() {
 		waitMenu();
 		return false;
 	}
+	return false;
 }
 
 void Model::Employee::action() noexcept {

@@ -4,8 +4,6 @@
 #include<iostream>
 #include <iomanip>
 #include <vector>
-#include <filesystem>
-#include <fstream>
 #include <string>
 #include "../include/Helper.h"
 #include "../sqlite/sqlite3.h"
@@ -42,8 +40,7 @@ namespace DB {
 			return db;
 		}
 
-		void writeCSV();
-		bool exportToCsv(const std::string_view&, const std::filesystem::path&);
+		
 		static int callback(void* data, int args, char** row, char** col);
 		static int callbackOther(void* data, int args, char** row, char** col);
 	};

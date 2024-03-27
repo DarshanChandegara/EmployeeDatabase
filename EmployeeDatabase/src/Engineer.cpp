@@ -108,13 +108,13 @@ bool Model::Engineer::insertEngineer() {
 			query += "INSERT INTO Engineer VALUES ( " + to_string(getId()) + ", ' " + programming_language + " ' , ' " + specialization + " ') ;";
 			int rc = DB::Database::getInstance().executeQuery(query.c_str());
 			if (rc == 0) {
-				std::cout << "Engineer Inserted successfully\n\n";
+				std::cout << "\x1b[32mEngineer Inserted successfully\x1b[0m\n\n";
 				waitMenu();
 				logging::Info("Engineer Added for Id: ", std::to_string(getId()));
 				return true;
 			}
 			else if (rc == 19) {
-				std::cout << "Entered Enginner is already exist\n\n";
+				std::cout << "\x1b[33mEntered Enginner is already exist\x1b[0m\n\n";
 				waitMenu();
 				return false;
 			}
@@ -122,13 +122,14 @@ bool Model::Engineer::insertEngineer() {
 		else {
 			return false;
 		}
-
+		return false;
 	}
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
 		waitMenu();
 		return false;
 	}
+	return false;
 }
 
 bool Model::Engineer::updateEngineer() {
@@ -291,23 +292,25 @@ bool Model::Engineer::updateEngineer() {
 			}
 
 			if (rc == 0) {
-				std::cout << "Engineer updated successfully\n\n";
+				std::cout << "\x1b[32mEngineer updated successfully\x1b[0m\n\n";
 				waitMenu();
 				logging::Info("Engineer updated for Id: ", std::to_string(getId()));
 				return true;
 			}
 			else if (rc == 19) {
-				std::cout << "You can not assign value beacuse entered manager or department is not in particular table\n\n";
+				std::cout << "\x1b[33mYou can not assign value beacuse entered manager or department is not in particular table\x1b[0m\n\n";
 				waitMenu();
 				return false;
 			}
 		}
+		return false;
 	}
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
 		waitMenu();
 		return false;
 	}
+	return false;
 }
 
 bool Model::Engineer::deleteEngineer() {
@@ -320,8 +323,8 @@ bool Model::Engineer::deleteEngineer() {
 		waitMenu();
 		return false;
 	}
-}
-
+} 
+ 
 void Model::Engineer::action() noexcept {
 
 	/*auto check{ true };
