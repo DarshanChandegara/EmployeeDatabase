@@ -42,3 +42,34 @@ id,Dname,manager_id,description;
 id,Dname,manager_id,description;
 1,DC,501,related;
 2,QA,501,testing;
+
+28/3/2024 :: 11:18:59
+
+id,Dname,manager_id,description;
+1,DC,120,jdvsdvac;
+2,WebDev,121,This is webDev team;
+3,sddf,1,;
+5,QA,120,This is team for testing;
+6,3D,1,asdas;
+7,Finance,120,managing money ;
+
+28/3/2024 :: 18:6:35
+
+id,Dname,manager_id,description;
+1,DC,501,related;
+2,QA,501,testing;
+3,Quality Assurance,501,Team for Teasting;
+
+28/3/2024 :: 18:13:25
+
+id,Dname,manager_id,description;
+1,DC,501,related;
+2,QA,501,testing;
+3,Quality Assurance,501,Team for Teasting;
+
+28/3/2024 :: 18:14:26
+
+id,Dname,manager_id,description;
+1,DC,501,related;
+2,QA,501,testing;
+3,Quality Assurance,501,Team for Teasting;

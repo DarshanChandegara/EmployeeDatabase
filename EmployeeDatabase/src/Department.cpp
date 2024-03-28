@@ -1,16 +1,26 @@
 #include "../include/Model/Department.h"
 
-void Model::Department::userInput() {
+bool Model::Department::userInputDepartment() {
 	try {
 		system("cls");
-		setId(std::stoi(input("Enter Department ID: ", idRegex)));
-		setName();
-		setManagerId(std::stoi(input("Enter Department Manager ID: ", idRegex)));
-		setDescription();
+		std::string msg = " Enter # to leave the field Empty: \n"; 
+		if (auto tmp = input("Enter Department ID: ", idRegex); tmp.has_value()) setId(std::stoi(tmp.value()));
+		else return false;
+
+		if (auto tmp = input("Enter Department Name OR " + msg, allRegex); tmp.has_value()) setName(tmp.value());  
+		else return false;
+		
+		if (auto tmp = input("Enter Department Manager ID: ", idRegex); tmp.has_value()) setManagerId(std::stoi(tmp.value())); 
+		else return false; 
+
+		if (auto tmp = input("Enter Department Name OR " + msg, allRegex); tmp.has_value()) setDescription(tmp.value()); 
+		else return false;
+		return true;
 	}
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
 		waitMenu();
+		return false;
 	}
 }
 
@@ -26,7 +36,7 @@ bool Model::Department::viewDepartment() {
 		std::cout << "3. manager_id\n";
 		std::cout << "4. ALL\n\n";
 		int i;
-		i = std::stoi(input("Enter Your Choice : ", std::regex{ "[0-4]" }));
+		i = std::stoi(input("Enter Your Choice : ", std::regex{ "[0-4]" }).value_or("0"));
 
 		std::cout << "\n\n";
 		std::string tmp;
@@ -84,11 +94,18 @@ bool Model::Department::insertDepartment() {
 		system("cls");
 		std::cout << "If you want to go back press 0 Otherwise press 1\n";
 		int i;
-		if (i = std::stoi(input("", std::regex{ "^[0-1]$" }));  i == 0) {
+		if (i = std::stoi(input("", std::regex{ "^[0-1]$" }).value_or("0"));  i == 0) {
 			return true;
 		}
 
-		userInput(); 
+		auto flag{ userInputDepartment() };
+
+		if (!flag) {
+			std::cout << "\x1b[33mInsertion Failed!!! \x1b[0m\n";
+			waitMenu();
+			return false;
+		}
+
 		std::string query = "INSERT INTO Department "
 			"(id, Dname, manager_id, description) "
 			"VALUES (" + std::to_string(Did) + ", '" + Dname + "'," + std::to_string(manager_id) + ", '" + description + "');";
@@ -120,7 +137,7 @@ bool Model::Department::updateDepartment() {
 	try {
 		system("cls");
 		std::string query = "update Department set ";
-		setId(std::stoi(input("Enter the Did to update Department : " , idRegex)));  
+		setId(std::stoi(input("Enter the Did to update Department : " , idRegex).value()));  
 
 		std::string select = "select * from Department where id = " + std::to_string(getId()) + " ;";
 		DB::Database::getInstance().selectQuery(select.c_str());
@@ -143,25 +160,40 @@ bool Model::Department::updateDepartment() {
 				std::cout << "2. manager id\n";
 				std::cout << "3. description\n";
 				std::cout << "4. toUpdateDatabase\n\n";
-				i = std::stoi(input("Enter Your Choice : ", std::regex{ "[0-4]" }));
+				i = std::stoi(input("Enter Your Choice : ", std::regex{ "[0-4]" }).value_or("0")); 
 				switch (i) {
 				case 0:
 					return true;
 
 				case 1:
-					setName(); 
+					if (auto tmp = input("Enter Department Name: ", allRegex); tmp.has_value()) setName(tmp.value()); 
+					else {
+						std::cout << "\x1b[33m Updation Failed!!! \x1b[0m\n"; 
+						waitMenu(); 
+						return false;
+					}
 					mp.erase("Dname");
 					mp.insert({ "Dname" , Dname });
 					break;
 
 				case 2:
-					setManagerId(std::stoi(input("Enter Manager ID Id: ", idRegex))); 
+					if (auto tmp = input("Enter Department Manager ID: ", idRegex); tmp.has_value()) setManagerId(std::stoi(tmp.value())); 
+					else {
+						std::cout << "\x1b[33m Updation Failed!!! \x1b[0m\n"; 
+						waitMenu();
+						return false;
+					}
 					mp.erase("manager_id");
 					mp.insert({ "manager_id" , std::to_string(manager_id) });
 					break;
 
 				case 3:
-					setDescription(); 
+					if (auto tmp = input("Enter Department Name:  ", allRegex); tmp.has_value()) setDescription(tmp.value());
+					else {
+						std::cout << "\x1b[33m Updation Failed!!! \x1b[0m\n"; 
+						waitMenu(); 
+						return false; 
+					}
 					mp.erase("description");
 					mp.insert({ "description" , description});
 					break;
@@ -210,6 +242,7 @@ bool Model::Department::updateDepartment() {
 	}
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
+		std::cout << "\x1b[33m Updation Failed!!! \x1b[0m\n";  
 		waitMenu();
 		return false;
 	}
@@ -225,7 +258,7 @@ bool Model::Department::deleteDepartment() {
 		std::cout << "1. Did\n";
 		std::cout << "2. Dname\n";
 		int i;
-		i = std::stoi(input("Enter Your Choice : ", std::regex{ "[0-2]" }));
+		i = std::stoi(input("Enter Your Choice : ", std::regex{ "[0-2]" }).value_or("0")); 
 		std::cout << "\n";
 		std::string tmp;
 		while (1) {
@@ -234,13 +267,23 @@ bool Model::Department::deleteDepartment() {
 				return true;
 
 			case 1:
-				setId(std::stoi(input("Enter Did: ",idRegex))); 
-				query += "id = " + std::to_string(getId()) + ";";
+				if (auto tmp = input("Enter Department ID: ", idRegex); tmp.has_value()) setId(std::stoi(tmp.value()));
+				else {
+					std::cout << "\x1b[33m Deletion Failed!!! \x1b[0m\n";
+					waitMenu(); 
+					return false;
+				}
+				query += "id = " + std::to_string(getId()) + ";"; 
 				//std::cout << query;  
 
 				break;
 			case 2: 
-				setName(); 
+				if (auto tmp = input("Enter Department Name: ", allRegex); tmp.has_value()) setName(tmp.value());  
+				else {
+					std::cout << "\x1b[33m Deletion Failed!!! \x1b[0m\n"; 
+					waitMenu(); 
+					return false;
+				}
 				query += "Dname = '" + getName() + "';";
 				//std::cout << query;
 				break;
@@ -278,6 +321,7 @@ bool Model::Department::deleteDepartment() {
 	}
 	catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
+		std::cout << "\x1b[33m Deletion Failed!!! \x1b[0m\n";
 		waitMenu();
 		return false;
 	}
@@ -323,3 +367,4 @@ void Model::Department::action() noexcept {
 		}
 	}*/
 }
+ 

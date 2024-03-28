@@ -5,12 +5,18 @@
 #include<filesystem>
 #include<string>
 #include<regex>
+#include<optional>
 
 namespace utility { 
 
-	inline std::string input(const std::string prompt, const std::regex& r, bool flag=false) { 
+	inline std::optional<std::string> input(const std::string prompt, const std::regex& r, bool flag=false) {
 		std::string input; 
+
+		auto cnt{ 0 };
+		
 		while (true) {  
+
+			if (cnt == 3) break;
 			std::cout << prompt; 
 			std::getline(std::cin, input); 
 
@@ -18,12 +24,13 @@ namespace utility {
 			else if (input == "#" && flag == true) return "0"; 
 			if (!std::regex_match(input, r)) { 
 				std::cout << "\x1b[38;5;208mEnter valid input\x1b[0m\n";
+				cnt++;
 			}
 			else { 
-				break;
+				return input;
 			}
 		}
-		return input;
+		return std::nullopt;
 	}
 
 	inline  std::string fun() {
