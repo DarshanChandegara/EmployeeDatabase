@@ -5,10 +5,15 @@
 #include "include/LOG/log.h"
 #include "include/LOG/logger.h"
 #include "include/Model/Table.h"
+#include "include/Model/Employee.h"
+#include "include/Model/Engineer.h"
+#include "include/Model/Manager.h"
+#include "include/controllers/salaryController.h"
 
 using namespace utility;
 
 void menu();
+void tableAction();
 
 int main() {
 	logging::default_logger()->setFileFlag(true);   
@@ -54,7 +59,7 @@ int main() {
 			break;
 
 		case 5:
-			t.action();
+			tableAction();
 			break;
 		
 		case 6:

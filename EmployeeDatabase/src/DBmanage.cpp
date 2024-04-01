@@ -4,6 +4,8 @@ int DB::Database::row = 0;
 
 bool DB::Database::open(const char* str) {
 	rc = sqlite3_open(str, &db);
+	const char* pragmaQuery = { "PRAGMA foreign_keys = ON;" };  
+	executeQuery(pragmaQuery); 
 
 	if (rc) {
 		logging::default_logger()->log(logging::Log::Level::LevelError, sqlite3_errmsg(db));   
@@ -131,15 +133,12 @@ bool DB::Database::createDefaultTables() {
 		//std::cout << "Table created successfully" << std::endl;
 	}
 
-	const char* pragmaQuery = { "PRAGMA foreign_keys = ON;" };
-	executeQuery(pragmaQuery);
-
 	return true;
 }
 
-int DB::Database::executeQuery(const char* sql, float count)
+int DB::Database::executeQuery(const char* sql, float count)  
 {
-	rc = sqlite3_exec(db, sql, callbackOther, &count, &errorMsg);
+	rc = sqlite3_exec(db, sql, callbackForChecking, &count, &errorMsg); 
 
 	if (rc == 19) {
 		//std::cerr << "You can not perform this operation on this record because this violates the rule of reference key constraints\n"; 
@@ -173,6 +172,27 @@ bool DB::Database::selectQuery(const char* sql)
 	if (rc != SQLITE_OK)
 	{
 		std::cerr << "\x1b[31mSQL error: " << errorMsg <<"\x1b[0m" << std::endl;
+		std::cout << "Press Enter to continue\n";
+		std::cin.get();
+		sqlite3_free(errorMsg);
+		return false;
+	}
+	else
+	{
+		//std::cout << "Query executed successfully" << std::endl;
+		std::cout << Database::row << " row returned\n\n";
+		return true;
+	}
+}
+
+bool DB::Database::selectQueryForChecking(const char* sql)
+{
+	Database::row = 0;
+	rc = sqlite3_exec(db, sql, callbackForChecking, 0, &errorMsg); 
+
+	if (rc != SQLITE_OK)
+	{
+		std::cerr << "\x1b[31mSQL error: " << errorMsg << "\x1b[0m" << std::endl;
 		std::cout << "Press Enter to continue\n";
 		std::cin.get();
 		sqlite3_free(errorMsg);
@@ -222,9 +242,8 @@ int DB::Database::callback(void* data, int args, char** row, char** col) {
 	return 0;
 }
 
-int DB::Database::callbackOther(void* data, int argc, char** argv, char** azColName) {
-	int* count = reinterpret_cast<int*>(data);
-	*count = atoi(argv[0]);
+int DB::Database::callbackForChecking(void* data, int argc, char** argv, char** azColName) {
+	Database::row++;
 	return 0;
 }
 

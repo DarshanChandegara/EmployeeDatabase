@@ -365,3 +365,10 @@ FodyWeavers.xsd
 /EmployeeDatabase/include/LOG/log.h
 /EmployeeDatabase/include/LOG/log.h
 /EmployeeDatabase/default.txt
+/EmployeeDatabase/BackUp/darshan.csv
+/EmployeeDatabase/BackUp/demo.csv
+/EmployeeDatabase/BackUp/Department.csv
+/EmployeeDatabase/BackUp/Employee.csv
+/EmployeeDatabase/BackUp/Engineer.csv
+/EmployeeDatabase/BackUp/Manager.csv
+/EmployeeDatabase/BackUp/Salary.csv

@@ -32,6 +32,8 @@ namespace Model {
             address(address), gender(gender), doj(doj),
             manager_id(manager_id), department_id(department_id), s{ s1 } {}
 
+        virtual ~Employee() = default;
+
         int getId() const { return Eid; }
         std::string getFirstname() const { return firstname; }
         std::string getLastname() const { return lastname; }
@@ -57,13 +59,13 @@ namespace Model {
         void setDepartmentId(const int& id) { department_id = id; }
 
 
-        bool viewEmployee();
-        bool insertEmployee();
-        bool deleteEmployee();
-        bool updateEmployee();
-        bool userInputEmployee();
-        void action() noexcept;
+        bool viewEmployee() const;
+        bool insertEmployee() const;
+        bool deleteEmployee() const;
+        bool updateEmployee() const;
+        static std::optional<Employee> getEmployee(const std::string&);
 
+        Model::Salary s{};
     private:
         int Eid{};
         std::string firstname{};
@@ -76,7 +78,6 @@ namespace Model {
         std::string doj{};
         int manager_id{};
         int department_id{};
-        Model::Salary s{};
     };
 }
 

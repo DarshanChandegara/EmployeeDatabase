@@ -159,7 +159,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\Table.cpp" />
+    <ClCompile Include="src\controllers\departmentController.cpp" />
+    <ClCompile Include="src\controllers\employeeController.cpp" />
+    <ClCompile Include="src\controllers\engineerController.cpp" />
+    <ClCompile Include="src\controllers\managerController.cpp" />
+    <ClCompile Include="src\controllers\salaryController.cpp" />
+    <ClCompile Include="src\Model\Table.cpp" />
+    <ClInclude Include="include\controllers\departmentController.h" />
+    <ClInclude Include="include\controllers\employeeController.h" />
+    <ClInclude Include="include\controllers\engineerController.h" />
+    <ClInclude Include="include\controllers\managerController.h" />
+    <ClInclude Include="include\controllers\salaryController.h" />
     <ClInclude Include="include\Helper.h" />
     <ClInclude Include="include\LOG\fileHelper.h" />
     <ClInclude Include="include\LOG\log.h" />
@@ -172,12 +182,12 @@
     <ClCompile Include="sqlite\sqlite3.c" />
     <ClCompile Include="src\action.cpp" />
     <ClCompile Include="src\DBmanage.cpp" />
-    <ClCompile Include="src\Department.cpp" />
-    <ClCompile Include="src\Employee.cpp" />
-    <ClCompile Include="src\Engineer.cpp" />
-    <ClCompile Include="src\Manager.cpp" />
+    <ClCompile Include="src\Model\Department.cpp" />
+    <ClCompile Include="src\Model\Employee.cpp" />
+    <ClCompile Include="src\Model\Engineer.cpp" />
+    <ClCompile Include="src\Model\Manager.cpp" />
     <ClCompile Include="src\menu.cpp" />
-    <ClCompile Include="src\Salary.cpp" />
+    <ClCompile Include="src\Model\Salary.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\DBmanage.h" />
@@ -190,13 +200,18 @@
     <ClInclude Include="sqlite\sqlite3ext.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="BackUp\darsh.csv" />
     <None Include="BackUp\darshan.csv" />
+    <None Include="BackUp\deep.csv" />
     <None Include="BackUp\demo.csv" />
     <None Include="BackUp\Department.csv" />
+    <None Include="BackUp\dscvs.csv" />
     <None Include="BackUp\Employee.csv" />
     <None Include="BackUp\Engineer.csv" />
     <None Include="BackUp\Manager.csv" />
+    <None Include="BackUp\new.csv" />
     <None Include="BackUp\Salary.csv" />
+    <None Include="BackUp\this.csv" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

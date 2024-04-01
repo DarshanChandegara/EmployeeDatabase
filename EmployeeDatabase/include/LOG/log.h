@@ -64,7 +64,7 @@ namespace logging {
 		std::string l_name;
 		Level m_LogLevel;
 		bool isDumpOnFile = false;
-		std::string fName{"default.txt"};
+		std::string fName{"include/LOG/logs.txt"};
 		mutable std::string buffer{ "" };
 
 		

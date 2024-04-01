@@ -35,6 +35,7 @@ namespace DB {
 		bool close();
 		int executeQuery(const char* sql, float count = 0);
 		bool selectQuery(const char* sql);
+		bool selectQueryForChecking(const char* sql);
 
 		static Database& getInstance() {
 			static Database db;
@@ -43,7 +44,7 @@ namespace DB {
 
 		
 		static int callback(void* data, int args, char** row, char** col);
-		static int callbackOther(void* data, int args, char** row, char** col);
+		static int callbackForChecking(void* data, int args, char** row, char** col);
 	};
 }
 

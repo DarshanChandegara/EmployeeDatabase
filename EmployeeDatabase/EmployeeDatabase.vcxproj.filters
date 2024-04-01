@@ -24,19 +24,19 @@
     <ClCompile Include="sqlite\sqlite3.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Department.cpp">
+    <ClCompile Include="src\Model\Department.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Engineer.cpp">
+    <ClCompile Include="src\Model\Engineer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Manager.cpp">
+    <ClCompile Include="src\Model\Manager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Salary.cpp">
+    <ClCompile Include="src\Model\Salary.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Employee.cpp">
+    <ClCompile Include="src\Model\Employee.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\menu.cpp">
@@ -48,7 +48,22 @@
     <ClCompile Include="src\DBmanage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Table.cpp">
+    <ClCompile Include="src\Model\Table.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\controllers\departmentController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\controllers\employeeController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\controllers\engineerController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\controllers\managerController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\controllers\salaryController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -98,6 +113,21 @@
     <ClInclude Include="include\Model\Table.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\controllers\departmentController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\controllers\employeeController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\controllers\engineerController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\controllers\managerController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\controllers\salaryController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -108,5 +138,10 @@
     <None Include="BackUp\Manager.csv" />
     <None Include="BackUp\Salary.csv" />
     <None Include="BackUp\darshan.csv" />
+    <None Include="BackUp\darsh.csv" />
+    <None Include="BackUp\deep.csv" />
+    <None Include="BackUp\dscvs.csv" />
+    <None Include="BackUp\new.csv" />
+    <None Include="BackUp\this.csv" />
   </ItemGroup>
 </Project>
