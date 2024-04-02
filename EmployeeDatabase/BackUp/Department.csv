@@ -1,0 +1,105 @@
+
+27/3/2024 :: 12:57:27
+
+id,Dname,manager_id,description;
+1,DC,501,;
+
+27/3/2024 :: 12:59:3
+
+id,Dname,manager_id,description;
+1,DC,501,;
+
+27/3/2024 :: 13:0:5
+
+id,Dname,manager_id,description;
+1,DC,501,;
+
+27/3/2024 :: 15:10:35
+
+id,Dname,manager_id,description;
+1,DC,501,;
+
+27/3/2024 :: 16:43:25
+
+id,Dname,manager_id,description;
+1,DC,501,related;
+2,QA,501,testing;
+
+27/3/2024 :: 16:47:11
+
+id,Dname,manager_id,description;
+1,DC,501,related;
+2,QA,501,testing;
+
+27/3/2024 :: 16:48:38
+
+id,Dname,manager_id,description;
+1,DC,501,related;
+2,QA,501,testing;
+
+27/3/2024 :: 16:48:48
+
+id,Dname,manager_id,description;
+1,DC,501,related;
+2,QA,501,testing;
+
+28/3/2024 :: 11:18:59
+
+id,Dname,manager_id,description;
+1,DC,120,jdvsdvac;
+2,WebDev,121,This is webDev team;
+3,sddf,1,;
+5,QA,120,This is team for testing;
+6,3D,1,asdas;
+7,Finance,120,managing money ;
+
+28/3/2024 :: 18:6:35
+
+id,Dname,manager_id,description;
+1,DC,501,related;
+2,QA,501,testing;
+3,Quality Assurance,501,Team for Teasting;
+
+28/3/2024 :: 18:13:25
+
+id,Dname,manager_id,description;
+1,DC,501,related;
+2,QA,501,testing;
+3,Quality Assurance,501,Team for Teasting;
+
+28/3/2024 :: 18:14:26
+
+id,Dname,manager_id,description;
+1,DC,501,related;
+2,QA,501,testing;
+3,Quality Assurance,501,Team for Teasting;
+
+1/4/2024 :: 15:28:15
+
+id,Dname,manager_id,description;
+1,DC,501,related;
+2,QA,501,testing;
+
+1/4/2024 :: 15:29:1
+
+id,Dname,manager_id,description;
+1,DC,501,related;
+2,QA,501,testing;
+
+1/4/2024 :: 19:26:9
+
+id,Dname,manager_id,description;
+1,DC,501,related;
+2,nothing,501,sfsfdg gdf gfd ;
+
+1/4/2024 :: 22:18:16
+
+id,Dname,manager_id,description;
+1,DC,501,related;
+2,nothing,502,sfsfdg gdf gfd ;
+
+1/4/2024 :: 22:19:0
+
+id,Dname,manager_id,description;
+1,DC,501,related;
+2,nothing,502,sfsfdg gdf gfd ;
