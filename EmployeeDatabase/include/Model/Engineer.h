@@ -25,6 +25,10 @@ namespace Model {
         void setProgramming_language(const std::string_view& lang) { programming_language = lang; }
         void setSpecialization(const std::string_view& specs) { specialization = specs; }
 
+        bool viewEngineerById(const std::string&, const std::string&) const;
+        bool viewEngineerByDepartmentName(const std::string&) const;
+        bool viewAllEngineer() const;
+        bool viewEngineerByStringField(const std::string&, const std::string&)const;
         bool viewEngineer() const;
         bool insertEngineer() const;
         bool deleteEngineer() const;

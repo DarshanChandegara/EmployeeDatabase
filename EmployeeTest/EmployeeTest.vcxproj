@@ -47,7 +47,7 @@
   <ItemDefinitionGroup />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -60,12 +60,12 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>C:\Users\ZTI\OneDrive - ZURU INC\C++\EmployeeDatabase\bin-int\x64\Debug</AdditionalLibraryDirectories>
-      <AdditionalDependencies>$(SolutionDir)bin-int\x64\Debug\Employee;$(SolutionDir)bin-int\x64\Debug\Engineer;$(SolutionDir)bin-int\x64\Debug\Manager;$(SolutionDir)bin-int\x64\Debug\Salary;$(SolutionDir)bin-int\x64\Debug\Department;$(SolutionDir)bin-int\x64\Debug\DBmanage;$(SolutionDir)bin-int\x64\Debug\sqlite3;$(SolutionDir)bin-int\x64\Debug\departmentController;$(SolutionDir)bin-int\x64\Debug\employeeController;$(SolutionDir)bin-int\x64\Debug\engineerController;$(SolutionDir)bin-int\x64\Debug\managerController;$(SolutionDir)bin-int\x64\Debug\salaryController;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)bin-int\x64\Debug\Employee;$(SolutionDir)bin-int\x64\Debug\Engineer;$(SolutionDir)bin-int\x64\Debug\Manager;$(SolutionDir)bin-int\x64\Debug\Salary;$(SolutionDir)bin-int\x64\Debug\Department;$(SolutionDir)bin-int\x64\Debug\DBmanage;$(SolutionDir)bin-int\x64\Debug\sqlite3;$(SolutionDir)bin-int\x64\Debug\Table;$(SolutionDir)bin-int\x64\Debug\departmentController;$(SolutionDir)bin-int\x64\Debug\employeeController;$(SolutionDir)bin-int\x64\Debug\engineerController;$(SolutionDir)bin-int\x64\Debug\managerController;$(SolutionDir)bin-int\x64\Debug\salaryController;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>X64;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -78,12 +78,12 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>C:\Users\ZTI\OneDrive - ZURU INC\C++\EmployeeDatabase\bin-int\x64\Debug</AdditionalLibraryDirectories>
-      <AdditionalDependencies>$(SolutionDir)bin-int\x64\Debug\Employee;$(SolutionDir)bin-int\x64\Debug\Engineer;$(SolutionDir)bin-int\x64\Debug\Manager;$(SolutionDir)bin-int\x64\Debug\Salary;$(SolutionDir)bin-int\x64\Debug\Department;$(SolutionDir)bin-int\x64\Debug\DBmanage;$(SolutionDir)bin-int\x64\Debug\sqlite3;$(SolutionDir)bin-int\x64\Debug\departmentController;$(SolutionDir)bin-int\x64\Debug\employeeController;$(SolutionDir)bin-int\x64\Debug\engineerController;$(SolutionDir)bin-int\x64\Debug\managerController;$(SolutionDir)bin-int\x64\Debug\salaryController;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)bin-int\x64\Debug\Employee;$(SolutionDir)bin-int\x64\Debug\Engineer;$(SolutionDir)bin-int\x64\Debug\Manager;$(SolutionDir)bin-int\x64\Debug\Salary;$(SolutionDir)bin-int\x64\Debug\Department;$(SolutionDir)bin-int\x64\Debug\DBmanage;$(SolutionDir)bin-int\x64\Debug\sqlite3;$(SolutionDir)bin-int\x64\Debug\Table;$(SolutionDir)bin-int\x64\Debug\departmentController;$(SolutionDir)bin-int\x64\Debug\employeeController;$(SolutionDir)bin-int\x64\Debug\engineerController;$(SolutionDir)bin-int\x64\Debug\managerController;$(SolutionDir)bin-int\x64\Debug\salaryController;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
@@ -97,12 +97,12 @@
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <AdditionalLibraryDirectories>C:\Users\ZTI\OneDrive - ZURU INC\C++\EmployeeDatabase\bin-int\x64\Debug</AdditionalLibraryDirectories>
-      <AdditionalDependencies>$(SolutionDir)bin-int\x64\Debug\Employee;$(SolutionDir)bin-int\x64\Debug\Engineer;$(SolutionDir)bin-int\x64\Debug\Manager;$(SolutionDir)bin-int\x64\Debug\Salary;$(SolutionDir)bin-int\x64\Debug\Department;$(SolutionDir)bin-int\x64\Debug\DBmanage;$(SolutionDir)bin-int\x64\Debug\sqlite3;$(SolutionDir)bin-int\x64\Debug\departmentController;$(SolutionDir)bin-int\x64\Debug\employeeController;$(SolutionDir)bin-int\x64\Debug\engineerController;$(SolutionDir)bin-int\x64\Debug\managerController;$(SolutionDir)bin-int\x64\Debug\salaryController;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)bin-int\x64\Debug\Employee;$(SolutionDir)bin-int\x64\Debug\Engineer;$(SolutionDir)bin-int\x64\Debug\Manager;$(SolutionDir)bin-int\x64\Debug\Salary;$(SolutionDir)bin-int\x64\Debug\Department;$(SolutionDir)bin-int\x64\Debug\DBmanage;$(SolutionDir)bin-int\x64\Debug\sqlite3;$(SolutionDir)bin-int\x64\Debug\Table;$(SolutionDir)bin-int\x64\Debug\departmentController;$(SolutionDir)bin-int\x64\Debug\employeeController;$(SolutionDir)bin-int\x64\Debug\engineerController;$(SolutionDir)bin-int\x64\Debug\managerController;$(SolutionDir)bin-int\x64\Debug\salaryController;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <PreprocessorDefinitions>X64;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
@@ -116,7 +116,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <AdditionalLibraryDirectories>C:\Users\ZTI\OneDrive - ZURU INC\C++\EmployeeDatabase\bin-int\x64\Debug</AdditionalLibraryDirectories>
-      <AdditionalDependencies>$(SolutionDir)bin-int\x64\Debug\Employee;$(SolutionDir)bin-int\x64\Debug\Engineer;$(SolutionDir)bin-int\x64\Debug\Manager;$(SolutionDir)bin-int\x64\Debug\Salary;$(SolutionDir)bin-int\x64\Debug\Department;$(SolutionDir)bin-int\x64\Debug\DBmanage;$(SolutionDir)bin-int\x64\Debug\sqlite3;$(SolutionDir)bin-int\x64\Debug\departmentController;$(SolutionDir)bin-int\x64\Debug\employeeController;$(SolutionDir)bin-int\x64\Debug\engineerController;$(SolutionDir)bin-int\x64\Debug\managerController;$(SolutionDir)bin-int\x64\Debug\salaryController;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)bin-int\x64\Debug\Employee;$(SolutionDir)bin-int\x64\Debug\Engineer;$(SolutionDir)bin-int\x64\Debug\Manager;$(SolutionDir)bin-int\x64\Debug\Salary;$(SolutionDir)bin-int\x64\Debug\Department;$(SolutionDir)bin-int\x64\Debug\DBmanage;$(SolutionDir)bin-int\x64\Debug\sqlite3;$(SolutionDir)bin-int\x64\Debug\Table;$(SolutionDir)bin-int\x64\Debug\departmentController;$(SolutionDir)bin-int\x64\Debug\employeeController;$(SolutionDir)bin-int\x64\Debug\engineerController;$(SolutionDir)bin-int\x64\Debug\managerController;$(SolutionDir)bin-int\x64\Debug\salaryController;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -124,10 +124,18 @@
     <ClInclude Include="Fixtures\EmployeeFixture.h" />
     <ClInclude Include="Fixtures\ManagerFixture.h" />
     <ClInclude Include="Fixtures\SalaryFixture.h" />
+    <ClInclude Include="Fixtures\TableFixture.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Fixtures\EngineerFixture.h" />
+    <ClCompile Include="src\Department.cpp" />
+    <ClCompile Include="src\Employee.cpp" />
+    <ClCompile Include="src\Engineer.cpp" />
+    <ClCompile Include="src\Manager.cpp" />
+    <ClCompile Include="src\Salary.cpp" />
+    <ClCompile Include="src\Table.cpp" />
+    <ClCompile Include="src\Validator.cpp" />
     <ClCompile Include="test.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -142,6 +150,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="BackUp\Department.csv" />
+    <None Include="BackUp\emp.csv" />
+    <None Include="BackUp\Employee.csv" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

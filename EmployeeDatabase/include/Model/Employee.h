@@ -63,6 +63,10 @@ namespace Model {
         bool insertEmployee() const;
         bool deleteEmployee() const;
         bool updateEmployee() const;
+        bool viewEmployeeById( const std::string& ,const std::string&) const;
+        bool viewEmployeByDepartmentName(const std::string&) const ;
+        bool viewAllEmployee() const;
+        bool viewEmloyeeByStringField(const std::string&, const std::string&)const;
         static std::optional<Employee> getEmployee(const std::string&);
 
         Model::Salary s{};

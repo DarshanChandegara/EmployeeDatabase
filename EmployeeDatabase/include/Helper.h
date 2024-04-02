@@ -9,6 +9,10 @@
 
 namespace utility { 
 
+	inline bool validate(const std::string& value, const std::regex& r) {
+		return regex_match(value , r);
+	}
+
 	inline std::optional<std::string> input(const std::string prompt, const std::regex& r, bool flag=false) {
 		std::string input; 
 
@@ -22,7 +26,7 @@ namespace utility {
 
 			if (input == "#" && flag == false) return ""; 
 			else if (input == "#" && flag == true) return "0"; 
-			if (!std::regex_match(input, r)) { 
+			if (!validate(input  , r)) { 
 				std::cout << "\x1b[38;5;208mEnter valid input\x1b[0m\n";
 				cnt++;
 			}
@@ -30,6 +34,7 @@ namespace utility {
 				return input;
 			}
 		}
+		std::cout << "\x1b[31mYou have reached to maximum attempt\x1b[0m\n";
 		return std::nullopt;
 	}
 
@@ -39,10 +44,12 @@ namespace utility {
 
 	inline void waitMenu() {
 		std::cout << "Press 0 to continue....\n";
-		int i;
-		std::cin >> i;
-		std::cin.get();
+		//int i;
+		//std::cin >> i;
+		//std::cin.get();
 	}
+
+	
 }
 
 #endif

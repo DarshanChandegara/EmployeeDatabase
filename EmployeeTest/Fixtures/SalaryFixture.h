@@ -7,9 +7,10 @@ protected:
 
 	void SetUp() {
 
+		s1.setId(2);
 		s3.setId(510);
 		s2.setBaseSalary(700000);
-		s4.setBonus(100000);
+		s4.setBonus(200000);
 	}
 
 	void TearDown() {

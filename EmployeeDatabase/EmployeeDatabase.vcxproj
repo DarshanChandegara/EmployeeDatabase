@@ -212,6 +212,7 @@
     <None Include="BackUp\new.csv" />
     <None Include="BackUp\Salary.csv" />
     <None Include="BackUp\this.csv" />
+    <None Include="employee.db" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

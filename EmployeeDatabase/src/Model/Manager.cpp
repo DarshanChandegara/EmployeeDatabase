@@ -1,10 +1,80 @@
 #include "../../include/Model/Manager.h"
 #include "../../include/controllers/managerController.h"
 
+bool Model::Manager::viewManagerById(const std::string& id, const std::string& value) const {
+	try {
+		std::string query = "SELECT * FROM Employee INNER JOIN Manager ON Manager.id = Employee.Eid and " + id + " = " + value + " ;";
+
+		DB::Database::getInstance().selectQuery(query.c_str());
+		if (DB::Database::row == 0) {
+			return false;
+		}
+		waitMenu();
+		return true;
+	}
+	catch (std::exception& e) {
+		std::cout << e.what() << std::endl;
+		waitMenu();
+		return false;
+	}
+}
+
+bool Model::Manager::viewManagerByDepartmentName(const std::string& value) const {
+	try {
+		std::string query = "SELECT e.*, eng.* FROM Employee e INNER JOIN Manager eng ON e.Eid = eng.id INNER JOIN Department dept ON e.department_id = dept.id WHERE dept.Dname = '" + value + "' ;";
+
+		DB::Database::getInstance().selectQuery(query.c_str());
+		if (DB::Database::row == 0) {
+			return false;
+		}
+		waitMenu();
+		return true;
+	}
+	catch (std::exception& e) {
+		std::cout << e.what() << std::endl;
+		waitMenu();
+		return false;
+	}
+}
+
+bool Model::Manager::viewAllManager() const {
+	try {
+		std::string query = "SELECT * FROM Employee INNER JOIN Manager ON Manager.id = Employee.Eid;";
+		DB::Database::getInstance().selectQuery(query.c_str());
+		if (DB::Database::row == 0) {
+			return false;
+		}
+		waitMenu();
+		return true;
+	}
+	catch (std::exception& e) {
+		std::cout << e.what() << std::endl;
+		waitMenu();
+		return false;
+	}
+}
+
+bool Model::Manager::viewManagerByStringField(const std::string& id, const std::string& value) const {
+	try {
+		std::string query = "SELECT * FROM Employee INNER JOIN Manager ON Manager.id = Employee.Eid and " + id + " = '" + value + "' ;";
+
+		DB::Database::getInstance().selectQuery(query.c_str());
+		if (DB::Database::row == 0) {
+			return false;
+		}
+		waitMenu();
+		return true;
+	}
+	catch (std::exception& e) {
+		std::cout << e.what() << std::endl;
+		waitMenu();
+		return false;
+	}
+}
+
 bool Model::Manager::viewManager() const {
 
 	try {
-		system("cls");
 		std::string query;
 
 		auto tmp = viewManagerController(); 
@@ -12,17 +82,20 @@ bool Model::Manager::viewManager() const {
 		if (tmp.has_value()) { 
 			auto& [field, value] = tmp.value(); 
 			if (field == "Eid" || field == "manager_id") {
-
-				query += "SELECT * FROM Employee INNER JOIN Manager ON Manager.id = Employee.Eid and " + field + " = " + value + " ;";
+				viewManagerById(field , value);
+				//query += "SELECT * FROM Employee INNER JOIN Manager ON Manager.id = Employee.Eid and " + field + " = " + value + " ;";
 			}
 			else if (field == "all") {
-				query += "SELECT * FROM Employee INNER JOIN Manager ON Manager.id = Employee.Eid;";
+				viewAllManager();
+				//query += "SELECT * FROM Employee INNER JOIN Manager ON Manager.id = Employee.Eid;";
 			}
 			else if (field == "Dname") {
-				query += "SELECT e.*, eng.* FROM Employee e INNER JOIN Manager eng ON e.Eid = eng.id INNER JOIN Department dept ON e.department_id = dept.id WHERE dept.Dname = '" + value + "' ;";
+				viewManagerByDepartmentName(value);
+				//query += "SELECT e.*, eng.* FROM Employee e INNER JOIN Manager eng ON e.Eid = eng.id INNER JOIN Department dept ON e.department_id = dept.id WHERE dept.Dname = '" + value + "' ;";
 			}
 			else {
-				query += "SELECT * FROM Employee INNER JOIN Manager ON Manager.id = Employee.Eid and " + field + " = '" + value + "' ;";
+				viewManagerByStringField(field , value);
+				//query += "SELECT * FROM Employee INNER JOIN Manager ON Manager.id = Employee.Eid and " + field + " = '" + value + "' ;";
 			}
 
 			DB::Database::getInstance().selectQuery(query.c_str());
@@ -116,7 +189,6 @@ bool Model::Manager::updateManager() const {
 bool Model::Manager::deleteManager() const {
 
 	try {
-		system("cls");
 		return deleteEmployee();
 	}
 	catch (std::exception& e) {
@@ -153,6 +225,7 @@ std::optional<Model::Manager> Model::Manager::getManager(const std::string & id)
 
 	try {
 		sqlite3_exec(DB::Database::getInstance().db, selectQuery.c_str(), callback, &e, 0);
+		if (e.getId() == 0) return std::nullopt;
 	}
 	catch (...) {
 		return std::nullopt;

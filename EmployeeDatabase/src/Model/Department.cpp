@@ -1,9 +1,62 @@
 #include "../../include/Model/Department.h"
 #include "../../include/controllers/departmentController.h"
 
+bool Model::Department::viewDepartementById(const std::string& field, const std::string& value) const {
+	try {
+		std::string query = "select * from Department where " + field + " = " + value + " ;";
+
+		DB::Database::getInstance().selectQuery(query.c_str());
+		if (DB::Database::row == 0) {
+			return false;
+		}
+		waitMenu();
+		return true;
+	}
+	catch (std::exception& e) {
+		std::cout << e.what() << std::endl;
+		waitMenu();
+		return false;
+	}
+}
+
+bool Model::Department::viewDepartmentByStringField(const std::string& field, const std::string& value) const {
+	try {
+		std::string query = "select * from Department where " + field + " = '" + value + "' ;"; 
+
+		DB::Database::getInstance().selectQuery(query.c_str());
+		if (DB::Database::row == 0) {
+			return false;
+		}
+		waitMenu();
+		return true;
+	}
+	catch (std::exception& e) {
+		std::cout << e.what() << std::endl;
+		waitMenu();
+		return false;
+	}
+}
+
+bool Model::Department::viewAllDepartment() const {
+	try {
+		std::string query = "select * from Department;";
+
+		DB::Database::getInstance().selectQuery(query.c_str());
+		if (DB::Database::row == 0) {
+			return false;
+		}
+		waitMenu();
+		return true;
+	}
+	catch (std::exception& e) {
+		std::cout << e.what() << std::endl;
+		waitMenu();
+		return false;
+	}
+}
+
 bool Model::Department::viewDepartment() const  {
 	try {
-		system("cls");
 
 		std::string query;
 		auto tmp = viewDepartmentController();
@@ -11,14 +64,16 @@ bool Model::Department::viewDepartment() const  {
 		if (tmp.has_value()) {
 			auto& [field, value] = tmp.value();
 			if (field == "id" || field == "manager_id") {
-
-				query += "select * from Department where " + field + " = " + value + " ;";
+				//query += "select * from Department where " + field + " = " + value + " ;"; 
+				return viewDepartementById(field , value);  
 			}
 			else if (field == "all") {
-				query += "select * from Department ;";
+				 //query += "select * from Department;";
+				return viewAllDepartment();
 			}
 			else {
-				query += "select * from Department where " + field + " = '" + value + "' ;";
+				 //query += "select * from Department where " + field + " = '" + value + "' ;";
+				viewDepartmentByStringField(field , value); 
 			}
 
 			DB::Database::getInstance().selectQuery(query.c_str());
@@ -42,7 +97,6 @@ bool Model::Department::viewDepartment() const  {
 
 bool Model::Department::insertDepartment() const  {
 	try {
-		//system("cls");
 
 		std::string query = "INSERT INTO Department "
 			"(id, Dname, manager_id, description) "
@@ -158,6 +212,7 @@ std::optional<Model::Department> Model::Department::getDepartment(const std::str
 		std::string selectQuery = "SELECT * FROM Department WHERE id = " + id + ";";
 
 		sqlite3_exec(DB::Database::getInstance().db, selectQuery.c_str(), callback, &d, 0);
+		if (d.getId() == 0) return std::nullopt; 
 		return d;
 	}
 	catch (...) {

@@ -42,6 +42,10 @@ namespace Model {
 			return name;
 		}
 
+		void setName(const std::string& tName) {
+			name = tName;
+		}
+
 	private:
 		std::string name;
 		std::map<std::string, std::string> columnType;

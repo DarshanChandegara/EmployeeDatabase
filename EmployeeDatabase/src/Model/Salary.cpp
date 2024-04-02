@@ -1,6 +1,42 @@
 #include "../../include/Model/Salary.h"
 #include "../../include/controllers/salaryController.h"
 
+bool Model::Salary::viewSalaryById(const std::string& id) const {
+	try {
+		std::string query = "select Employee.Eid , Employee.firstname , Employee.lastname , Employee.email , Salary.amount , Salary.base_salary , Salary.bonus from Employee JOIN Salary ON Employee.Eid = Salary.Sid where Sid = " + id + " ;"; 
+
+		DB::Database::getInstance().selectQuery(query.c_str());
+		if (DB::Database::row == 0) {
+			return false;
+		}
+		waitMenu();
+		return true;
+	}
+	catch (std::exception& e) {
+		std::cout << e.what() << std::endl;
+		waitMenu();
+		return false;
+	}
+}
+
+bool Model::Salary::viewAllSalary() const {
+	try {
+		std::string query = "select Employee.Eid , Employee.firstname , Employee.lastname , Employee.email , Salary.amount , Salary.base_salary , Salary.bonus from Employee JOIN Salary ON Employee.Eid = Salary.Sid ;";
+
+		DB::Database::getInstance().selectQuery(query.c_str());
+		if (DB::Database::row == 0) {
+			return false;
+		}
+		waitMenu();
+		return true;
+	}
+	catch (std::exception& e) {
+		std::cout << e.what() << std::endl;
+		waitMenu();
+		return false;
+	}
+}
+
 double Model::Salary::increment(double percentage, int id) {
 	try {
 		double val = 0;
@@ -36,11 +72,12 @@ bool Model::Salary::viewSalary() const {
 		if (tmp.has_value()) {
 			auto& [field, value] = tmp.value();
 			if (field == "id") {
-
-				query += "select Employee.Eid , Employee.firstname , Employee.lastname , Employee.email , Salary.amount , Salary.base_salary , Salary.bonus from Employee JOIN Salary ON Employee.Eid = Salary.Sid where Sid = " + value + " ;";
+				viewSalaryById(value);
+				//query += "select Employee.Eid , Employee.firstname , Employee.lastname , Employee.email , Salary.amount , Salary.base_salary , Salary.bonus from Employee JOIN Salary ON Employee.Eid = Salary.Sid where Sid = " + value + " ;";
 			}
 			else if (field == "all") {
-				query += "select Employee.Eid , Employee.firstname , Employee.lastname , Employee.email , Salary.amount , Salary.base_salary , Salary.bonus from Employee JOIN Salary ON Employee.Eid = Salary.Sid ;";
+				viewAllSalary();
+				//query += "select Employee.Eid , Employee.firstname , Employee.lastname , Employee.email , Salary.amount , Salary.base_salary , Salary.bonus from Employee JOIN Salary ON Employee.Eid = Salary.Sid ;";
 			}
 
 			DB::Database::getInstance().selectQuery(query.c_str());
@@ -75,9 +112,8 @@ bool Model::Salary::insertSalary(int id) const {
 	}
 }
 
-bool Model::Salary::updateSalary() const {
+bool Model::Salary::updateSalary()  {
 	try {
-		system("cls");
 
 		//  for testing 
 		std::string select = "select * from Salary where Sid = " + std::to_string(getId()) + ";";
@@ -89,7 +125,7 @@ bool Model::Salary::updateSalary() const {
 			waitMenu();
 			return false;
 		}
-
+		setAmount(getBaseSalary() + getBonus());
 		std::string query = "update Salary set amount = " + std::to_string(amount) + "  , base_salary = " + std::to_string(base_salary) + " , bonus = " + std::to_string(bonus) + " where Sid = " + std::to_string(Sid) + "; ";
 		//std::cout << query << "\n";   
 
@@ -134,6 +170,7 @@ std::optional<Model::Salary> Model::Salary::getSalary(const std::string& id) {
 
 	try {
 		sqlite3_exec(DB::Database::getInstance().db, selectQuery.c_str(), callback, &s, 0);
+		if (s.getId() == 0) return std::nullopt;
 	}
 	catch (...) {
 		return std::nullopt;

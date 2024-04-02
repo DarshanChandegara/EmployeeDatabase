@@ -7,7 +7,7 @@ class EngineerFixture : public testing::Test {
 protected:
 
 	void SetUp() {
-		eng.setId(301);
+		eng.setId(2);
 		eng.setFirstname("Darshan");
 		eng.setLastname("Chandegara");
 		eng.setDob("26-08-2002");
@@ -23,12 +23,14 @@ protected:
 
 		eg4.setManagerId(10);
 		eg5.setDepartmentId(10);
-		eg6.setId(310);
+		eg6.setId(350);
+
+		eg7.insertEngineer();
 
 	}
 
 	void TearDown() {
-
+		eg7.deleteEngineer();
 	}	
 	Model::Salary sg1{ 4 , 600000.0 , 500000.0 , 100000.0 };
 	Model::Engineer eng;
@@ -38,6 +40,7 @@ protected:
 	Model::Engineer eg4 = eg1;
 	Model::Engineer eg5 = eg1;
 	Model::Engineer eg6 = eg1;
+	Model::Engineer eg7 = { 310 , "Kalpesh" , "Shukla" , "16-12-1212" , "5567894565" , "this@gmail.com" , "jsdhgfd fgsd" , Gender::Male , "01-01-2023" , 2 , 1 , sg1 , "C++", "Senior C++ Develpoer" };
 	
 
 };

@@ -1,25 +1,94 @@
 #include "../../include/Model/Employee.h"
 #include "../../include/controllers/employeeController.h"
 
+bool Model::Employee::viewEmployeeById(const std::string& id ,const std::string& value) const {
+	try {
+		std::string query = "select * from Employee where " + id + " = " + value + " ;";
+
+		DB::Database::getInstance().selectQuery(query.c_str()); 
+		if (DB::Database::row == 0) { 
+			return false;
+		}
+		waitMenu(); 
+		return true;
+	}
+	catch (std::exception& e) {
+		std::cout << e.what() << std::endl;
+		waitMenu();
+		return false;
+	}
+}
+
+bool Model::Employee::viewEmployeByDepartmentName(const std::string& value) const {
+	try {
+		std::string query = "SELECT Employee.*FROM Employee JOIN Department ON Employee.department_id = Department.id WHERE Dname = '" + value + "'; ";
+
+		DB::Database::getInstance().selectQuery(query.c_str());  
+		if (DB::Database::row == 0) { 
+			return false;
+		}
+		waitMenu();
+		return true;
+	}
+	catch (std::exception& e) {
+		std::cout << e.what() << std::endl;
+		waitMenu();
+		return false;
+	}
+}
+
+bool Model::Employee::viewAllEmployee() const {
+	try {
+		std::string query = "select * from Employee ;"; 
+		DB::Database::getInstance().selectQuery(query.c_str()); 
+		if (DB::Database::row == 0) { 
+			return false;
+		}
+		waitMenu(); 
+		return true;
+	}
+	catch (std::exception& e) { 
+		std::cout << e.what() << std::endl; 
+		waitMenu(); 
+		return false;
+	}
+}
+
+bool Model::Employee::viewEmloyeeByStringField(const std::string& id, const std::string& value) const {
+	try {
+		std::string query = "select * from Employee where " + id + " = '" + value + "' ;";
+
+		DB::Database::getInstance().selectQuery(query.c_str());
+		if (DB::Database::row == 0) {
+			return false;
+		}
+		waitMenu();
+		return true;
+	}
+	catch (std::exception& e) {
+		std::cout << e.what() << std::endl;
+		waitMenu();
+		return false;
+	}
+}
+
 bool Model::Employee::viewEmployee() const {
 	try {
-		system("cls");
 		std::string query;
 		auto tmp = viewEmployeeController();
 		if (tmp.has_value()) {
 			auto& [field, value] = tmp.value();
 			if (field == "Eid" || field == "manager_id") {
-
-				query += "select * from Employee where " + field + " = " + value + " ;";
+				viewEmployeeById(field , value); 
 			}
 			else if (field == "all") {
-				query += "select * from Employee ;";
+				viewAllEmployee();
 			}
 			else if (field == "Dname") {
-				query += "SELECT Employee.* FROM Employee JOIN Department ON Employee.department_id = Department.id WHERE Dname = '" + value + "' ;";
+				viewEmployeByDepartmentName(value); 
 			}
 			else {
-				query += "select * from Employee where " + field + " = '" + value + "' ;";
+				viewEmloyeeByStringField(field , value); 
 			}
 
 			DB::Database::getInstance().selectQuery(query.c_str());
@@ -61,7 +130,7 @@ bool Model::Employee::insertEmployee() const {
 
 		int rc = DB::Database::getInstance().executeQuery(query.c_str());
 		if (rc == 0) {
-			std::cout << "\x1b[32mEmployee inserted successfully\x1b[0m\n";
+			//std::cout << "\x1b[32mEmployee inserted successfully\x1b[0m\n";
 			logging::Info("Employee added for Id: ", std::to_string(getId()));
 			return s.insertSalary(getId());
 		}
@@ -114,7 +183,7 @@ bool Model::Employee::updateEmployee() const {
 			return false;
 		}
 		else if (rc == 0) {
-			std::cout << "\x1b[32m Employee Updated successfully\x1b[0m \n\n";
+			//std::cout << "\x1b[32m Employee Updated successfully\x1b[0m \n\n";
 			waitMenu();
 			logging::Info("Employee Updated with Id: ", std::to_string(getId()));
 			return true;
@@ -191,6 +260,8 @@ std::optional<Model::Employee> Model::Employee::getEmployee(const std::string& i
 
 	try {
 		sqlite3_exec(DB::Database::getInstance().db, selectQuery.c_str(), callback, &e, 0);
+		//std::cout << e.getId() << "\n\n\n\n\n\nTHafsfgsudgfkfumhidgiudiffiuguf\n\n\n\n\n\n";
+		if (e.getId() == 0 ) return std::nullopt;
 	}
 	catch (...) {
 		return std::nullopt;

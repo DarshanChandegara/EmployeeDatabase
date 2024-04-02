@@ -262,6 +262,13 @@ bool Model::Table::exportToCsv(const std::string_view& tableName, const std::fil
 
 	std::ofstream file{ path, std::ios::app};
 
+	auto tmp = Model::Table::getTable(std::string{ tableName }); 
+	if (!tmp.has_value()) {
+		std::cout << "\x1b[33mTable is not available !!!!\x1b[0m\n";
+		waitMenu();
+		return false;
+	}
+
 	if (!file.is_open()) {
 		std::cout << "\x1b[33mFile is unable to open!!!!\x1b[0m\n";
 		waitMenu();
@@ -413,7 +420,7 @@ bool Model::Table::updateRecord() {
 		}
 
 		std::string select = "select * from "+ name +" where id = " + id.value() + " ;"; 
-		DB::Database::getInstance().selectQuery(select.c_str()); 
+		DB::Database::getInstance().selectQueryForChecking(select.c_str());  
 		if (DB::Database::row == 0) { 
 			std::cout << "Entered Record is not in database\n\n";
 			waitMenu();

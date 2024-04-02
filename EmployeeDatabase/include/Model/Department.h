@@ -41,6 +41,9 @@ namespace Model {
 		}
 
 		static std::optional<Department> getDepartment(const std::string& id);
+		bool viewDepartementById(const std::string& , const std::string&) const;
+		bool viewDepartmentByStringField(const std::string&, const std::string&) const;
+		bool viewAllDepartment()const;
 		bool viewDepartment() const;
 		bool insertDepartment() const;
 		bool deleteDepartment() const;
