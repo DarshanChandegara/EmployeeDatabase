@@ -7,6 +7,7 @@ bool Model::Department::viewDepartementById(const std::string& field, const std:
 
 		DB::Database::getInstance().selectQuery(query.c_str());
 		if (DB::Database::row == 0) {
+			logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", "Department with Id: " + std::to_string(getId()) + " is not in database");
 			return false;
 		}
 		waitMenu();
@@ -25,6 +26,7 @@ bool Model::Department::viewDepartmentByStringField(const std::string& field, co
 
 		DB::Database::getInstance().selectQuery(query.c_str());
 		if (DB::Database::row == 0) {
+			logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", "Department with Id: " + std::to_string(getId()) + " is not in database");
 			return false;
 		}
 		waitMenu();
@@ -43,6 +45,7 @@ bool Model::Department::viewAllDepartment() const {
 
 		DB::Database::getInstance().selectQuery(query.c_str());
 		if (DB::Database::row == 0) {
+			logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", "Depertments are not in database");
 			return false;
 		}
 		waitMenu();
@@ -75,12 +78,6 @@ bool Model::Department::viewDepartment() const  {
 				 //query += "select * from Department where " + field + " = '" + value + "' ;";
 				viewDepartmentByStringField(field , value); 
 			}
-
-			DB::Database::getInstance().selectQuery(query.c_str());
-			if (DB::Database::row == 0) {
-				return false;
-			}
-			waitMenu();
 			return true;
 		}
 		else {
@@ -105,6 +102,7 @@ bool Model::Department::insertDepartment() const  {
 		int rc = DB::Database::getInstance().executeQuery(query.c_str());
 		if (rc == 19) {
 			std::cout << "\x1b[33mEntered manager is not available in particular table OR Entered department ID is already exist in table  \x1b[0m\n\n";
+			logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", "Department with Id: " + std::to_string(getId()) + " is failed to insert");
 			waitMenu();
 			return false;
 		}
@@ -144,6 +142,7 @@ bool Model::Department::updateDepartment() const  {
 
 		if (rc == 19) {
 			std::cerr << "\x1b[33m You can not assigne value because entered manager is not in database \x1b[0m\n\n";
+			logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", "Department with Id: " + std::to_string(getId()) + " is failed to update");
 			waitMenu();
 			return false;
 		}
@@ -172,6 +171,7 @@ bool Model::Department::deleteDepartment() const  {
 			int change = sqlite3_changes(DB::Database::getInstance().db);
 			if (change == 0) {
 				std::cout << "\x1b[33mSelected Department is not in database\x1b[0m\n";
+				logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", "Department with Id: " + std::to_string(getId()) + " is failed to delete");
 				waitMenu();
 				return false;
 			}
@@ -184,6 +184,7 @@ bool Model::Department::deleteDepartment() const  {
 		}
 		else if (rc == 19) {
 			std::cout << "\x1b[33mYou can not Delete this department because there is employee which are working in this department \x1b[0m \n\n";
+			logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", "Employee with Id: " + std::to_string(getId()) + " is failed to delete");
 			waitMenu();
 			return false;
 		}

@@ -70,16 +70,13 @@ bool Model::Table::createTable() {
 		}
 		
 		sql += ");";
-
-		std::cout << sql;  
-		//int rc{}; 
 		int rc = DB::Database::getInstance().executeQuery(sql.c_str());  
 		if (rc == 0) {
 			std::cout << "\n\x1b[32mTable created Suceesfully\x1b[0m\n\n";
+			logging::default_logger()->log(logging::Log::Level::LevelInfo, "[Sucess]", tableName + "created Sucessfully");
 			waitMenu(); 
 			return true;
 		}
-		//std::cout << sql << "\n\n";
 		return false;
 	}
 	catch (std::exception& e) {
@@ -122,15 +119,18 @@ bool Model::Table::deleteTable() {
 			std::cin >> tableName;
 			if (tableName == "Employee" || tableName == "Salary" || tableName == "Engineer" || tableName == "Manager" || tableName == "Department") {
 				std::cout << " \x1b[31mYou can not delete this Table\x1b[0m\n";
+				logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", tableName + "can not deletd");
+
 				waitMenu();
 				break;
 			}
 			deleteQuery = "DROP TABLE " + tableName + ";";
-			//std::cout << deleteQuery << "\n\n";
 			rc = DB::Database::getInstance().executeQuery(deleteQuery.c_str());
 
 			if (rc == 0) {
 				std::cout << "\x1b[32mTable Dropped Succesfully !\x1b[0m \n\n";
+				logging::default_logger()->log(logging::Log::Level::LevelInfo, "[Sucess]", tableName + "dropped Sucessfully");
+
 				waitMenu();
 				return true;
 			}
@@ -142,6 +142,8 @@ bool Model::Table::deleteTable() {
 			std::cin >> tableName;
 			if (tableName == "Employee" || tableName == "Salary" || tableName == "Engineer" || tableName == "Manager" || tableName == "Department") {
 				std::cout << "\x1b[31mYou can not delete this Table\x1b[0m\n";
+				logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", tableName + "can not deletd");
+
 				waitMenu();
 				break;
 			}
@@ -151,6 +153,8 @@ bool Model::Table::deleteTable() {
 			if (rc == 0) {
 
 				std::cout << "\x1b[32mTable Deleted Succesfully !\x1b[0m \n\n";
+				logging::default_logger()->log(logging::Log::Level::LevelInfo, "[Sucess]", tableName + "dropped Sucessfully");
+
 				waitMenu();
 				return true;
 			}
@@ -265,12 +269,16 @@ bool Model::Table::exportToCsv(const std::string_view& tableName, const std::fil
 	auto tmp = Model::Table::getTable(std::string{ tableName }); 
 	if (!tmp.has_value()) {
 		std::cout << "\x1b[33mTable is not available !!!!\x1b[0m\n";
+		logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", std::string{ tableName } + "is not in database");
+
 		waitMenu();
 		return false;
 	}
 
 	if (!file.is_open()) {
 		std::cout << "\x1b[33mFile is unable to open!!!!\x1b[0m\n";
+		logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", " csv file of"+ std::string{ tableName } + "is unable to open");
+
 		waitMenu();
 		return false;
 	}
@@ -279,7 +287,10 @@ bool Model::Table::exportToCsv(const std::string_view& tableName, const std::fil
 	int rc = DB::Database::getInstance().executeQuery(query.c_str());
 
 	if (rc != 0) {
-		std::cout << "\x1b[31mError msg: " << DB::Database::getInstance().errorMsg << "\x1b[0m\n";
+		std::cout << "\x1b[31mError msg: " << DB::Database::getInstance().errorMsg << "\x1b[0m\n";				
+		logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", DB::Database::getInstance().errorMsg);
+
+
 		waitMenu();
 		return false;
 	}
@@ -289,6 +300,8 @@ bool Model::Table::exportToCsv(const std::string_view& tableName, const std::fil
 	rc = sqlite3_prepare_v2(DB::Database::getInstance().db, query.c_str(), -1, &DB::Database::getInstance().stmt, nullptr);
 	if (rc != 0) {
 		std::cout << "\x1b[31mError msg: " << DB::Database::getInstance().errorMsg << "\x1b[0m\n";
+		logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", DB::Database::getInstance().errorMsg);
+
 		waitMenu();
 		return false;
 	}
@@ -386,6 +399,7 @@ bool Model::Table::insertRecord() {
 		}
 		else if (rc == 19) {
 			std::cout << "\x1b[33mEntered Data is not available in particular table Or entered Record is already exist \x1b[0m\n\n";
+			logging::Error("[Failure]", "Entered Data is not available in particular table Or entered Record is already exist in " + getname());
 			waitMenu(); 
 			return false;
 		}
@@ -477,7 +491,6 @@ bool Model::Table::updateRecord() {
 				query += " where id = " + id.value() + ";";
 			}
 
-			//std::cout << query;
 
 			int rc = DB::Database::getInstance().executeQuery(query.c_str());
 
@@ -544,6 +557,7 @@ bool Model::Table::deleteRecord() const{
 			}
 			else if (rc == 19) {
 				std::cout << "\x1b[33m You can not delete Record because Some other records are dependent on it \x1b[0m\n\n"; 
+				logging::Error("[Failure]", "Deletion fail in " + name + "with id " + id.value_or(""));
 				waitMenu(); 
 				return false;
 			}

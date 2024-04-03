@@ -7,6 +7,7 @@ bool Model::Employee::viewEmployeeById(const std::string& id ,const std::string&
 
 		DB::Database::getInstance().selectQuery(query.c_str()); 
 		if (DB::Database::row == 0) { 
+			logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", "Employee with Id: " + std::to_string(getId()) + " is not in database");
 			return false;
 		}
 		waitMenu(); 
@@ -25,6 +26,7 @@ bool Model::Employee::viewEmployeByDepartmentName(const std::string& value) cons
 
 		DB::Database::getInstance().selectQuery(query.c_str());  
 		if (DB::Database::row == 0) { 
+			logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", "Employee with Id: " + std::to_string(getId()) + " is not in database");
 			return false;
 		}
 		waitMenu();
@@ -42,6 +44,7 @@ bool Model::Employee::viewAllEmployee() const {
 		std::string query = "select * from Employee ;"; 
 		DB::Database::getInstance().selectQuery(query.c_str()); 
 		if (DB::Database::row == 0) { 
+			logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", "Employees are not in database");
 			return false;
 		}
 		waitMenu(); 
@@ -60,6 +63,7 @@ bool Model::Employee::viewEmloyeeByStringField(const std::string& id, const std:
 
 		DB::Database::getInstance().selectQuery(query.c_str());
 		if (DB::Database::row == 0) {
+			logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", "Employee with Id: " + std::to_string(getId()) + " is not in database");
 			return false;
 		}
 		waitMenu();
@@ -90,12 +94,6 @@ bool Model::Employee::viewEmployee() const {
 			else {
 				viewEmloyeeByStringField(field , value); 
 			}
-
-			DB::Database::getInstance().selectQuery(query.c_str());
-			if (DB::Database::row == 0) {
-				return false;
-			}
-			waitMenu();
 			return true;
 		}
 		else {
@@ -136,6 +134,7 @@ bool Model::Employee::insertEmployee() const {
 		}
 		else if (rc == 19) {
 			std::cout << "\x1b[33mEntered manager or department is not available in particular table Or entered employee is already exist \x1b[0m\n\n";
+			logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", "Employee with Id: " + std::to_string(getId()) + " is failed to insert");
 			waitMenu();
 			return false;
 		}
@@ -179,6 +178,7 @@ bool Model::Employee::updateEmployee() const {
 
 		if (rc == 19) {
 			std::cerr << "\x1b[33m You can not assigne value because entered manager or department is not in database OR entered employee is already in database \x1b[0m\n\n";
+			logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", "Employee with Id: " + std::to_string(getId()) + " is failed to update");
 			waitMenu();
 			return false;
 		}
@@ -209,6 +209,7 @@ bool Model::Employee::deleteEmployee() const {
 			int change = sqlite3_changes(DB::Database::getInstance().db);
 			if (change == 0) {
 				std::cout << "\x1b[33m Selected Employee is not in database\x1b[0m\n";
+				logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", "Employee with Id: " + std::to_string(getId()) + " is failed to delete");
 				waitMenu();
 				return false;
 			}
@@ -221,6 +222,7 @@ bool Model::Employee::deleteEmployee() const {
 		}
 		else if (rc == 19) {
 			std::cout << "\x1b[33m You can not Delete this Employee because there is employee which are managed by in this Employee \x1b[0m \n\n";
+			logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", "Employee with Id: " + std::to_string(getId()) + " is failed to delete");
 			waitMenu();
 			return false;
 		}
@@ -260,7 +262,6 @@ std::optional<Model::Employee> Model::Employee::getEmployee(const std::string& i
 
 	try {
 		sqlite3_exec(DB::Database::getInstance().db, selectQuery.c_str(), callback, &e, 0);
-		//std::cout << e.getId() << "\n\n\n\n\n\nTHafsfgsudgfkfumhidgiudiffiuguf\n\n\n\n\n\n";
 		if (e.getId() == 0 ) return std::nullopt;
 	}
 	catch (...) {

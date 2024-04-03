@@ -8,6 +8,7 @@ bool Model::Engineer::viewEngineerById(const std::string& id, const std::string&
 
 		DB::Database::getInstance().selectQuery(query.c_str());
 		if (DB::Database::row == 0) {
+			logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", "Engineer with Id: " + std::to_string(getId()) + " is not in database");
 			return false;
 		}
 		waitMenu();
@@ -26,6 +27,7 @@ bool Model::Engineer::viewEngineerByDepartmentName(const std::string& value) con
 
 		DB::Database::getInstance().selectQuery(query.c_str());
 		if (DB::Database::row == 0) {
+			logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", "Engineer with Id: " + std::to_string(getId()) + " is not in database");
 			return false;
 		}
 		waitMenu();
@@ -43,6 +45,7 @@ bool Model::Engineer::viewAllEngineer() const {
 		std::string query = "SELECT * FROM Employee INNER JOIN Engineer ON Engineer.id = Employee.Eid;";
 		DB::Database::getInstance().selectQuery(query.c_str());
 		if (DB::Database::row == 0) {
+			logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", "Engineer with Id: " + std::to_string(getId()) + " is not in database");
 			return false;
 		}
 		waitMenu();
@@ -61,6 +64,7 @@ bool Model::Engineer::viewEngineerByStringField(const std::string & id, const st
 
 		DB::Database::getInstance().selectQuery(query.c_str());
 		if (DB::Database::row == 0) {
+			logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", "Engineers are not in database");
 			return false;
 		}
 		waitMenu();
@@ -100,11 +104,6 @@ bool Model::Engineer::viewEngineer() const {
 				//query += "SELECT * FROM Employee INNER JOIN Engineer ON Engineer.id = Employee.Eid and " + field + " = '" + value + "' ;";
 			}
 
-			DB::Database::getInstance().selectQuery(query.c_str());
-			if (DB::Database::row == 0) {
-				return false;
-			}
-			waitMenu();
 			return true;
 		}
 		else {
@@ -135,6 +134,7 @@ bool Model::Engineer::insertEngineer() const {
 			}
 			else if (rc == 19) {
 				std::cout << "\x1b[33m Entered Enginner is already exist\x1b[0m\n\n";
+				logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", "Engineer with Id: " + std::to_string(getId()) + " is failed to insert");
 				waitMenu();
 				return false;
 			}
@@ -168,6 +168,7 @@ bool Model::Engineer::updateEngineer() const {
 			}
 			else if (rc == 19) {
 				std::cout << "\x1b[33m  You can not assign value beacuse entered manager or department is not in particular table OR Engineer is already in database \x1b[0m\n\n";
+				logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", "ENgineer with Id: " + std::to_string(getId()) + " is failed to update");
 				waitMenu(); 
 				return false;
 			}

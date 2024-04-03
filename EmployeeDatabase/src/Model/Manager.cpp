@@ -7,6 +7,7 @@ bool Model::Manager::viewManagerById(const std::string& id, const std::string& v
 
 		DB::Database::getInstance().selectQuery(query.c_str());
 		if (DB::Database::row == 0) {
+			logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", "Manager with Id: " + std::to_string(getId()) + " is not in database");
 			return false;
 		}
 		waitMenu();
@@ -25,6 +26,7 @@ bool Model::Manager::viewManagerByDepartmentName(const std::string& value) const
 
 		DB::Database::getInstance().selectQuery(query.c_str());
 		if (DB::Database::row == 0) {
+			logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", "Manager with Id: " + std::to_string(getId()) + " is not in database");
 			return false;
 		}
 		waitMenu();
@@ -42,6 +44,7 @@ bool Model::Manager::viewAllManager() const {
 		std::string query = "SELECT * FROM Employee INNER JOIN Manager ON Manager.id = Employee.Eid;";
 		DB::Database::getInstance().selectQuery(query.c_str());
 		if (DB::Database::row == 0) {
+			logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", "Manager with Id: " + std::to_string(getId()) + " is not in database");
 			return false;
 		}
 		waitMenu();
@@ -60,6 +63,7 @@ bool Model::Manager::viewManagerByStringField(const std::string& id, const std::
 
 		DB::Database::getInstance().selectQuery(query.c_str());
 		if (DB::Database::row == 0) {
+			logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", "Managers are not in database");
 			return false;
 		}
 		waitMenu();
@@ -98,11 +102,6 @@ bool Model::Manager::viewManager() const {
 				//query += "SELECT * FROM Employee INNER JOIN Manager ON Manager.id = Employee.Eid and " + field + " = '" + value + "' ;";
 			}
 
-			DB::Database::getInstance().selectQuery(query.c_str());
-			if (DB::Database::row == 0) {
-				return false;
-			}
-			waitMenu();
 			return true;
 		}
 		else {
@@ -133,6 +132,7 @@ bool Model::Manager::insertManager() const {
 			}
 			else if (rc == 19) {
 				std::cout << "\x1b[33m Entered Manager is already exist\x1b[0m\n\n";
+				logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", "Manager with Id: " + std::to_string(getId()) + " is failed to insert");
 				waitMenu(); 
 				return false;
 			}
@@ -166,6 +166,7 @@ bool Model::Manager::updateManager() const {
 			}
 			else if (rc == 19) {
 				std::cout << "\x1b[33m  You can not assign value beacuse entered manager or department is not in particular table \x1b[0m\n\n";
+				logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", "Manager with Id: " + std::to_string(getId()) + " is failed to update");
 				waitMenu();
 				return false;
 			}

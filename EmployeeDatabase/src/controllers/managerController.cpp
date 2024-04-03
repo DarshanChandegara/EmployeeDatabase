@@ -194,6 +194,7 @@ std::optional<Model::Manager> updateManagerController() {
 		}
 		else {
 			std::cout << "\x1b[33m Manager is not in database!!! \x1b[0m\n";
+			logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", "Manager  is not in database");
 			return std::nullopt;
 		}
 	}

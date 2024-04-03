@@ -7,6 +7,7 @@ bool Model::Salary::viewSalaryById(const std::string& id) const {
 
 		DB::Database::getInstance().selectQuery(query.c_str());
 		if (DB::Database::row == 0) {
+			logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", "Employee with Id: " + std::to_string(getId()) + " is not in database");
 			return false;
 		}
 		waitMenu();
@@ -25,6 +26,7 @@ bool Model::Salary::viewAllSalary() const {
 
 		DB::Database::getInstance().selectQuery(query.c_str());
 		if (DB::Database::row == 0) {
+			logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", "Employees are not in database");
 			return false;
 		}
 		waitMenu();
@@ -79,12 +81,6 @@ bool Model::Salary::viewSalary() const {
 				viewAllSalary();
 				//query += "select Employee.Eid , Employee.firstname , Employee.lastname , Employee.email , Salary.amount , Salary.base_salary , Salary.bonus from Employee JOIN Salary ON Employee.Eid = Salary.Sid ;";
 			}
-
-			DB::Database::getInstance().selectQuery(query.c_str());
-			if (DB::Database::row == 0) {
-				return false;
-			}
-			waitMenu();
 			return true;
 		}
 		else {

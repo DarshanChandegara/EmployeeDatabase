@@ -195,6 +195,7 @@ std::optional<Model::Engineer> updateEngineerController() {
 		}
 		else {
 			std::cout << "\x1b[33m Engineer is not in database!!! \x1b[0m\n";
+			logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", "Engineer is not in database");
 			return std::nullopt;
 		}
 	}

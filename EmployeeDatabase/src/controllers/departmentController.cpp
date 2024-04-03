@@ -5,9 +5,11 @@ std::optional<Model::Department> userinputDepartment() {
 		system("cls");
 		std::cout << "If you want to go back press 0 Otherwise press 1\n";
 		int i;
+
 		if (i = std::stoi(input("", std::regex{ "^[0-1]$" }).value_or("0"));  i == 0) {
 			return std::nullopt;
 		}
+
 		Model::Department d;
 		std::string msg = " Enter # to leave the field Empty: \n";
 		if (auto tmp = input("Enter Department ID: ", idRegex); tmp.has_value()) d.setId(std::stoi(tmp.value()));
@@ -37,8 +39,6 @@ std::optional<std::pair<std::string, std::string>> viewDepartmentController() {
 		std::pair<std::string, std::string> p;
 
 		system("cls");
-		//std::string query = "select * from Department where "; 
-		std::string all;
 		std::cout << "Select the Field on which you want to view the Department\n";
 		std::cout << "0. Go Back\n";
 		std::cout << "1. Id\n";
@@ -81,7 +81,6 @@ std::optional<std::pair<std::string, std::string>> viewDepartmentController() {
 				else {
 					return std::nullopt;
 				}
-				//query += "manager_id = " + tmp + ";"; 
 				break;
 
 			case 4:
@@ -170,6 +169,7 @@ std::optional<Model::Department> updateDepartmentController() {
 		}
 		else {
 			std::cout << "\x1b[33m Departement is not in database!!! \x1b[0m\n";
+			logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", "Department is no in database");
 			return std::nullopt;
 		}
 	}

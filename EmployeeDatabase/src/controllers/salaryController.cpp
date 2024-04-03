@@ -99,6 +99,7 @@ std::optional<Model::Salary> updateSalaryController() {
 		}
 		else {
 			std::cout << "\x1b[33m Employee is not in database!!! \x1b[0m\n";
+			logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", "Employee is not in database");
 			return std::nullopt;
 		}
 	}

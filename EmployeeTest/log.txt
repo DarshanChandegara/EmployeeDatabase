@@ -1,0 +1,235 @@
+2/4/2024 :: 22:16:39 [Info] [User] Database Open Successfully 
+2/4/2024 :: 22:16:39 [Info] [User] Table created successfully 
+2/4/2024 :: 22:16:39 [Info] [User] Table created successfully 
+2/4/2024 :: 22:16:39 [Info] [User] Table created successfully 
+2/4/2024 :: 22:16:39 [Info] [User] Table created successfully 
+2/4/2024 :: 22:16:39 [Info] [User] Table created successfully 
+2/4/2024 :: 22:16:39 [Info] [User] Department added for Id:  3 
+2/4/2024 :: 22:16:39 [Info] [User] Department added for Id:  4 
+2/4/2024 :: 22:16:39 [Info] [User] Department Updated with Id:  3 
+2/4/2024 :: 22:16:39 [Info] [User] Department Deleted with Id:  3 
+2/4/2024 :: 22:16:39 [Info] [User] Department Deleted with Id:  4 
+2/4/2024 :: 22:16:39 [Info] [User] Employee added for Id:  3 
+2/4/2024 :: 22:16:39 [Info] [User] Employee Updated with Id:  3 
+2/4/2024 :: 22:16:39 [Info] [User] Employee Deleted with Id:  3 
+2/4/2024 :: 22:16:39 [Info] [User] Employee added for Id:  310 
+2/4/2024 :: 22:16:39 [Info] [User] Engineer Added for Id:  310 
+2/4/2024 :: 22:16:39 [Info] [User] Employee added for Id:  301 
+2/4/2024 :: 22:16:39 [Info] [User] Engineer Added for Id:  301 
+2/4/2024 :: 22:16:39 [Info] [User] Employee Deleted with Id:  310 
+2/4/2024 :: 22:16:39 [Info] [User] Employee added for Id:  310 
+2/4/2024 :: 22:16:39 [Info] [User] Engineer Added for Id:  310 
+2/4/2024 :: 22:16:39 [Info] [User] Employee Deleted with Id:  310 
+2/4/2024 :: 22:16:39 [Info] [User] Employee added for Id:  310 
+2/4/2024 :: 22:16:39 [Info] [User] Engineer Added for Id:  310 
+2/4/2024 :: 22:16:39 [Info] [User] Employee Updated with Id:  2 
+2/4/2024 :: 22:16:39 [Info] [User] Engineer updated for Id:  2 
+2/4/2024 :: 22:16:39 [Info] [User] Employee Deleted with Id:  310 
+2/4/2024 :: 22:16:39 [Info] [User] Employee added for Id:  310 
+2/4/2024 :: 22:16:39 [Info] [User] Engineer Added for Id:  310 
+2/4/2024 :: 22:16:39 [Info] [User] Employee Deleted with Id:  310 
+2/4/2024 :: 22:16:39 [Info] [User] Employee added for Id:  310 
+2/4/2024 :: 22:16:39 [Info] [User] Engineer Added for Id:  310 
+2/4/2024 :: 22:16:39 [Info] [User] Employee Deleted with Id:  301 
+2/4/2024 :: 22:16:39 [Info] [User] Employee Deleted with Id:  310 
+2/4/2024 :: 22:16:39 [Info] [User] Employee added for Id:  501 
+2/4/2024 :: 22:16:39 [Info] [User] Manager Added for Id:  501 
+2/4/2024 :: 22:16:39 [Info] [User] Employee added for Id:  502 
+2/4/2024 :: 22:16:39 [Info] [User] Manager Added for Id:  502 
+2/4/2024 :: 22:16:39 [Info] [User] Employee Updated with Id:  501 
+2/4/2024 :: 22:16:39 [Info] [User] Manager updated for Id:  501 
+2/4/2024 :: 22:16:40 [Info] [User] Employee Deleted with Id:  501 
+2/4/2024 :: 22:16:40 [Info] [User] Employee Deleted with Id:  502 
+2/4/2024 :: 22:16:40 [Info] [User] Salary updated for Id:  511 
+2/4/2024 :: 22:16:40 [Info] [User] Salary updated for Id:  511 
+2/4/2024 :: 22:16:40 [Info] [User] Table Employee backup successfull!!!! 
+2/4/2024 :: 22:16:40 [Info] [User] Table Department backup successfull!!!! 
+2/4/2024 :: 23:11:8 [Info] [User] [Success] Database Open Successfully 
+2/4/2024 :: 23:11:8 [Info] [User] [Sucess] Table created successfully 
+2/4/2024 :: 23:11:8 [Info] [User] [Sucess] Table created successfully 
+2/4/2024 :: 23:11:8 [Info] [User] [Sucess] Table created successfully 
+2/4/2024 :: 23:11:8 [Info] [User] [Sucess] Table created successfully 
+2/4/2024 :: 23:12:40 [Info] [User] [Success] Database Open Successfully 
+2/4/2024 :: 23:12:40 [Info] [User] [Sucess] Table created successfully 
+2/4/2024 :: 23:12:40 [Info] [User] [Sucess] Table created successfully 
+2/4/2024 :: 23:12:40 [Info] [User] [Sucess] Table created successfully 
+2/4/2024 :: 23:12:40 [Info] [User] [Sucess] Table created successfully 
+2/4/2024 :: 23:12:40 [Info] [User] [Success] Table created successfully 
+2/4/2024 :: 23:12:40 [Error] [User] [Failure] Department with Id: 1 is failed to insert 
+2/4/2024 :: 23:12:40 [Error] [User] [Failure] Department with Id: 3 is failed to insert 
+2/4/2024 :: 23:12:40 [Info] [User] Department added for Id:  3 
+2/4/2024 :: 23:12:40 [Info] [User] Department added for Id:  4 
+2/4/2024 :: 23:12:40 [Error] [User] [Failure] Department with Id: 1 is not in database 
+2/4/2024 :: 23:12:40 [Error] [User] [Failure] Department with Id: 1 is not in database 
+2/4/2024 :: 23:12:40 [Error] [User] [Failure] Department with Id: 1 is not in database 
+2/4/2024 :: 23:12:40 [Error] [User] [Failure] Department with Id: 3 is failed to update 
+2/4/2024 :: 23:12:40 [Info] [User] Department Updated with Id:  3 
+2/4/2024 :: 23:12:40 [Error] [User] [Failure] Employee with Id: 1 is failed to delete 
+2/4/2024 :: 23:12:40 [Error] [User] [Failure] Department with Id: 5 is failed to delete 
+2/4/2024 :: 23:12:40 [Info] [User] Department Deleted with Id:  3 
+2/4/2024 :: 23:12:40 [Info] [User] Department Deleted with Id:  4 
+2/4/2024 :: 23:12:40 [Info] [User] Employee added for Id:  3 
+2/4/2024 :: 23:12:40 [Error] [User] [Failure] Employee with Id: 3 is failed to insert 
+2/4/2024 :: 23:12:40 [Error] [User] [Failure] Employee with Id: 3 is failed to insert 
+2/4/2024 :: 23:12:40 [Error] [User] [Failure] Employee with Id: 3 is failed to insert 
+2/4/2024 :: 23:12:40 [Error] [User] [Failure] Employee with Id: 1 is not in database 
+2/4/2024 :: 23:12:40 [Error] [User] [Failure] Employee with Id: 1 is not in database 
+2/4/2024 :: 23:12:40 [Error] [User] [Failure] Employee with Id: 1 is not in database 
+2/4/2024 :: 23:12:40 [Error] [User] [Failure] Employee with Id: 1 is not in database 
+2/4/2024 :: 23:12:40 [Error] [User] [Failure] Employee with Id: 3 is failed to update 
+2/4/2024 :: 23:12:40 [Error] [User] [Failure] Employee with Id: 3 is failed to update 
+2/4/2024 :: 23:12:40 [Info] [User] Employee Updated with Id:  3 
+2/4/2024 :: 23:12:40 [Error] [User] [Failure] Employee with Id: 2 is failed to delete 
+2/4/2024 :: 23:12:40 [Error] [User] [Failure] Employee with Id: 10 is failed to delete 
+2/4/2024 :: 23:12:40 [Info] [User] Employee Deleted with Id:  3 
+2/4/2024 :: 23:12:40 [Info] [User] Employee added for Id:  310 
+2/4/2024 :: 23:12:40 [Info] [User] Engineer Added for Id:  310 
+2/4/2024 :: 23:12:40 [Info] [User] Employee added for Id:  301 
+2/4/2024 :: 23:12:40 [Info] [User] Engineer Added for Id:  301 
+2/4/2024 :: 23:12:40 [Error] [User] [Failure] Employee with Id: 2 is failed to insert 
+2/4/2024 :: 23:12:40 [Error] [User] [Failure] Employee with Id: 301 is failed to insert 
+2/4/2024 :: 23:12:40 [Error] [User] [Failure] Employee with Id: 305 is failed to insert 
+2/4/2024 :: 23:12:40 [Info] [User] Employee Deleted with Id:  310 
+2/4/2024 :: 23:12:40 [Info] [User] Employee added for Id:  310 
+2/4/2024 :: 23:12:40 [Info] [User] Engineer Added for Id:  310 
+2/4/2024 :: 23:12:40 [Error] [User] [Failure] Engineer with Id: 301 is not in database 
+2/4/2024 :: 23:12:40 [Error] [User] [Failure] Engineer with Id: 301 is not in database 
+2/4/2024 :: 23:12:40 [Error] [User] [Failure] Engineer with Id: 301 is not in database 
+2/4/2024 :: 23:12:40 [Error] [User] [Failure] Engineers are not in database 
+2/4/2024 :: 23:12:40 [Info] [User] Employee Deleted with Id:  310 
+2/4/2024 :: 23:12:40 [Info] [User] Employee added for Id:  310 
+2/4/2024 :: 23:12:40 [Info] [User] Engineer Added for Id:  310 
+2/4/2024 :: 23:12:40 [Error] [User] [Failure] Employee with Id: 301 is failed to update 
+2/4/2024 :: 23:12:40 [Error] [User] [Failure] Employee with Id: 301 is failed to update 
+2/4/2024 :: 23:12:40 [Error] [User] [Failure] Employee with Id: 301 is failed to update 
+2/4/2024 :: 23:12:40 [Info] [User] Employee Updated with Id:  2 
+2/4/2024 :: 23:12:40 [Info] [User] Engineer updated for Id:  2 
+2/4/2024 :: 23:12:40 [Info] [User] Employee Deleted with Id:  310 
+2/4/2024 :: 23:12:40 [Info] [User] Employee added for Id:  310 
+2/4/2024 :: 23:12:41 [Info] [User] Engineer Added for Id:  310 
+2/4/2024 :: 23:12:41 [Info] [User] Employee Deleted with Id:  310 
+2/4/2024 :: 23:12:41 [Info] [User] Employee added for Id:  310 
+2/4/2024 :: 23:12:41 [Info] [User] Engineer Added for Id:  310 
+2/4/2024 :: 23:12:41 [Error] [User] [Failure] Employee with Id: 350 is failed to delete 
+2/4/2024 :: 23:12:41 [Info] [User] Employee Deleted with Id:  301 
+2/4/2024 :: 23:12:41 [Info] [User] Employee Deleted with Id:  310 
+2/4/2024 :: 23:12:41 [Info] [User] Employee added for Id:  501 
+2/4/2024 :: 23:12:41 [Info] [User] Manager Added for Id:  501 
+2/4/2024 :: 23:12:41 [Info] [User] Employee added for Id:  502 
+2/4/2024 :: 23:12:41 [Info] [User] Manager Added for Id:  502 
+2/4/2024 :: 23:12:41 [Error] [User] [Failure] Employee with Id: 2 is failed to insert 
+2/4/2024 :: 23:12:41 [Error] [User] [Failure] Employee with Id: 501 is failed to insert 
+2/4/2024 :: 23:12:41 [Error] [User] [Failure] Employee with Id: 501 is failed to insert 
+2/4/2024 :: 23:12:41 [Error] [User] [Failure] Employee with Id: 501 is failed to update 
+2/4/2024 :: 23:12:41 [Error] [User] [Failure] Employee with Id: 501 is failed to update 
+2/4/2024 :: 23:12:41 [Info] [User] Employee Updated with Id:  501 
+2/4/2024 :: 23:12:41 [Info] [User] Manager updated for Id:  501 
+2/4/2024 :: 23:12:41 [Error] [User] [Failure] Manager with Id: 2 is not in database 
+2/4/2024 :: 23:12:41 [Error] [User] [Failure] Manager with Id: 2 is not in database 
+2/4/2024 :: 23:12:41 [Error] [User] [Failure] Manager with Id: 2 is not in database 
+2/4/2024 :: 23:12:41 [Error] [User] [Failure] Managers are not in database 
+2/4/2024 :: 23:12:41 [Error] [User] [Failure] Employee with Id: 2 is failed to delete 
+2/4/2024 :: 23:12:41 [Error] [User] [Failure] Employee with Id: 510 is failed to delete 
+2/4/2024 :: 23:12:41 [Info] [User] Employee Deleted with Id:  501 
+2/4/2024 :: 23:12:41 [Info] [User] Employee Deleted with Id:  502 
+2/4/2024 :: 23:12:41 [Error] [User] [Failure] Employee with Id: 2 is not in database 
+2/4/2024 :: 23:12:41 [Info] [User] Salary updated for Id:  511 
+2/4/2024 :: 23:12:41 [Info] [User] Salary updated for Id:  511 
+2/4/2024 :: 23:12:41 [Info] [User] Table Employee backup successfull!!!! 
+2/4/2024 :: 23:12:41 [Info] [User] Table Department backup successfull!!!! 
+2/4/2024 :: 23:12:41 [Error] [User] [Failure] empis not in database 
+2/4/2024 :: 23:12:41 [Error] [User] [Failure] database table is locked 
+2/4/2024 :: 23:12:41 [Error] [User] [Failure] database table is locked 
+2/4/2024 :: 23:12:41 [Error] [User] [Failure] database table is locked 
+2/4/2024 :: 23:15:3 [Info] [User] [Success] Database Open Successfully 
+2/4/2024 :: 23:15:3 [Info] [User] [Sucess] Table created successfully 
+2/4/2024 :: 23:15:3 [Info] [User] [Sucess] Table created successfully 
+2/4/2024 :: 23:15:3 [Info] [User] [Sucess] Table created successfully 
+2/4/2024 :: 23:15:3 [Info] [User] [Sucess] Table created successfully 
+2/4/2024 :: 23:15:3 [Info] [User] [Success] Table created successfully 
+2/4/2024 :: 23:15:3 [Error] [User] [Failure] Department with Id: 1 is failed to insert 
+2/4/2024 :: 23:15:3 [Error] [User] [Failure] Department with Id: 3 is failed to insert 
+2/4/2024 :: 23:15:3 [Info] [User] Department added for Id:  3 
+2/4/2024 :: 23:15:3 [Info] [User] Department added for Id:  4 
+2/4/2024 :: 23:15:3 [Error] [User] [Failure] Department with Id: 1 is not in database 
+2/4/2024 :: 23:15:3 [Error] [User] [Failure] Department with Id: 1 is not in database 
+2/4/2024 :: 23:15:3 [Error] [User] [Failure] Department with Id: 1 is not in database 
+2/4/2024 :: 23:15:3 [Error] [User] [Failure] Department with Id: 3 is failed to update 
+2/4/2024 :: 23:15:3 [Info] [User] Department Updated with Id:  3 
+2/4/2024 :: 23:15:3 [Error] [User] [Failure] Employee with Id: 1 is failed to delete 
+2/4/2024 :: 23:15:3 [Error] [User] [Failure] Department with Id: 5 is failed to delete 
+2/4/2024 :: 23:15:3 [Info] [User] Department Deleted with Id:  3 
+2/4/2024 :: 23:15:3 [Info] [User] Department Deleted with Id:  4 
+2/4/2024 :: 23:15:3 [Info] [User] Employee added for Id:  3 
+2/4/2024 :: 23:15:3 [Error] [User] [Failure] Employee with Id: 3 is failed to insert 
+2/4/2024 :: 23:15:3 [Error] [User] [Failure] Employee with Id: 3 is failed to insert 
+2/4/2024 :: 23:15:3 [Error] [User] [Failure] Employee with Id: 3 is failed to insert 
+2/4/2024 :: 23:15:3 [Error] [User] [Failure] Employee with Id: 1 is not in database 
+2/4/2024 :: 23:15:3 [Error] [User] [Failure] Employee with Id: 1 is not in database 
+2/4/2024 :: 23:15:3 [Error] [User] [Failure] Employee with Id: 1 is not in database 
+2/4/2024 :: 23:15:3 [Error] [User] [Failure] Employee with Id: 1 is not in database 
+2/4/2024 :: 23:15:3 [Error] [User] [Failure] Employee with Id: 3 is failed to update 
+2/4/2024 :: 23:15:3 [Error] [User] [Failure] Employee with Id: 3 is failed to update 
+2/4/2024 :: 23:15:3 [Info] [User] Employee Updated with Id:  3 
+2/4/2024 :: 23:15:3 [Error] [User] [Failure] Employee with Id: 2 is failed to delete 
+2/4/2024 :: 23:15:3 [Error] [User] [Failure] Employee with Id: 10 is failed to delete 
+2/4/2024 :: 23:15:3 [Info] [User] Employee Deleted with Id:  3 
+2/4/2024 :: 23:15:3 [Info] [User] Employee added for Id:  310 
+2/4/2024 :: 23:15:3 [Info] [User] Engineer Added for Id:  310 
+2/4/2024 :: 23:15:3 [Info] [User] Employee added for Id:  301 
+2/4/2024 :: 23:15:3 [Info] [User] Engineer Added for Id:  301 
+2/4/2024 :: 23:15:3 [Error] [User] [Failure] Employee with Id: 2 is failed to insert 
+2/4/2024 :: 23:15:3 [Error] [User] [Failure] Employee with Id: 301 is failed to insert 
+2/4/2024 :: 23:15:3 [Error] [User] [Failure] Employee with Id: 305 is failed to insert 
+2/4/2024 :: 23:15:3 [Info] [User] Employee Deleted with Id:  310 
+2/4/2024 :: 23:15:3 [Info] [User] Employee added for Id:  310 
+2/4/2024 :: 23:15:3 [Info] [User] Engineer Added for Id:  310 
+2/4/2024 :: 23:15:3 [Error] [User] [Failure] Engineer with Id: 301 is not in database 
+2/4/2024 :: 23:15:3 [Error] [User] [Failure] Engineer with Id: 301 is not in database 
+2/4/2024 :: 23:15:3 [Error] [User] [Failure] Engineer with Id: 301 is not in database 
+2/4/2024 :: 23:15:3 [Error] [User] [Failure] Engineers are not in database 
+2/4/2024 :: 23:15:3 [Info] [User] Employee Deleted with Id:  310 
+2/4/2024 :: 23:15:3 [Info] [User] Employee added for Id:  310 
+2/4/2024 :: 23:15:3 [Info] [User] Engineer Added for Id:  310 
+2/4/2024 :: 23:15:3 [Error] [User] [Failure] Employee with Id: 301 is failed to update 
+2/4/2024 :: 23:15:4 [Error] [User] [Failure] Employee with Id: 301 is failed to update 
+2/4/2024 :: 23:15:4 [Error] [User] [Failure] Employee with Id: 301 is failed to update 
+2/4/2024 :: 23:15:4 [Info] [User] Employee Updated with Id:  2 
+2/4/2024 :: 23:15:4 [Info] [User] Engineer updated for Id:  2 
+2/4/2024 :: 23:15:4 [Info] [User] Employee Deleted with Id:  310 
+2/4/2024 :: 23:15:4 [Info] [User] Employee added for Id:  310 
+2/4/2024 :: 23:15:4 [Info] [User] Engineer Added for Id:  310 
+2/4/2024 :: 23:15:4 [Info] [User] Employee Deleted with Id:  310 
+2/4/2024 :: 23:15:4 [Info] [User] Employee added for Id:  310 
+2/4/2024 :: 23:15:4 [Info] [User] Engineer Added for Id:  310 
+2/4/2024 :: 23:15:4 [Error] [User] [Failure] Employee with Id: 350 is failed to delete 
+2/4/2024 :: 23:15:4 [Info] [User] Employee Deleted with Id:  301 
+2/4/2024 :: 23:15:4 [Info] [User] Employee Deleted with Id:  310 
+2/4/2024 :: 23:15:4 [Info] [User] Employee added for Id:  501 
+2/4/2024 :: 23:15:4 [Info] [User] Manager Added for Id:  501 
+2/4/2024 :: 23:15:4 [Info] [User] Employee added for Id:  502 
+2/4/2024 :: 23:15:4 [Info] [User] Manager Added for Id:  502 
+2/4/2024 :: 23:15:4 [Error] [User] [Failure] Employee with Id: 2 is failed to insert 
+2/4/2024 :: 23:15:4 [Error] [User] [Failure] Employee with Id: 501 is failed to insert 
+2/4/2024 :: 23:15:4 [Error] [User] [Failure] Employee with Id: 501 is failed to insert 
+2/4/2024 :: 23:15:4 [Error] [User] [Failure] Employee with Id: 501 is failed to update 
+2/4/2024 :: 23:15:4 [Error] [User] [Failure] Employee with Id: 501 is failed to update 
+2/4/2024 :: 23:15:4 [Info] [User] Employee Updated with Id:  501 
+2/4/2024 :: 23:15:4 [Info] [User] Manager updated for Id:  501 
+2/4/2024 :: 23:15:4 [Error] [User] [Failure] Manager with Id: 2 is not in database 
+2/4/2024 :: 23:15:4 [Error] [User] [Failure] Manager with Id: 2 is not in database 
+2/4/2024 :: 23:15:4 [Error] [User] [Failure] Manager with Id: 2 is not in database 
+2/4/2024 :: 23:15:4 [Error] [User] [Failure] Managers are not in database 
+2/4/2024 :: 23:15:4 [Error] [User] [Failure] Employee with Id: 2 is failed to delete 
+2/4/2024 :: 23:15:4 [Error] [User] [Failure] Employee with Id: 510 is failed to delete 
+2/4/2024 :: 23:15:4 [Info] [User] Employee Deleted with Id:  501 
+2/4/2024 :: 23:15:4 [Info] [User] Employee Deleted with Id:  502 
+2/4/2024 :: 23:15:4 [Error] [User] [Failure] Employee with Id: 2 is not in database 
+2/4/2024 :: 23:15:4 [Info] [User] Salary updated for Id:  511 
+2/4/2024 :: 23:15:4 [Info] [User] Salary updated for Id:  511 
+2/4/2024 :: 23:15:4 [Info] [User] Table Employee backup successfull!!!! 
+2/4/2024 :: 23:15:4 [Info] [User] Table Department backup successfull!!!! 
+2/4/2024 :: 23:15:4 [Error] [User] [Failure] empis not in database 
+2/4/2024 :: 23:15:4 [Error] [User] [Failure] database table is locked 
+2/4/2024 :: 23:15:4 [Error] [User] [Failure] database table is locked 
+2/4/2024 :: 23:15:4 [Error] [User] [Failure] database table is locked 

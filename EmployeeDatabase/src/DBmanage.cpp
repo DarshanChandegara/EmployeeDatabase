@@ -8,12 +8,12 @@ bool DB::Database::open(const char* str) {
 	executeQuery(pragmaQuery); 
 
 	if (rc) {
-		logging::default_logger()->log(logging::Log::Level::LevelError, sqlite3_errmsg(db));   
+		logging::default_logger()->log(logging::Log::Level::LevelError,"[Failure]", sqlite3_errmsg(db));
 		std::cerr << "\x1b[31mCan't open database: " << sqlite3_errmsg(db) << "\x1b[0m\n";
 		return false;
 	}
 	else {
-		logging::default_logger()->log( logging::Log::Level::LevelInfo, "Database Open Successfully");  
+		logging::default_logger()->log( logging::Log::Level::LevelInfo,"[Success]", "Database Open Successfully");
 		//std::cout << "Database Open Successfully \n";
 		return true;
 	}
@@ -40,13 +40,13 @@ bool DB::Database::createDefaultTables() {
 
 	if (rc != SQLITE_OK)
 	{
-		logging::default_logger()->log(logging::Log::Level::LevelError, sqlite3_errmsg(db));
+		logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", sqlite3_errmsg(db));
 		std::cerr << "\x1b[31mSQL error: " << errorMsg << "\x1b[0m" << std::endl;
 		sqlite3_free(errorMsg);
 	}
 	else
 	{
-		logging::default_logger()->log(logging::Log::Level::LevelInfo, "Table created successfully");
+		logging::default_logger()->log(logging::Log::Level::LevelInfo,"[Sucess]", "Table created successfully");
 		//std::cout << "Table created successfully" << std::endl;
 	}
 
@@ -61,13 +61,13 @@ bool DB::Database::createDefaultTables() {
 
 	if (rc != SQLITE_OK)
 	{
-		logging::default_logger()->log(logging::Log::Level::LevelError, sqlite3_errmsg(db));
+		logging::default_logger()->log(logging::Log::Level::LevelError,"[Failure]", sqlite3_errmsg(db));
 		std::cerr << "\x1b[31mSQL error: " << errorMsg << "\x1b[0m" << std::endl;
 		sqlite3_free(errorMsg);
 	}
 	else
 	{
-		logging::default_logger()->log(logging::Log::Level::LevelInfo, "Table created successfully");
+		logging::default_logger()->log(logging::Log::Level::LevelInfo,"[Sucess]", "Table created successfully");
 		//std::cout << "Table created successfully" << std::endl;
 	}
 
@@ -82,13 +82,13 @@ bool DB::Database::createDefaultTables() {
 
 	if (rc != SQLITE_OK)
 	{
-		logging::default_logger()->log(logging::Log::Level::LevelError, sqlite3_errmsg(db));
+		logging::default_logger()->log(logging::Log::Level::LevelError,"[Failure]", sqlite3_errmsg(db));
 		std::cerr << "\x1b[31mSQL error: " << errorMsg << "\x1b[0m" << std::endl;
 		sqlite3_free(errorMsg);
 	}
 	else
 	{
-		logging::default_logger()->log(logging::Log::Level::LevelInfo, "Table created successfully");
+		logging::default_logger()->log(logging::Log::Level::LevelInfo, "[Sucess]", "Table created successfully");
 		//std::cout << "Table created successfully" << std::endl;
 	}
 
@@ -102,13 +102,13 @@ bool DB::Database::createDefaultTables() {
 
 	if (rc != SQLITE_OK)
 	{
-		logging::default_logger()->log(logging::Log::Level::LevelError, sqlite3_errmsg(db));
+		logging::default_logger()->log(logging::Log::Level::LevelError,"[Failure]", sqlite3_errmsg(db));
 		std::cerr << "\x1b[31mSQL error: " << errorMsg << "\x1b[0m" << std::endl;
 		sqlite3_free(errorMsg);
 	}
 	else
 	{
-		logging::default_logger()->log(logging::Log::Level::LevelInfo, "Table created successfully");
+		logging::default_logger()->log(logging::Log::Level::LevelInfo,"[Sucess]", "Table created successfully");
 		//std::cout << "Table created successfully" << std::endl;
 	}
 
@@ -123,13 +123,13 @@ bool DB::Database::createDefaultTables() {
 
 	if (rc != SQLITE_OK)
 	{
-		logging::default_logger()->log(logging::Log::Level::LevelError, sqlite3_errmsg(db));
+		logging::default_logger()->log(logging::Log::Level::LevelError,"[Failure]", sqlite3_errmsg(db));
 		std::cerr << "\x1b[31mSQL error: " << errorMsg << "\x1b[0m" << std::endl;
 		sqlite3_free(errorMsg);
 	}
 	else
 	{
-		logging::default_logger()->log(logging::Log::Level::LevelInfo, "Table created successfully");
+		logging::default_logger()->log(logging::Log::Level::LevelInfo,"[Success]", "Table created successfully");
 		//std::cout << "Table created successfully" << std::endl;
 	}
 
@@ -141,14 +141,12 @@ int DB::Database::executeQuery(const char* sql, float count)
 	rc = sqlite3_exec(db, sql, callbackForChecking, &count, &errorMsg); 
 
 	if (rc == 19) {
-		//std::cerr << "You can not perform this operation on this record because this violates the rule of reference key constraints\n"; 
-		//std::cout << "Press 0 to continue\n"; 
-		//std::cin >> rc; 
 		return rc;
 	}
 	else if (rc != SQLITE_OK)
 	{
 		std::cerr << "\x1b[31mSQL error: " << errorMsg <<"\x1b[0m" << std::endl;
+		logging::default_logger()->log(logging::Log::Level::LevelError ,"[Failure]" , errorMsg);
 		waitMenu(); 
 		sqlite3_free(errorMsg);
 		return rc;
@@ -172,6 +170,7 @@ bool DB::Database::selectQuery(const char* sql)
 	if (rc != SQLITE_OK)
 	{
 		std::cerr << "\x1b[31mSQL error: " << errorMsg <<"\x1b[0m" << std::endl;
+		logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", errorMsg); 
 		std::cout << "Press Enter to continue\n";
 		std::cin.get();
 		sqlite3_free(errorMsg);
@@ -193,6 +192,7 @@ bool DB::Database::selectQueryForChecking(const char* sql)
 	if (rc != SQLITE_OK)
 	{
 		std::cerr << "\x1b[31mSQL error: " << errorMsg << "\x1b[0m" << std::endl;
+		logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", errorMsg); 
 		std::cout << "Press Enter to continue\n";
 		std::cin.get();
 		sqlite3_free(errorMsg);

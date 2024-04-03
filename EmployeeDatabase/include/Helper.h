@@ -44,9 +44,9 @@ namespace utility {
 
 	inline void waitMenu() {
 		std::cout << "Press 0 to continue....\n";
-		//int i;
-		//std::cin >> i;
-		//std::cin.get();
+		int i;
+		std::cin >> i;
+		std::cin.get();
 	}
 
 	
