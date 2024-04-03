@@ -114,6 +114,7 @@ std::optional<Model::Department> updateDepartmentController() {
 		system("cls");
 		if (DB::Database::row == 0) {
 			std::cout << "\x1b[33m Department is not in database \x1b[0m\n";
+			logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", "Department with ID: "+std::to_string(d.getId()) + " is no in database");
 			waitMenu();
 			return std::nullopt;
 		}

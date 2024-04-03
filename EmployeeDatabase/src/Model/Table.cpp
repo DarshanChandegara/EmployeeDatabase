@@ -9,8 +9,9 @@ bool Model::Table::createTable() {
 			return false;
 		}
 		std::string tableName;
-		std::cout << "Enter table name: ";
-		std::cin >> tableName;
+		std::optional<std::string> tmp;
+		if (tmp = input("Enter table name: ", allRegex); tmp.has_value()) tableName = tmp.value();
+		else return false;
 		std::string sql = "CREATE TABLE IF NOT EXISTS " + tableName + " (";
 		std::vector<std::string> columns;
 
@@ -18,17 +19,20 @@ bool Model::Table::createTable() {
 
 		do {
 			std::string columnName, columnType, constraints;
-			std::cout << "\nEnter column name: ";
-			std::cin >> columnName;
-			std::cout << "Enter column type: ";
-			std::cin >> columnType;
-			std::cout << "Enter column constraints : ";
-			std::cin.ignore();
-			std::getline(std::cin, constraints);
+			if (tmp = input("Enter column name: ", allRegex); tmp.has_value()) columnName = tmp.value();
+			else return false;
+
+			if (tmp = input("Enter column type: ", allRegex); tmp.has_value()) columnType = tmp.value();
+			else return false;
+
+			if (tmp = input("Enter column constraints : ", allRegex); tmp.has_value()) constraints = tmp.value();
+			else return false;
 
 			columns.push_back(columnName + " " + columnType + " " + constraints);
+		
 			std::cout << "Add another column? (y/n): ";
-			std::cin >> choice;
+			std::cin >> choice; 
+			std::cin.get(); 
 
 		} while (choice == 'y' || choice == 'Y');
 
@@ -44,15 +48,18 @@ bool Model::Table::createTable() {
 		std::string field, refrenceTableName , tableField; 
 		while (flag) { 
 			std::cout << "Do you want to add Foreign Key (Y/N)?: ";
-			
-			if (std::cin >> choice; (choice == 'y' || choice == 'Y')) {
+			std::cin >> choice; 
+			std::cin.get();
+			if ( (choice == 'y' || choice == 'Y')) { 
 
-				std::cout << "Enter the field: ";
-				std::cin >> field;
-				std::cout << "Enter the name of the table from which refrence is taken: ";
-				std::cin >> refrenceTableName;  
-				std::cout << "Enter the field of the reference table: ";
-				std::cin >> tableField;  
+				if (tmp = input("Enter the field: ", allRegex); tmp.has_value()) field = tmp.value();
+				else return false;
+
+				if (tmp = input("Enter the name of the table from which refrence is taken: ", allRegex); tmp.has_value()) refrenceTableName = tmp.value();
+				else return false;
+
+				if (tmp = input("Enter the field of the reference table: ", allRegex); tmp.has_value()) tableField = tmp.value();
+				else return false;
 				
 				sql +=", FOREIGN KEY (" + field + ") REFERENCES " + refrenceTableName + "( " + tableField + ")";
 				cnt++;
@@ -63,8 +70,9 @@ bool Model::Table::createTable() {
 		}
 		if (cnt != 0) { 
 			std::cout << "Do you want to add on delete cascade (Y/N)? "; 
-
-			if (std::cin >> choice; (choice == 'Y' || choice == 'y')) { 
+			std::cin >> choice;
+			std::cin.get();
+			if (; (choice == 'Y' || choice == 'y')) { 
 				sql += " ON DELETE CASCADE";
 			}
 		}
@@ -73,7 +81,7 @@ bool Model::Table::createTable() {
 		int rc = DB::Database::getInstance().executeQuery(sql.c_str());  
 		if (rc == 0) {
 			std::cout << "\n\x1b[32mTable created Suceesfully\x1b[0m\n\n";
-			logging::default_logger()->log(logging::Log::Level::LevelInfo, "[Sucess]", tableName + "created Sucessfully");
+			logging::default_logger()->log(logging::Log::Level::LevelInfo, "[Sucess]", tableName + " created Sucessfully");
 			waitMenu(); 
 			return true;
 		}
@@ -115,11 +123,11 @@ bool Model::Table::deleteTable() {
 			return false;
 			break;
 		case 1:
-			std::cout << "\nEnter Table Name to Drop: ";
-			std::cin >> tableName;
+			if (auto tmp = input("Enter table name: ", allRegex); tmp.has_value()) tableName = tmp.value(); 
+			else return false;
 			if (tableName == "Employee" || tableName == "Salary" || tableName == "Engineer" || tableName == "Manager" || tableName == "Department") {
 				std::cout << " \x1b[31mYou can not delete this Table\x1b[0m\n";
-				logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", tableName + "can not deletd");
+				logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", tableName + " can not deletd");
 
 				waitMenu();
 				break;
@@ -129,7 +137,7 @@ bool Model::Table::deleteTable() {
 
 			if (rc == 0) {
 				std::cout << "\x1b[32mTable Dropped Succesfully !\x1b[0m \n\n";
-				logging::default_logger()->log(logging::Log::Level::LevelInfo, "[Sucess]", tableName + "dropped Sucessfully");
+				logging::default_logger()->log(logging::Log::Level::LevelInfo, "[Sucess]", tableName + " dropped Sucessfully");
 
 				waitMenu();
 				return true;
@@ -138,11 +146,11 @@ bool Model::Table::deleteTable() {
 
 		case 2:
 
-			std::cout << "\nEnter Table Name to Delete: ";
-			std::cin >> tableName;
+			if (auto tmp = input("Enter table name: ", allRegex); tmp.has_value()) tableName = tmp.value();
+			else return false;
 			if (tableName == "Employee" || tableName == "Salary" || tableName == "Engineer" || tableName == "Manager" || tableName == "Department") {
 				std::cout << "\x1b[31mYou can not delete this Table\x1b[0m\n";
-				logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", tableName + "can not deletd");
+				logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", tableName + " can not deletd");
 
 				waitMenu();
 				break;
@@ -153,7 +161,7 @@ bool Model::Table::deleteTable() {
 			if (rc == 0) {
 
 				std::cout << "\x1b[32mTable Deleted Succesfully !\x1b[0m \n\n";
-				logging::default_logger()->log(logging::Log::Level::LevelInfo, "[Sucess]", tableName + "dropped Sucessfully");
+				logging::default_logger()->log(logging::Log::Level::LevelInfo, "[Sucess]", tableName + " Deleted Sucessfully");
 
 				waitMenu();
 				return true;
@@ -393,7 +401,7 @@ bool Model::Table::insertRecord() {
 
 		if (rc == 0) {
 			std::cout << "\x1b[32mIn " + name + ": Record Inserted successfully!!!!\x1b[0m\n";
-			logging::Info(name + ": Record Inserted successfully!!!!"); 
+			logging::Info("[Success]", name + ": Record Inserted successfully!!!!");
 			waitMenu();
 			return true;
 		}
@@ -436,7 +444,7 @@ bool Model::Table::updateRecord() {
 		std::string select = "select * from "+ name +" where id = " + id.value() + " ;"; 
 		DB::Database::getInstance().selectQueryForChecking(select.c_str());  
 		if (DB::Database::row == 0) { 
-			std::cout << "Entered Record is not in database\n\n";
+			std::cout << "Entered Record is not in table"+name+"\n\n";
 			waitMenu();
 			return false;
 		}
@@ -496,7 +504,7 @@ bool Model::Table::updateRecord() {
 
 			if (rc == 0) {
 				std::cout << "\x1b[32min " + name + ": Record updated successfully with id " + id.value() + "\x1b[0m\n";
-				logging::Info(name + ": Record updated successfully with id " + id.value());
+				logging::Info("[Success]", name + ": Record updated successfully with id " + id.value());
 				waitMenu();
 				return true;
 			}
@@ -533,7 +541,7 @@ bool Model::Table::deleteRecord() const{
 		std::string select = "select * from " + name + " where id = " + id.value() + " ;"; 
 		DB::Database::getInstance().selectQuery(select.c_str()); 
 		if (DB::Database::row == 0) { 
-			std::cout << "Entered Record is not in database\n\n";
+			std::cout << "Entered Record is not in table " + name +"\n\n";
 			waitMenu(); 
 			return false;
 		}
@@ -550,7 +558,7 @@ bool Model::Table::deleteRecord() const{
 				}
 				else { 
 					std::cout << "\x1b[32m Record deleted successfully from " + name + "\x1b[0m\n"; 
-					logging::Info(name + ": Record deleted successfully with id " + id.value()); 
+					logging::Info("[Success]", name + ": Record deleted successfully with id " + id.value());
 					waitMenu(); 
 					return true;
 				}

@@ -129,7 +129,7 @@ bool Model::Salary::updateSalary()  {
 		if (rc == 0) {
 			std::cout << "\x1b[32mSalary updated successfully\x1b[0m\n\n";
 			waitMenu();
-			logging::Info("Salary updated for Id: ", std::to_string(getId()));
+			logging::Info("[Success]", "Salary updated for Id: ", std::to_string(getId()));
 
 			return true;
 		}

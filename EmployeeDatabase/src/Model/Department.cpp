@@ -109,7 +109,7 @@ bool Model::Department::insertDepartment() const  {
 		else if (rc == 0) {
 			std::cout << "\x1b[32mDepartment added successfully\x1b[0m \n\n";
 			waitMenu();
-			logging::Info("Department added for Id: ", std::to_string(getId()));
+			logging::Info("[Success]", "Department added for Id: ", std::to_string(getId()));
 			return true;
 		}
 		return false;
@@ -149,7 +149,7 @@ bool Model::Department::updateDepartment() const  {
 		else if (rc == 0) {
 			std::cout << "\x1b[32mDepartment Updated successfully\x1b[0m \n\n";
 			waitMenu();
-			logging::Info("Department Updated with Id: ", std::to_string(getId()));
+			logging::Info("[Success]", "Department Updated with Id: ", std::to_string(getId()));
 			return true;
 		}
 		return false;
@@ -178,7 +178,7 @@ bool Model::Department::deleteDepartment() const  {
 			else {
 				std::cout << "\x1b[32mDepartment Deleted successfully\x1b[0m \n\n";
 				waitMenu();
-				logging::Info("Department Deleted with Id: ", std::to_string(getId()));
+				logging::Info("[Success]", "Department Deleted with Id: ", std::to_string(getId()));
 				return true;
 			}
 		}

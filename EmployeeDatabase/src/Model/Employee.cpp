@@ -7,7 +7,7 @@ bool Model::Employee::viewEmployeeById(const std::string& id ,const std::string&
 
 		DB::Database::getInstance().selectQuery(query.c_str()); 
 		if (DB::Database::row == 0) { 
-			logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", "Employee with Id: " + std::to_string(getId()) + " is not in database");
+			logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", "Employee with " + id +": " + value + " is not in database");
 			return false;
 		}
 		waitMenu(); 
@@ -26,7 +26,7 @@ bool Model::Employee::viewEmployeByDepartmentName(const std::string& value) cons
 
 		DB::Database::getInstance().selectQuery(query.c_str());  
 		if (DB::Database::row == 0) { 
-			logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", "Employee with Id: " + std::to_string(getId()) + " is not in database");
+			logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", "Employee with Department Name: " + value + " is not in database");
 			return false;
 		}
 		waitMenu();
@@ -63,7 +63,7 @@ bool Model::Employee::viewEmloyeeByStringField(const std::string& id, const std:
 
 		DB::Database::getInstance().selectQuery(query.c_str());
 		if (DB::Database::row == 0) {
-			logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", "Employee with Id: " + std::to_string(getId()) + " is not in database");
+			logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", "Employee with " + id + ": "+ value + " is not in database");
 			return false;
 		}
 		waitMenu();
@@ -129,7 +129,7 @@ bool Model::Employee::insertEmployee() const {
 		int rc = DB::Database::getInstance().executeQuery(query.c_str());
 		if (rc == 0) {
 			//std::cout << "\x1b[32mEmployee inserted successfully\x1b[0m\n";
-			logging::Info("Employee added for Id: ", std::to_string(getId()));
+			logging::Info("[Successs]", "Employee added for Id: ", std::to_string(getId()));
 			return s.insertSalary(getId());
 		}
 		else if (rc == 19) {
@@ -185,7 +185,7 @@ bool Model::Employee::updateEmployee() const {
 		else if (rc == 0) {
 			//std::cout << "\x1b[32m Employee Updated successfully\x1b[0m \n\n";
 			waitMenu();
-			logging::Info("Employee Updated with Id: ", std::to_string(getId()));
+			logging::Info("[Success]", "Employee Updated with Id: ", std::to_string(getId()));
 			return true;
 		}
 		return false;
@@ -216,7 +216,7 @@ bool Model::Employee::deleteEmployee() const {
 			else {
 				std::cout << "\x1b[32m Employee Deleted successfully\x1b[0m \n\n";
 				waitMenu();
-				logging::Info("Employee Deleted with Id: ", std::to_string(getId()));
+				logging::Info( "[Success]", "Employee Deleted with Id: ", std::to_string(getId()));
 				return true;
 			}
 		}

@@ -214,7 +214,7 @@ bool DB::Database::close() {
 		return false;
 	}
 	else {
-		logging::Info("Database closed Successfully");
+		logging::Info("[Success]", "Database closed Successfully");
 		//std::cout << "Database closed Successfully\n";
 		return true;
 	}

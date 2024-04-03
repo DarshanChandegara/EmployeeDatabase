@@ -11,8 +11,6 @@
 #include<optional>
 using namespace std;
 
-//void userInput(Model::Employee* emp);
-
 void salaryAction() {
 
 	auto check{ true };

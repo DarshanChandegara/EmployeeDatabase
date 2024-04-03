@@ -18,7 +18,9 @@ std::optional<Model::Manager> updateManagerController() {
 		DB::Database::getInstance().selectQueryForChecking(select.c_str());
 		if (DB::Database::row == 0) {
 			std::cout << "\x1b[33m Manager is not in database \x1b[0m\n";
-			waitMenu();
+			logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", "Manager with ID: " + std::to_string(e.getId()) + " is no in database");
+
+			waitMenu(); 
 			return std::nullopt;
 		}
 

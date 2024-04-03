@@ -8,7 +8,7 @@ bool Model::Engineer::viewEngineerById(const std::string& id, const std::string&
 
 		DB::Database::getInstance().selectQuery(query.c_str());
 		if (DB::Database::row == 0) {
-			logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", "Engineer with Id: " + std::to_string(getId()) + " is not in database");
+			logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", "Engineer with " + id + ": " + value + " is not in database");
 			return false;
 		}
 		waitMenu();
@@ -27,7 +27,7 @@ bool Model::Engineer::viewEngineerByDepartmentName(const std::string& value) con
 
 		DB::Database::getInstance().selectQuery(query.c_str());
 		if (DB::Database::row == 0) {
-			logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", "Engineer with Id: " + std::to_string(getId()) + " is not in database");
+			logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", "Engineer with Department Name: " + value + " is not in database");
 			return false;
 		}
 		waitMenu();
@@ -45,7 +45,7 @@ bool Model::Engineer::viewAllEngineer() const {
 		std::string query = "SELECT * FROM Employee INNER JOIN Engineer ON Engineer.id = Employee.Eid;";
 		DB::Database::getInstance().selectQuery(query.c_str());
 		if (DB::Database::row == 0) {
-			logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", "Engineer with Id: " + std::to_string(getId()) + " is not in database");
+			logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", "Engineers are not in database");
 			return false;
 		}
 		waitMenu();
@@ -64,7 +64,7 @@ bool Model::Engineer::viewEngineerByStringField(const std::string & id, const st
 
 		DB::Database::getInstance().selectQuery(query.c_str());
 		if (DB::Database::row == 0) {
-			logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", "Engineers are not in database");
+			logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", "Engineer with " + id + ": " + value + " is not in database");
 			return false;
 		}
 		waitMenu();
@@ -76,8 +76,6 @@ bool Model::Engineer::viewEngineerByStringField(const std::string & id, const st
 		return false;
 	}
 }
-
-
 
 bool Model::Engineer::viewEngineer() const {
 	try {
@@ -129,7 +127,7 @@ bool Model::Engineer::insertEngineer() const {
 			if (rc == 0) {
 				std::cout << "\x1b[32m Engineer Inserted successfully\x1b[0m\n\n";
 				waitMenu();
-				logging::Info("Engineer Added for Id: ", std::to_string(getId()));
+				logging::Info("[Sucess]", "Engineer Added for Id: ", std::to_string(getId()));
 				return true;
 			}
 			else if (rc == 19) {
@@ -163,12 +161,12 @@ bool Model::Engineer::updateEngineer() const {
 			if (rc == 0) {
 				std::cout << "\x1b[32m Engineer updated successfully\x1b[0m\n\n"; 
 				waitMenu(); 
-				logging::Info("Engineer updated for Id: ", std::to_string(getId()));
+				logging::Info("[Success]", "Engineer updated for Id: ", std::to_string(getId()));
 				return true; 
 			}
 			else if (rc == 19) {
 				std::cout << "\x1b[33m  You can not assign value beacuse entered manager or department is not in particular table OR Engineer is already in database \x1b[0m\n\n";
-				logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", "ENgineer with Id: " + std::to_string(getId()) + " is failed to update");
+				logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", "Engineer with Id: " + std::to_string(getId()) + " is failed to update");
 				waitMenu(); 
 				return false;
 			}

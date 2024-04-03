@@ -7,7 +7,7 @@ bool Model::Manager::viewManagerById(const std::string& id, const std::string& v
 
 		DB::Database::getInstance().selectQuery(query.c_str());
 		if (DB::Database::row == 0) {
-			logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", "Manager with Id: " + std::to_string(getId()) + " is not in database");
+			logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", "Manager with " + id + ": " + value + " is not in database");
 			return false;
 		}
 		waitMenu();
@@ -26,7 +26,7 @@ bool Model::Manager::viewManagerByDepartmentName(const std::string& value) const
 
 		DB::Database::getInstance().selectQuery(query.c_str());
 		if (DB::Database::row == 0) {
-			logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", "Manager with Id: " + std::to_string(getId()) + " is not in database");
+			logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", "Manager with Department Name: " + value + " is not in database");
 			return false;
 		}
 		waitMenu();
@@ -44,7 +44,7 @@ bool Model::Manager::viewAllManager() const {
 		std::string query = "SELECT * FROM Employee INNER JOIN Manager ON Manager.id = Employee.Eid;";
 		DB::Database::getInstance().selectQuery(query.c_str());
 		if (DB::Database::row == 0) {
-			logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", "Manager with Id: " + std::to_string(getId()) + " is not in database");
+			logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", "Managers are not in database");
 			return false;
 		}
 		waitMenu();
@@ -63,7 +63,7 @@ bool Model::Manager::viewManagerByStringField(const std::string& id, const std::
 
 		DB::Database::getInstance().selectQuery(query.c_str());
 		if (DB::Database::row == 0) {
-			logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", "Managers are not in database");
+			logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", "Manager with " + id + ": " + value + " is not in database");
 			return false;
 		}
 		waitMenu();
@@ -127,7 +127,7 @@ bool Model::Manager::insertManager() const {
 			if (rc == 0) {
 				std::cout << "\x1b[32m Manager Inserted successfully\x1b[0m\n\n";
 				waitMenu();
-				logging::Info("Manager Added for Id: ", std::to_string(getId()));
+				logging::Info("[Success]", "Manager Added for Id: ", std::to_string(getId()));
 				return true;
 			}
 			else if (rc == 19) {
@@ -161,7 +161,7 @@ bool Model::Manager::updateManager() const {
 			if (rc == 0) {
 				std::cout << "\x1b[32m Manager updated successfully\x1b[0m\n\n"; 
 				waitMenu();
-				logging::Info("Manager updated for Id: ", std::to_string(getId())); 
+				logging::Info("[Success]", "Manager updated for Id: ", std::to_string(getId()));
 				return true;
 			}
 			else if (rc == 19) {

@@ -35,6 +35,8 @@ std::optional<Model::Salary> updateSalaryController() {
 
 		if (DB::Database::row == 0) {
 			std::cout << "\x1b[33m Employee is not in database \x1b[0m\n";
+			logging::default_logger()->log(logging::Log::Level::LevelError, "[Failure]", "Employee with ID: " + std::to_string(e.getId()) + " is no in database");
+			 
 			waitMenu();
 			return std::nullopt;
 		}
